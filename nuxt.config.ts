@@ -3,10 +3,10 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxthub/core', "@nuxt/eslint"],
   hub: {
-    database: true,
+    database: false,
     kv: true,
-    blob: true,
-    cache: true,
+    blob: false,
+    cache: false,
   },
   nitro: {
     experimental: {
