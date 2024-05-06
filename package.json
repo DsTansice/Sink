@@ -1,22 +1,23 @@
 {
-  "name": "nuxthub-starter",
+  "name": "sink",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt build",
-    "preview": "nuxt preview",
-    "deploy": "nuxthub deploy",
+    "preview": "wrangler pages dev dist",
+    "deploy": "wrangler pages deploy dist",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@nuxt/eslint": "^0.3.8",
-    "@nuxthub/core": "^0.5.11",
     "nuxt": "^3.11.2"
   },
   "devDependencies": {
+    "@nuxt/eslint": "^0.3.8",
+    "@nuxthub/core": "^0.5.11",
     "@nuxt/eslint-config": "^0.3.8",
     "eslint": "^9.0.0",
     "vue-tsc": "^2.0.13",
