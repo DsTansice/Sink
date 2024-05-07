@@ -1,6 +1,6 @@
 import { z } from 'zod'
-import { nanoid } from '../nanoid'
-import { slugRegex } from '../slug'
+import { nanoid } from '../utils/nanoid'
+import { slugRegex } from '../utils/slug'
 
 export const LinkSchema = z.object({
   id: z.string().trim().max(26).default(nanoid(10)),

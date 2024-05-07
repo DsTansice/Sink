@@ -1,6 +1,6 @@
 import type { z } from 'zod'
 import { useValidatedBody } from 'h3-zod';
-import { LinkSchema } from '@/server/lib/schema/link'
+import { LinkSchema } from '@/server/schema/link'
 
 export default eventHandler(async(event) => {
   const link = await useValidatedBody(event, LinkSchema)
