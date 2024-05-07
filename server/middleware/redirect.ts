@@ -1,5 +1,5 @@
-import { z } from 'zod'
-import { LinkSchema } from '@/server/lib/schema/link'
+import type { z } from 'zod'
+import type { LinkSchema } from '@/server/lib/schema/link'
 import { slugRegex } from '@/server/lib/slug'
 export default eventHandler(async (event) => {
   const slug = event.path.slice(1) // remove leading slash
