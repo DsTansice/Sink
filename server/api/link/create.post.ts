@@ -4,15 +4,15 @@ import { LinkSchema } from '@/server/lib/schema/link'
 
 export default eventHandler(async(event) => {
   const link = await useValidatedBody(event, LinkSchema)
-  const existingLink = await hubKV().get(`link:${link.slug}`)
+  const existingLink = await hubKV().has(`link:${link.slug}`)
   if (existingLink) {
-    setResponseStatus(event, 409)
-    return {
-      success: false,
-      message: 'Link already exists'
-    }
+    return createError({
+      status: 409, // Conflict
+      statusText: 'Link already exists',
+    })
   } else {
     await hubKV().set(`link:${link.slug}`, link)
-    return { success: true, link }
+    setResponseStatus(event, 201)
+    return { link }
   }
 })
