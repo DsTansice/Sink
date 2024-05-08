@@ -1,16 +1,27 @@
 import { useValidatedBody } from 'h3-zod';
 import { LinkSchema } from '@/server/schema/link'
+import { getExpiration } from '@/server/utils/time';
 
 export default eventHandler(async(event) => {
   const link = await useValidatedBody(event, LinkSchema)
-  const existingLink = await hubKV().has(`link:${link.slug}`)
+
+  const { cloudflare } = event.context
+  const { KV } = cloudflare.env
+  const existingLink = await KV.get(`link:${link.slug}`)
   if (existingLink) {
     return createError({
       status: 409, // Conflict
       statusText: 'Link already exists',
     })
   } else {
-    await hubKV().set(`link:${link.slug}`, link)
+    const expiration = getExpiration(event, link.expiration)
+
+    await KV.put(`link:${link.slug}`, JSON.stringify(link), {
+      expiration,
+      metadata: {
+        expiration,
+      }
+    })
     setResponseStatus(event, 201)
     return { link }
   }

@@ -1,15 +1,18 @@
 export default eventHandler(async (event) => {
   const slug = getQuery(event).slug
   if (slug) {
-    const link = await hubKV().get(`link:${slug}`)
+    const { cloudflare } = event.context
+    const { KV } = cloudflare.env
+    const { metadata, value: link } = await KV.getWithMetadata(`link:${slug}`, { type: "json" })
     if (link) {
       return {
-        link
+        ...metadata,
+        ...link
       }
     }
   }
   return createError({
-    statusCode: 404,
-    statusMessage: 'Not Found',
+    status: 404,
+    statusText: 'Not Found',
   })
 })

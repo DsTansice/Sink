@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { destr } from 'destr'
 
 export default eventHandler(async (event) => {
   const { cloudflare } = event.context
@@ -15,7 +14,14 @@ export default eventHandler(async (event) => {
   })
   if (Array.isArray(list.keys)) {
     list.links = await Promise.all(list.keys.map(async (key: { name: string; }) => {
-      return destr(await KV.get(key.name))
+      const { metadata, value: link } = await KV.getWithMetadata(key.name, { type: "json" })
+      if (link) {
+        return {
+          ...metadata,
+          ...link
+        }
+      }
+      return link
     }))
   }
   delete list.keys

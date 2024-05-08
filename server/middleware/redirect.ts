@@ -1,7 +1,7 @@
 import type { z } from 'zod'
 import type { LinkSchema } from '@/server/schema/link'
 import { parseHost } from 'ufo'
-import { slugRegex } from '@/server/utils/slug'
+import { slugRegex } from '~/utils/slug'
 import { UAParser } from 'ua-parser-js'
 import {
   Bots,
@@ -14,7 +14,9 @@ import { parseAcceptLanguage } from 'intl-parse-accept-language';
 export default eventHandler(async (event) => {
   const slug = event.path.slice(1) // remove leading slash
   if (slugRegex.test(slug)) {
-    const link: z.infer<typeof LinkSchema> | null = await hubKV().get(`link:${slug}`)
+    const { cloudflare } = event.context
+    const { KV } = cloudflare.env
+    const link: z.infer<typeof LinkSchema> | null = await KV.get(`link:${slug}`, { type: "text" })
     if (link) {
       const ip = getHeader(event, 'x-real-ip')
 
@@ -44,7 +46,7 @@ export default eventHandler(async (event) => {
         deviceType: uaInfo?.device?.type,
       })
 
-      return sendRedirect(event, link.url, +(process.env.SINK_REDIRECT_STATUS_CODE || 301))
+      return sendRedirect(event, link.url, (+useRuntimeConfig(event).redirectStatusCode || 301))
     }
   }
 })

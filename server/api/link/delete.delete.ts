@@ -1,6 +1,15 @@
 export default eventHandler(async (event) => {
+  const { previewMode } = useRuntimeConfig(event)
+  if (previewMode) {
+    return createError({
+      status: 403,
+      statusText: 'Preview mode cannot delete links.',
+    })
+  }
   const { slug } = await readBody(event)
   if (slug) {
-    await hubKV().del(`link:${slug}`)
+    const { cloudflare } = event.context
+    const { KV } = cloudflare.env
+    await KV.delete(`link:${slug}`)
   }
 })
