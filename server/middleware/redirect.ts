@@ -12,6 +12,7 @@ import {
 import { parseAcceptLanguage } from 'intl-parse-accept-language';
 
 export default eventHandler(async (event) => {
+  console.log(useRuntimeConfig(event))
   const slug = event.path.slice(1) // remove leading slash
   if (slugRegex.test(slug)) {
     const { cloudflare } = event.context
@@ -46,7 +47,7 @@ export default eventHandler(async (event) => {
         deviceType: uaInfo?.device?.type,
       })
 
-      return sendRedirect(event, link.url, (+useRuntimeConfig(event).redirectStatusCode || 301))
+      return sendRedirect(event, link.url, +useRuntimeConfig(event).redirectStatusCode)
     }
   }
 })

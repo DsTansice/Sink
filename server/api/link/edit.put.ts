@@ -1,10 +1,16 @@
 import type { z } from 'zod'
-import { useValidatedBody } from 'h3-zod';
 import { LinkSchema } from '@/server/schema/link'
 import { getExpiration } from '@/server/utils/time';
 
 export default eventHandler(async(event) => {
-  const link = await useValidatedBody(event, LinkSchema)
+  const { previewMode } = useRuntimeConfig(event)
+  if (previewMode) {
+    return createError({
+      status: 403,
+      statusText: 'Preview mode cannot edit links.',
+    })
+  }
+  const link = await readValidatedBody(event, LinkSchema.parse)
   const { cloudflare } = event.context
   const { KV } = cloudflare.env
 

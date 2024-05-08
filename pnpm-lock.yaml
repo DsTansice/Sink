@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      h3-zod:
-        specifier: ^0.5.3
-        version: 0.5.3(h3@1.11.1)(zod@3.23.6)
       intl-parse-accept-language:
         specifier: ^1.0.0
         version: 1.0.0
@@ -2585,12 +2582,6 @@ packages:
   gzip-size@7.0.0:
     resolution: {integrity: sha512-O1Ld7Dr+nqPnmGpdhzLmMTQ4vAsD+rHwMm1NLUmoUFFymBOMKxCCrtDxqdBRYXdeEPEi3SyoR4TizJLQrnKBNA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
-
-  h3-zod@0.5.3:
-    resolution: {integrity: sha512-wqlRd/d5d9sNYxmNglnL63J4v5HiZZrcXdLIiU2cBsy5gTwxrSH1AqtNrVkuUleshgNOAQldbuO06phdUIxuKA==}
-    peerDependencies:
-      h3: ^1.6.0
-      zod: ^3.21.0
 
   h3@1.11.1:
     resolution: {integrity: sha512-AbaH6IDnZN6nmbnJOH72y3c5Wwh9P97soSVdGSBbcDACRdkC0FEWf25pzx4f/NuOCK6quHmW18yF2Wx+G4Zi1A==}
@@ -7691,11 +7682,6 @@ snapshots:
   gzip-size@7.0.0:
     dependencies:
       duplexer: 0.1.2
-
-  h3-zod@0.5.3(h3@1.11.1)(zod@3.23.6):
-    dependencies:
-      h3: 1.11.1
-      zod: 3.23.6
 
   h3@1.11.1:
     dependencies:

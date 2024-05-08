@@ -18,9 +18,14 @@ export default defineNuxtConfig({
     previewTTL: 24 * 3600, // 24h
   },
   runtimeConfig: {
-    siteToken: '',
+    siteToken: 'SinkCool',
     previewMode: '',
-    slugDefaultLength: '',
-    redirectStatusCode: ''
+    slugDefaultLength: '6',
+    redirectStatusCode: '301',
+    aiModel: '@cf/meta/llama-2-7b-chat-int8',
+    aiPrompt: `Help me recommend a SLUG for this URL.
+      The URL is {url} , and the SLUG needs to pass the regular {slugRegex},
+      Only the best one is returned,
+      the format must be JSON reference {"slug": "example-slug"}`,
   }
 })
