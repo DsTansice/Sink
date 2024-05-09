@@ -13,7 +13,7 @@ import {
 import { parseAcceptLanguage } from 'intl-parse-accept-language'
 
 export const useAccessLog = (event: H3Event) => {
-  const ip = getHeader(event, 'x-real-ip')
+  const ip = getRequestIP(event, {xForwardedFor: true})
 
   const referer = getHeader(event, 'referer')
   const { hostname: source } = parseHost(referer)
@@ -27,19 +27,37 @@ export const useAccessLog = (event: H3Event) => {
     device: [ExtraDevices.device || []].flat(),
   })).getResult()
 
-  console.log({
-    ua: userAgent,
-    ip,
-    source,
-    language,
-    os: uaInfo?.os?.name,
-    browser: uaInfo?.browser?.name,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    browserType: uaInfo?.browser?.type,
-    device: uaInfo?.device?.model,
-    deviceType: uaInfo?.device?.type,
-  })
+  const regionNames = new Intl.DisplayNames(['en'], { type: 'region' })
+  const { request: { cf } } = event.context.cloudflare
+  const link = event.context.link || {}
 
-  return hubAnalytics()
+  // const languageNames = new Intl.DisplayNames(["en"], { type: "language" });
+  // languageNames.of(language)
+
+  if (process.env.NODE_ENV === 'production') {
+    return hubAnalytics().put({
+      indexes: [link.id, link.slug],
+      blobs: [],
+    })
+  }
+  else {
+    console.log('client info:', {
+      ua: userAgent,
+      ip,
+      source,
+      countryCode: cf?.country,
+      country: regionNames.of(cf?.country),
+      region: cf?.region,
+      city: cf?.city,
+      timezone: cf?.timezone,
+      language,
+      os: uaInfo?.os?.name,
+      browser: uaInfo?.browser?.name,
+      // @ts-expect-error
+      browserType: uaInfo?.browser?.type,
+      device: uaInfo?.device?.model,
+      deviceType: uaInfo?.device?.type,
+    })
+    return Promise.resolve()
+  }
 }

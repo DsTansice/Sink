@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import { slugRegex } from '@/utils/slug'
 
 export default eventHandler(async (event) => {
   const url = (await getValidatedQuery(event, z.object({
@@ -10,6 +9,7 @@ export default eventHandler(async (event) => {
 
   if (AI) {
     const { aiPrompt, aiModel } = useRuntimeConfig(event)
+    const { slugRegex } = useAppConfig(event)
     const response = await AI.run(aiModel, {
       stream: false,
       prompt: aiPrompt.replace('{url}', url).replace('{slugRegex}', slugRegex.toString()),

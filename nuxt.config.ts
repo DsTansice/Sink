@@ -21,9 +21,6 @@ export default defineNuxtConfig({
       openAPI: true,
     },
   },
-  appConfig: {
-    previewTTL: 24 * 3600, // 24h
-  },
   runtimeConfig: {
     siteToken: 'SinkCool',
     previewMode: '',
