@@ -18,15 +18,13 @@
     "intl-parse-accept-language": "^1.0.0",
     "nanoid": "^5.0.7",
     "nuxt": "^3.11.2",
-    "ua-parser-js": "2.0.0-alpha.2",
+    "ua-parser-js": "next",
     "zod": "^3.23.6"
   },
   "devDependencies": {
     "@nuxt/eslint": "^0.3.8",
     "@nuxt/eslint-config": "^0.3.8",
     "@nuxthub/core": "^0.5.11",
-    "@stylistic/eslint-plugin": "^1.8.0",
-    "@types/ua-parser-js": "^0.7.39",
     "eslint": "^8.56.0",
     "vue-tsc": "^2.0.13",
     "wrangler": "^3.51.2"

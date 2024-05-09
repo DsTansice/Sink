@@ -3,10 +3,12 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxthub/core', '@nuxt/eslint'],
   hub: {
-    database: false,
-    kv: true,
+    analytics: true,
     blob: false,
     cache: false,
+    database: false,
+    kv: true,
+    // ai: true,
   },
   eslint: {
     config: {
