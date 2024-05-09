@@ -1,6 +1,5 @@
 import type { z } from 'zod'
 import { LinkSchema } from '@/server/schema/link'
-import { getExpiration } from '@/server/utils/time'
 
 export default eventHandler(async (event) => {
   const { previewMode } = useRuntimeConfig(event)

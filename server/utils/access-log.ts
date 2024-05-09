@@ -12,7 +12,7 @@ import {
 } from 'ua-parser-js/extensions'
 import { parseAcceptLanguage } from 'intl-parse-accept-language'
 
-export const accessLog = (event: H3Event) => {
+export const useAccessLog = (event: H3Event) => {
   const ip = getHeader(event, 'x-real-ip')
 
   const referer = getHeader(event, 'referer')
@@ -40,5 +40,6 @@ export const accessLog = (event: H3Event) => {
     device: uaInfo?.device?.model,
     deviceType: uaInfo?.device?.type,
   })
-  return Promise.resolve({})
+
+  return hubAnalytics()
 }

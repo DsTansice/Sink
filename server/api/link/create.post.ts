@@ -1,5 +1,4 @@
 import { LinkSchema } from '@/server/schema/link'
-import { getExpiration } from '@/server/utils/time'
 
 export default eventHandler(async (event) => {
   const link = await readValidatedBody(event, LinkSchema.parse)
