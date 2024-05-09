@@ -36,7 +36,7 @@ export const useAccessLog = (event: H3Event) => {
 
   if (process.env.NODE_ENV === 'production') {
     return hubAnalytics().put({
-      indexes: [link.id, link.slug],
+      indexes: [link.id], // only one index
       blobs: [],
     })
   }
