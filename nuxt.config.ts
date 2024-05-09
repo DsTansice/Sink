@@ -1,18 +1,23 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxthub/core', "@nuxt/eslint"],
+  modules: ['@nuxthub/core', '@nuxt/eslint'],
   hub: {
     database: false,
     kv: true,
     blob: false,
     cache: false,
   },
+  eslint: {
+    config: {
+      stylistic: true,
+    },
+  },
   nitro: {
     experimental: {
       // Enable Server API documentation within NuxtHub
-      openAPI: true
-    }
+      openAPI: true,
+    },
   },
   appConfig: {
     previewTTL: 24 * 3600, // 24h
@@ -27,5 +32,5 @@ export default defineNuxtConfig({
       The URL is {url} , and the SLUG needs to pass the regular {slugRegex},
       Only the best one is returned,
       the format must be JSON reference {"slug": "example-slug"}`,
-  }
+  },
 })

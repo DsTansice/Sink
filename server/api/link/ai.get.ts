@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { slugRegex } from "@/utils/slug";
+import { z } from 'zod'
+import { slugRegex } from '@/utils/slug'
 
 export default eventHandler(async (event) => {
   const url = (await getValidatedQuery(event, z.object({
@@ -16,7 +16,8 @@ export default eventHandler(async (event) => {
     })
 
     return response
-  } else {
+  }
+  else {
     return createError({ status: 501, statusText: 'AI not enabled' })
   }
 })

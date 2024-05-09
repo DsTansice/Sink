@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod'
 
 export default eventHandler(async (event) => {
   const { cloudflare } = event.context
@@ -10,15 +10,15 @@ export default eventHandler(async (event) => {
   const list = await KV.list({
     prefix: `link:`,
     limit,
-    cursor
+    cursor,
   })
   if (Array.isArray(list.keys)) {
-    list.links = await Promise.all(list.keys.map(async (key: { name: string; }) => {
-      const { metadata, value: link } = await KV.getWithMetadata(key.name, { type: "json" })
+    list.links = await Promise.all(list.keys.map(async (key: { name: string }) => {
+      const { metadata, value: link } = await KV.getWithMetadata(key.name, { type: 'json' })
       if (link) {
         return {
           ...metadata,
-          ...link
+          ...link,
         }
       }
       return link

@@ -1,15 +1,15 @@
 import type { z } from 'zod'
-import type { LinkSchema } from '@/server/schema/link'
 import { parseHost } from 'ufo'
-import { slugRegex } from '~/utils/slug'
 import { UAParser } from 'ua-parser-js'
 import {
   Bots,
   ExtraDevices,
   Emails,
-  Tools
-} from 'ua-parser-js/extensions';
-import { parseAcceptLanguage } from 'intl-parse-accept-language';
+  Tools,
+} from 'ua-parser-js/extensions'
+import { parseAcceptLanguage } from 'intl-parse-accept-language'
+import { slugRegex } from '~/utils/slug'
+import type { LinkSchema } from '@/server/schema/link'
 
 export default eventHandler(async (event) => {
   console.log(useRuntimeConfig(event))
@@ -17,7 +17,7 @@ export default eventHandler(async (event) => {
   if (slugRegex.test(slug)) {
     const { cloudflare } = event.context
     const { KV } = cloudflare.env
-    const link: z.infer<typeof LinkSchema> | null = await KV.get(`link:${slug}`, { type: "text" })
+    const link: z.infer<typeof LinkSchema> | null = await KV.get(`link:${slug}`, { type: 'text' })
     if (link) {
       const ip = getHeader(event, 'x-real-ip')
 

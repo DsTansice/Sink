@@ -1,4 +1,5 @@
 import { type H3Event } from 'h3'
+
 export const getExpiration = (event: H3Event, expiration: number | undefined) => {
   const { previewMode } = useRuntimeConfig(event)
   if (previewMode) {
