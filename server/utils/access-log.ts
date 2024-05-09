@@ -32,7 +32,7 @@ export const blobMap: { [x: string]: string } = {
 export const logsMap = Object.entries(blobMap).reduce((acc, [k, v]) => ({...acc , [v]: k}),{})
 
 export function logs2blobs(logs: { [x: string]: string | undefined }) {
-  return Object.keys(blobMap).sort((a,b) => a < b ? -1 : 1).map(key => logs[blobMap[key]] || '')
+  return Object.keys(blobMap).sort((a, b) => a.localeCompare(b, 'en')).map(key => logs[blobMap[key]] || '')
 }
 
 export function blobs2logs(blobs: string[]) {
@@ -88,7 +88,7 @@ export const useAccessLog = (event: H3Event) => {
     })
   }
   else {
-    console.log('access logs:', accessLogs)
+    console.log('access logs:', blobs2logs(logs2blobs(accessLogs)))
     return Promise.resolve()
   }
 }
