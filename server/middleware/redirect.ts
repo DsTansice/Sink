@@ -8,7 +8,7 @@ import {
   Tools,
 } from 'ua-parser-js/extensions'
 import { parseAcceptLanguage } from 'intl-parse-accept-language'
-import { slugRegex } from '~/utils/slug'
+import { slugRegex } from '@/utils/slug'
 import type { LinkSchema } from '@/server/schema/link'
 
 export default eventHandler(async (event) => {

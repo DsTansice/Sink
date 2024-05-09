@@ -10,7 +10,9 @@
     "deploy": "wrangler pages deploy dist",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
-    "typecheck": "nuxt typecheck"
+    "lint:fix": "eslint . --fix",
+    "typecheck": "nuxt typecheck",
+    "wrangler": "wrangler"
   },
   "dependencies": {
     "intl-parse-accept-language": "^1.0.0",
