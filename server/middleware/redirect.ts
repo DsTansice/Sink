@@ -1,6 +1,6 @@
 import type { z } from 'zod'
-import type { LinkSchema } from '@/server/schema/link'
 import { parsePath } from 'ufo'
+import type { LinkSchema } from '@/server/schema/link'
 
 export default eventHandler(async (event) => {
   const { pathname: slug } = parsePath(event.path.slice(1)) // remove leading slash
