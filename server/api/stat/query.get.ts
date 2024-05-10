@@ -3,9 +3,17 @@ import SqlBricks from 'sql-bricks'
 
 const { select } = SqlBricks
 
+const unitMap: { [x: string]: string } = {
+  minute: '%Y-%m-%d %H:%M',
+  hour: '%Y-%m-%d %H',
+  day: '%Y-%m-%d',
+}
+
 const QuerySchema = z.object({
   id: z.string(),
   type: z.string().optional(),
+  unit: z.string().optional(),
+  clientTimezone: z.string().default('Etc/UTC'),
   startAt: z.number().int().safe().optional(),
   endAt: z.number().int().safe().optional(),
   source: z.string().optional(),
@@ -22,8 +30,13 @@ const QuerySchema = z.object({
   deviceType: z.string().optional(),
 })
 
-function query2filter(query: { [x: string]: string | number | undefined }): Record<string, string | number | undefined> {
-  const filter: { [x: string]: string | number | undefined } = {}
+const FilterSchema = QuerySchema.omit({ id: true, type: true, unit: true, clientTimezone: true, startAt: true, endAt: true })
+
+type Query = z.infer<typeof QuerySchema>
+type Filter = z.infer<typeof FilterSchema>
+
+function query2filter(query: Query): Filter {
+  const filter: Filter = {}
   Object.keys(logsMap).forEach((key) => {
     if (query[key]) {
       filter[logsMap[key]] = query[key]
@@ -32,7 +45,7 @@ function query2filter(query: { [x: string]: string | number | undefined }): Reco
   return filter
 }
 
-function query2sql(query: { [x: string]: string | number | undefined }): string {
+function query2sql(query: Query): string {
   const filter = query2filter(query)
   const where = {
     index1: query.id,
@@ -40,7 +53,11 @@ function query2sql(query: { [x: string]: string | number | undefined }): string 
   }
   const { dataset } = useRuntimeConfig()
   if (query.type) {
-    return select(`${logsMap[query.type]} as x, SUM(_sample_interval) as y`).from(dataset).where(where).groupBy(logsMap[query.type]).orderBy('y DESC').toString()
+    return select(`${logsMap[query.type]} as x, SUM(_sample_interval) as y`).from(dataset).where(where).groupBy('x').orderBy('y DESC').toString()
+  }
+  if (query.unit) {
+    // Etc/UTC
+    return select(`formatDateTime(timestamp, '${unitMap[query.unit]}', '${query.clientTimezone}') as x, SUM(_sample_interval) as y`).from(dataset).where(where).groupBy('x').orderBy('x').toString()
   }
   return select('*').from(dataset).where(where).orderBy('timestamp DESC').toString()
 }
