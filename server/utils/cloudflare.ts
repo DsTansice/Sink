@@ -1,4 +1,6 @@
-export function useWAE(query: string) {
+import type { H3Event } from 'h3'
+
+export function useWAE(event: H3Event, query: string) {
   const { cfAccountId, cfApiToken } = useRuntimeConfig()
   console.log(query)
   return $fetch(`https://api.cloudflare.com/client/v4/accounts/${cfAccountId}/analytics_engine/sql`, {

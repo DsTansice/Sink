@@ -43,5 +43,5 @@ function query2sql(query: { [x: string]: string | number | undefined }): string 
 
 export default eventHandler(async (event) => {
   const query = await getValidatedQuery(event, QuerySchema.parse)
-  return useWAE(query2sql(query))
+  return useWAE(event, query2sql(query))
 })
