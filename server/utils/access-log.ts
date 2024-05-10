@@ -1,5 +1,5 @@
 import type { H3Event } from 'h3'
-import { parseHost } from 'ufo'
+import { parseURL } from 'ufo'
 import { UAParser } from 'ua-parser-js'
 import {
   Apps,
@@ -13,20 +13,20 @@ import {
 import { parseAcceptLanguage } from 'intl-parse-accept-language'
 
 export const blobMap: { [x: string]: string } = {
-  blob00: 'ua',
-  blob01: 'ip',
-  blob02: 'source',
-  blob03: 'countryCode',
-  blob04: 'country',
-  blob05: 'region',
-  blob06: 'city',
-  blob07: 'timezone',
-  blob08: 'language',
-  blob09: 'os',
-  blob10: 'browser',
-  blob11: 'browserType',
-  blob12: 'device',
-  blob13: 'deviceType',
+  blob1: 'ua',
+  blob10: 'ip',
+  blob11: 'source',
+  blob12: 'countryCode',
+  blob13: 'country',
+  blob14: 'region',
+  blob15: 'city',
+  blob16: 'timezone',
+  blob17: 'language',
+  blob18: 'os',
+  blob19: 'browser',
+  blob2: 'browserType',
+  blob20: 'device',
+  blob3: 'deviceType',
 }
 
 export const logsMap = Object.entries(blobMap).reduce((acc, [k, v]) => ({ ...acc, [v]: k }), {})
@@ -47,7 +47,7 @@ export const useAccessLog = (event: H3Event) => {
   const ip = getRequestIP(event, { xForwardedFor: true })
 
   const referer = getHeader(event, 'referer')
-  const { hostname: source } = parseHost(referer)
+  const { host: source } = parseURL(referer)
 
   const acceptLanguage = getHeader(event, 'accept-language') || ''
   const language = (parseAcceptLanguage(acceptLanguage) || [])[0]
