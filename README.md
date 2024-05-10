@@ -64,4 +64,4 @@ yarn build
 bun run build
 ```
 
-Check out the [deployment documentation](https://hub.nuxt.com/docs/getting-started/deploy) for more information.
+Check out the [deployment documentation](https://hub.nuxt.com/docs/getting-started/deploy) for more information
