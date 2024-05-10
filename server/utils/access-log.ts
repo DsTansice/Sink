@@ -29,7 +29,7 @@ export const blobMap: { [x: string]: string } = {
   blob13: 'deviceType',
 }
 
-export const logsMap = Object.entries(blobMap).reduce((acc, [k, v]) => ({...acc , [v]: k}),{})
+export const logsMap = Object.entries(blobMap).reduce((acc, [k, v]) => ({ ...acc, [v]: k }), {})
 
 export function logs2blobs(logs: { [x: string]: string | undefined }) {
   return Object.keys(blobMap).sort((a, b) => a.localeCompare(b, 'en')).map(key => logs[blobMap[key]] || '')

@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { destr } from 'destr'
 
 export default eventHandler(async (event) => {
   const url = (await getValidatedQuery(event, z.object({
@@ -10,12 +11,21 @@ export default eventHandler(async (event) => {
   if (AI) {
     const { aiPrompt, aiModel } = useRuntimeConfig(event)
     const { slugRegex } = useAppConfig(event)
-    const response = await AI.run(aiModel, {
-      stream: false,
-      prompt: aiPrompt.replace('{url}', url).replace('{slugRegex}', slugRegex.toString()),
-    })
-
-    return response
+    const messages = [
+      { role: 'system', content: aiPrompt.replace('{slugRegex}', slugRegex.toString()) },
+      { role: 'user', content: 'https://www.cloudflare.com/' },
+      { role: 'assistant', content: '{"slug": "cloudflare"}' },
+      { role: 'user', content: 'https://github.com/nuxt-hub/' },
+      { role: 'assistant', content: '{"slug": "nuxt-hub"}' },
+      { role: 'user', content: 'https://sink.cool/' },
+      { role: 'assistant', content: '{"slug": "sink-cool"}' },
+      {
+        role: 'user',
+        content: url,
+      },
+    ]
+    const { response } = await AI.run(aiModel, { messages })
+    return destr(response)
   }
   else {
     return createError({ status: 501, statusText: 'AI not enabled' })

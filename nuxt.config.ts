@@ -26,10 +26,7 @@ export default defineNuxtConfig({
     previewMode: '',
     slugDefaultLength: '6',
     redirectStatusCode: '301',
-    aiModel: '@cf/meta/llama-2-7b-chat-int8',
-    aiPrompt: `Help me recommend a SLUG for this URL.
-      The URL is {url} , and the SLUG needs to pass the regular {slugRegex},
-      Only the best one is returned,
-      the format must be JSON reference {"slug": "example-slug"}`,
+    aiModel: '@cf/meta/llama-3-8b-instruct',
+    aiPrompt: `You are a URL shortener. Please shorten the URL given by the user to a SLUG. SLUG is human-readable, no more than three words and can pass the regular expression {slugRegex}. Only the best one is returned, the format must be JSON reference {"slug": "example-slug"}`,
   },
 })
