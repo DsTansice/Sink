@@ -12,7 +12,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "nuxt typecheck",
-    "wrangler": "wrangler"
+    "wrangler": "wrangler",
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "intl-parse-accept-language": "^1.0.0",
@@ -32,7 +33,7 @@
     "wrangler": "^3.55.0"
   },
   "simple-git-hooks": {
-    "pre-commit": "lint-staged"
+    "pre-commit": "npm run lint-staged"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,vue}": ["eslint --fix"]
