@@ -6,6 +6,6 @@ export default eventHandler((event) => {
     headers: {
       Authorization: `Bearer ${cfApiToken}`,
     },
-    body: 'SELECT * FROM sink LIMIT 100',
+    body: 'SELECT * FROM sink ORDER BY timestamp DESC LIMIT 100',
   })
 })

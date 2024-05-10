@@ -12,27 +12,31 @@ import {
 } from 'ua-parser-js/extensions'
 import { parseAcceptLanguage } from 'intl-parse-accept-language'
 
+function toBlobNumber(blob: string) {
+  return +blob.replace(/[^\d]/g, '')
+}
+
 export const blobMap: { [x: string]: string } = {
   blob1: 'ua',
-  blob10: 'ip',
-  blob11: 'source',
-  blob12: 'countryCode',
-  blob13: 'country',
-  blob14: 'region',
-  blob15: 'city',
-  blob16: 'timezone',
-  blob17: 'language',
-  blob18: 'os',
-  blob19: 'browser',
-  blob2: 'browserType',
-  blob20: 'device',
-  blob3: 'deviceType',
+  blob2: 'ip',
+  blob3: 'source',
+  blob4: 'countryCode',
+  blob5: 'country',
+  blob6: 'region',
+  blob7: 'city',
+  blob8: 'timezone',
+  blob9: 'language',
+  blob10: 'os',
+  blob11: 'browser',
+  blob12: 'browserType',
+  blob13: 'device',
+  blob14: 'deviceType',
 }
 
 export const logsMap = Object.entries(blobMap).reduce((acc, [k, v]) => ({ ...acc, [v]: k }), {})
 
 export function logs2blobs(logs: { [x: string]: string | undefined }) {
-  return Object.keys(blobMap).sort((a, b) => a.localeCompare(b, 'en')).map(key => logs[blobMap[key]] || '')
+  return Object.keys(blobMap).sort((a, b) => toBlobNumber(a) - toBlobNumber(b)).map(key => logs[blobMap[key]] || '')
 }
 
 export function blobs2logs(blobs: string[]) {
@@ -88,7 +92,7 @@ export const useAccessLog = (event: H3Event) => {
     })
   }
   else {
-    console.log('access logs:', blobs2logs(logs2blobs(accessLogs)))
+    console.log('access logs:', logs2blobs(accessLogs), blobs2logs(logs2blobs(accessLogs)))
     return Promise.resolve()
   }
 }
