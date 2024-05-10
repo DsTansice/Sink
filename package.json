@@ -19,6 +19,7 @@
     "intl-parse-accept-language": "^1.0.0",
     "nanoid": "^5.0.7",
     "nuxt": "^3.11.2",
+    "sql-bricks": "^3.0.1",
     "ua-parser-js": "next",
     "zod": "^3.23.8"
   },
@@ -36,7 +37,9 @@
     "pre-commit": "npm run lint-staged"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,vue}": ["eslint --fix"]
+    "*.{js,jsx,ts,tsx,vue}": [
+      "eslint --fix"
+    ]
   },
   "packageManager": "pnpm@9.1.0+sha256.22e36fba7f4880ecf749a5ca128b8435da085ecd49575e7fb9e64d6bf4fad394"
 }

@@ -16,7 +16,7 @@ function toBlobNumber(blob: string) {
   return +blob.replace(/[^\d]/g, '')
 }
 
-export const blobMap: { [x: string]: string } = {
+export const blobsMap: { [x: string]: string } = {
   blob1: 'ua',
   blob2: 'ip',
   blob3: 'source',
@@ -33,16 +33,16 @@ export const blobMap: { [x: string]: string } = {
   blob14: 'deviceType',
 }
 
-export const logsMap = Object.entries(blobMap).reduce((acc, [k, v]) => ({ ...acc, [v]: k }), {})
+export const logsMap: { [x: string]: string } = Object.entries(blobsMap).reduce((acc, [k, v]) => ({ ...acc, [v]: k }), {})
 
 export function logs2blobs(logs: { [x: string]: string | undefined }) {
-  return Object.keys(blobMap).sort((a, b) => toBlobNumber(a) - toBlobNumber(b)).map(key => logs[blobMap[key]] || '')
+  return Object.keys(blobsMap).sort((a, b) => toBlobNumber(a) - toBlobNumber(b)).map(key => logs[blobsMap[key]] || '')
 }
 
 export function blobs2logs(blobs: string[]) {
-  const logsList = Object.keys(blobMap)
+  const logsList = Object.keys(blobsMap)
   return blobs.reduce((logs: { [x: string]: string }, blob, i) => {
-    logs[blobMap[logsList[i]]] = blob
+    logs[blobsMap[logsList[i]]] = blob
     return logs
   }, {})
 }
