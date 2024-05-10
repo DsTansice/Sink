@@ -48,7 +48,7 @@ export function blobs2logs(blobs: string[]) {
 }
 
 export const useAccessLog = (event: H3Event) => {
-  const ip = getRequestIP(event, { xForwardedFor: true })
+  const ip = getHeader(event, 'x-real-ip') || getRequestIP(event, { xForwardedFor: true })
 
   const referer = getHeader(event, 'referer')
   const { host: source } = parseURL(referer)
