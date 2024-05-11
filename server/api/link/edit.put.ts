@@ -1,5 +1,5 @@
 import type { z } from 'zod'
-import { LinkSchema } from '@/server/schema/link'
+import { LinkSchema } from '@/schemas/link'
 
 export default eventHandler(async (event) => {
   const { previewMode } = useRuntimeConfig(event)
