@@ -7,7 +7,7 @@ export default eventHandler(async (event) => {
   const { KV } = cloudflare.env
   const existingLink = await KV.get(`link:${link.slug}`)
   if (existingLink) {
-    return createError({
+    throw createError({
       status: 409, // Conflict
       statusText: 'Link already exists',
     })

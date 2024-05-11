@@ -11,7 +11,7 @@ export default eventHandler(async (event) => {
       }
     }
   }
-  return createError({
+  throw createError({
     status: 404,
     statusText: 'Not Found',
   })

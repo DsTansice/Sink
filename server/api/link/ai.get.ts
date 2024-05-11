@@ -35,6 +35,6 @@ export default eventHandler(async (event) => {
     return destr(response)
   }
   else {
-    return createError({ status: 501, statusText: 'AI not enabled' })
+    throw createError({ status: 501, statusText: 'AI not enabled' })
   }
 })
