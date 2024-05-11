@@ -1,5 +1,5 @@
 <template>
   <main>
-    404
+    <Button>404</Button>
   </main>
 </template>
