@@ -40,13 +40,13 @@ export type LogsMap = { [key in LogsKey]: string | undefined }
 
 export const logsMap: LogsMap = Object.entries(blobsMap).reduce((acc, [k, v]) => ({ ...acc, [v]: k }), {}) as LogsMap
 
-export function logs2blobs(logs: LogsMap) {
+function logs2blobs(logs: LogsMap) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
   return Object.keys(blobsMap).sort((a, b) => toBlobNumber(a) - toBlobNumber(b)).map(key => logs[blobsMap[key]] || '')
 }
 
-export function blobs2logs(blobs: string[]) {
+function blobs2logs(blobs: string[]) {
   const logsList = Object.keys(blobsMap)
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error

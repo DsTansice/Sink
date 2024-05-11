@@ -7,7 +7,7 @@ function query2sql(query: Query): string {
   const filter = query2filter(query)
   const { dataset } = useRuntimeConfig()
   // visitors did not consider sampling
-  return select(`SUM(_sample_interval) as views, COUNT(DISTINCT ${logsMap['ip']}) as visitors`).from(dataset).where(filter).toString()
+  return select(`SUM(_sample_interval) as views, COUNT(DISTINCT ${logsMap['ip']}) as visitors, COUNT(DISTINCT ${logsMap['source']}) as referers`).from(dataset).where(filter).toString()
 }
 
 export default eventHandler(async (event) => {

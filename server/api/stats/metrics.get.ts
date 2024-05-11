@@ -11,7 +11,9 @@ const MetricsQuerySchema = QuerySchema.extend({
 function query2sql(query: z.infer<typeof MetricsQuerySchema>): string {
   const filter = query2filter(query)
   const { dataset } = useRuntimeConfig()
-  return select(`${logsMap[query.type]} as x, SUM(_sample_interval) as y`).from(dataset).where(filter).groupBy('x').orderBy('y DESC').toString()
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  return select(`${logsMap[query.type]} as name, SUM(_sample_interval) as count`).from(dataset).where(filter).groupBy('name').orderBy('count DESC').toString()
 }
 
 export default eventHandler(async (event) => {

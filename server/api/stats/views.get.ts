@@ -18,7 +18,7 @@ const ViewsQuerySchema = QuerySchema.extend({
 function query2sql(query: z.infer<typeof ViewsQuerySchema>): string {
   const filter = query2filter(query)
   const { dataset } = useRuntimeConfig()
-  return select(`formatDateTime(timestamp, '${unitMap[query.unit]}', '${query.clientTimezone}') as x, SUM(_sample_interval) as y`).from(dataset).where(filter).groupBy('x').orderBy('x').toString()
+  return select(`formatDateTime(timestamp, '${unitMap[query.unit]}', '${query.clientTimezone}') as time, SUM(_sample_interval) as views, COUNT(DISTINCT ${logsMap['ip']}) as visitors`).from(dataset).where(filter).groupBy('time').orderBy('time').toString()
 }
 
 export default eventHandler(async (event) => {

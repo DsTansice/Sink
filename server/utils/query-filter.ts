@@ -1,8 +1,8 @@
 import type { z } from 'zod'
 import type { QuerySchema, FilterSchema } from '@/schemas/query'
 
-type Query = z.infer<typeof QuerySchema>
-type Filter = z.infer<typeof FilterSchema>
+export type Query = z.infer<typeof QuerySchema>
+export type Filter = z.infer<typeof FilterSchema>
 
 export function query2filter(query: Query): Filter {
   const filter: Filter = {}
