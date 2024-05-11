@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/eslint',
     '@nuxtjs/tailwindcss',
+    '@nuxt/image',
   ],
   routeRules: {
     '/': { prerender: true },

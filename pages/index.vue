@@ -1,5 +1,8 @@
 <template>
   <main>
-    <ContentDoc path="/" />
+    <HomeHero />
+    <HomeLogos />
+    <HomeFeatures />
+    <HomeCta />
   </main>
 </template>

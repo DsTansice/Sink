@@ -17,6 +17,8 @@
   },
   "dependencies": {
     "@nuxt/content": "^2.12.1",
+    "@nuxt/image": "^1.7.0",
+    "@tabler/icons-vue": "^3.3.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "intl-parse-accept-language": "^1.0.0",
