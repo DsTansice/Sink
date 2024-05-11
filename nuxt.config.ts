@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxthub/core', '@nuxt/eslint'],
+  routeRules: {
+    '/': { prerender: true },
+  },
   hub: {
     analytics: true,
     blob: false,
