@@ -1,4 +1,4 @@
 export default defineAppConfig({
   previewTTL: 24 * 3600, // 24h
-  slugRegex: /^[a-z0-9]+(?:-[a-z0-9]+)*$/i,
+  slugRegex: /^[^\s-_](?!.*?[-_]{2,})[a-z0-9-\\][^\s]*[^-_\s]$/i,
 })

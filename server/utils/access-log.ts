@@ -16,7 +16,7 @@ function toBlobNumber(blob: string) {
   return +blob.replace(/[^\d]/g, '')
 }
 
-export const blobsMap: { [x: string]: string } = {
+export const blobsMap = {
   blob1: 'ua',
   blob2: 'ip',
   blob3: 'source',
@@ -31,17 +31,28 @@ export const blobsMap: { [x: string]: string } = {
   blob12: 'browserType',
   blob13: 'device',
   blob14: 'deviceType',
-}
+} as const
 
-export const logsMap: { [x: string]: string } = Object.entries(blobsMap).reduce((acc, [k, v]) => ({ ...acc, [v]: k }), {})
+export type BlobsMap = typeof blobsMap
+export type BlobsKey = keyof BlobsMap
+export type LogsKey = BlobsMap[BlobsKey]
+export type LogsMap = { [key in LogsKey]: string | undefined }
 
-export function logs2blobs(logs: { [x: string]: string | undefined }) {
+export const logsMap: LogsMap = Object.entries(blobsMap).reduce((acc, [k, v]) => ({ ...acc, [v]: k }), {}) as LogsMap
+
+export function logs2blobs(logs: LogsMap) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   return Object.keys(blobsMap).sort((a, b) => toBlobNumber(a) - toBlobNumber(b)).map(key => logs[blobsMap[key]] || '')
 }
 
 export function blobs2logs(blobs: string[]) {
   const logsList = Object.keys(blobsMap)
-  return blobs.reduce((logs: { [x: string]: string }, blob, i) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  return blobs.reduce((logs: LogsMap, blob, i) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     logs[blobsMap[logsList[i]]] = blob
     return logs
   }, {})

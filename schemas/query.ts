@@ -2,8 +2,8 @@ import { z } from 'zod'
 
 export const QuerySchema = z.object({
   id: z.string().optional(),
-  startAt: z.number().int().safe().optional(),
-  endAt: z.number().int().safe().optional(),
+  startAt: z.coerce.number().int().safe().optional(),
+  endAt: z.coerce.number().int().safe().optional(),
   source: z.string().optional(),
   countryCode: z.string().optional(),
   country: z.string().optional(),
