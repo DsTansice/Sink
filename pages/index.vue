@@ -1,5 +1,5 @@
 <template>
   <main>
-    <Button>404</Button>
+    index
   </main>
 </template>
