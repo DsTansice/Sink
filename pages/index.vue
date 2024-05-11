@@ -1,5 +1,5 @@
 <template>
   <main>
-    index
+    <ContentDoc path="/" />
   </main>
 </template>
