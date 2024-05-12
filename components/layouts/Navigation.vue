@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 // import ListItem from './NavigationMenuDemoItem.vue'
 import {
   NavigationMenu,

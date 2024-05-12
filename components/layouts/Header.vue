@@ -44,7 +44,7 @@
               </span>
               <span class="mx-2">Sink</span>
             </a>
-            <div class="w-full">
+            <div class="w-full mx-4">
               <LayoutsNavigation />
             </div>
             <div

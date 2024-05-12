@@ -5,7 +5,7 @@ import { IconClick } from '@tabler/icons-vue'
 <template>
   <div class="md:py-12">
     <h2 class="text-center text-slate-500">
-      Works with your technologies
+      Built with awesome technologies
     </h2>
     <div class="flex flex-wrap items-center justify-center gap-8 mt-10 md:gap-20">
       <IconClick

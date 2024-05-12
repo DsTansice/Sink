@@ -9,9 +9,6 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxt/image',
   ],
-  routeRules: {
-    '/': { prerender: true },
-  },
   hub: {
     analytics: true,
     blob: false,
