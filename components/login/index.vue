@@ -7,9 +7,11 @@ const LoginSchema = z.object({
   token: z.string().describe('SiteToken'),
 })
 
+const { previewMode } = useRuntimeConfig().public
+
 const onSubmit = async (form) => {
-  localStorage.setItem('siteToken', form.token)
   try {
+    localStorage.setItem('siteToken', form.token)
     await useAPI('/api/verify')
     navigateTo('/dashboard')
   }
@@ -38,7 +40,7 @@ const onSubmit = async (form) => {
         :schema="LoginSchema"
         @submit="onSubmit"
       >
-        <Alert>
+        <Alert v-if="previewMode">
           <AlertCircle class="w-4 h-4" />
           <AlertTitle>Tips</AlertTitle>
           <AlertDescription>
