@@ -1,4 +1,5 @@
 import type { H3Event } from 'h3'
+import type { QueryValue } from 'ufo'
 import { parseURL } from 'ufo'
 import { UAParser } from 'ua-parser-js'
 import {
@@ -64,6 +65,13 @@ function blobs2logs(blobs: string[]) {
   }, {})
 }
 
+function query2string(query: QueryValue) {
+  if (Array.isArray(query)) {
+    return query.join(',')
+  }
+  return query
+}
+
 export const useAccessLog = (event: H3Event) => {
   const ip = getHeader(event, 'x-real-ip') || getRequestIP(event, { xForwardedFor: true })
 
@@ -108,11 +116,11 @@ export const useAccessLog = (event: H3Event) => {
     browserType: uaInfo?.browser?.type,
     device: uaInfo?.device?.model,
     deviceType: uaInfo?.device?.type,
-    UTMSource,
-    UTMMedium,
-    UTMCampaign,
-    UTMTerm,
-    UTMContent,
+    UTMSource: query2string(UTMSource),
+    UTMMedium: query2string(UTMMedium),
+    UTMCampaign: query2string(UTMCampaign),
+    UTMTerm: query2string(UTMTerm),
+    UTMContent: query2string(UTMContent),
   }
 
   if (process.env.NODE_ENV === 'production') {
