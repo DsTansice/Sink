@@ -17,20 +17,26 @@ function toBlobNumber(blob: string) {
 }
 
 export const blobsMap = {
-  blob1: 'ua',
-  blob2: 'ip',
-  blob3: 'source',
-  blob4: 'countryCode',
-  blob5: 'country',
-  blob6: 'region',
-  blob7: 'city',
-  blob8: 'timezone',
-  blob9: 'language',
-  blob10: 'os',
-  blob11: 'browser',
-  blob12: 'browserType',
-  blob13: 'device',
-  blob14: 'deviceType',
+  blob1: 'slug',
+  blob2: 'url',
+  blob3: 'ua',
+  blob4: 'ip',
+  blob5: 'source',
+  blob6: 'country',
+  blob7: 'region',
+  blob8: 'city',
+  blob9: 'timezone',
+  blob10: 'language',
+  blob11: 'os',
+  blob12: 'browser',
+  blob13: 'browserType',
+  blob14: 'device',
+  blob15: 'deviceType',
+  blob16: 'UTMSource',
+  blob17: 'UTMMedium',
+  blob18: 'UTMCampaign',
+  blob19: 'UTMTerm',
+  blob20: 'UTMContent',
 } as const
 
 export type BlobsMap = typeof blobsMap
@@ -73,16 +79,24 @@ export const useAccessLog = (event: H3Event) => {
     device: [ExtraDevices.device || []].flat(),
   })).getResult()
 
-  const regionNames = new Intl.DisplayNames(['en'], { type: 'region' })
+  const {
+    utm_source: UTMSource,
+    utm_medium: UTMMedium,
+    utm_campaign: UTMCampaign,
+    utm_term: UTMTerm,
+    utm_content: UTMContent,
+  } = getQuery(event)
+
   const { request: { cf } } = event.context.cloudflare
   const link = event.context.link || {}
 
   const accessLogs = {
+    url: link.url,
+    slug: link.slug,
     ua: userAgent,
     ip,
     source,
-    countryCode: cf?.country,
-    country: regionNames.of(cf?.country),
+    country: cf?.country,
     region: cf?.region,
     city: cf?.city,
     timezone: cf?.timezone,
@@ -94,6 +108,11 @@ export const useAccessLog = (event: H3Event) => {
     browserType: uaInfo?.browser?.type,
     device: uaInfo?.device?.model,
     deviceType: uaInfo?.device?.type,
+    UTMSource,
+    UTMMedium,
+    UTMCampaign,
+    UTMTerm,
+    UTMContent,
   }
 
   if (process.env.NODE_ENV === 'production') {
