@@ -1,5 +1,8 @@
 <template>
   <main>
-    <NuxtWelcome></NuxtWelcome>
+    <HomeHero />
+    <HomeLogos />
+    <HomeFeatures />
+    <HomeCta />
   </main>
 </template>
