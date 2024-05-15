@@ -3,17 +3,30 @@ import { VisSingleContainer, VisTopoJSONMap, VisTopoJSONMapSelectors } from '@un
 import { WorldMapTopoJSON } from '@unovis/ts/maps'
 import { ChartTooltip } from '@/components/ui/chart'
 
-const countryCodes = [
-  'AU', 'BR', 'CN', 'EG', 'FR', 'IN', 'JP', 'MX', 'NO', 'PE', 'PH', 'RU', 'TZ', 'US',
-]
-const areaData = countryCodes.map(id => ({ id, count: '110' }))
-const data = { areas: areaData }
+const areaData = ref([])
+
+const getMapData = async () => {
+  const { data } = await useAPI('/api/stats/metrics', {
+    query: {
+      type: 'countryCode',
+    },
+  })
+  if (Array.isArray(data)) {
+    areaData.value = data.map((country) => {
+      country.id = country.name
+      return country
+    })
+  }
+}
+
+onMounted(() => {
+  getMapData()
+})
 
 const valueFormatter = v => v
 const Tooltip = {
   props: ['title', 'data'],
   setup(props) {
-    // console.log(toRaw(props))
     const title = props.data[1]?.value?.name
     const data = [{
       name: props.title,
@@ -26,7 +39,10 @@ const Tooltip = {
 </script>
 
 <template>
-  <VisSingleContainer :data="data">
+  <VisSingleContainer
+    :data="{ areas: areaData }"
+    width="100%"
+  >
     <VisTopoJSONMap :topojson="WorldMapTopoJSON" />
     <ChartSingleTooltip
       index="id"

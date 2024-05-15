@@ -25,10 +25,15 @@ onMounted(async () => {
 </script>
 
 <template>
-  <BarChart
-    :data="views"
-    index="time"
-    type="stacked"
-    :categories="['visits', 'visitors']"
-  />
+  <Card class="p-4">
+    <CardTitle>
+      Views
+    </CardTitle>
+    <BarChart
+      :data="views"
+      index="time"
+      type="stacked"
+      :categories="['visits', 'visitors']"
+    />
+  </Card>
 </template>
