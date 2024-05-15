@@ -1,9 +1,9 @@
 import { defu } from 'defu'
 
 export const useAPI = (api: string, options: object = {}) => {
-  return useFetch(api, defu(options, {
+  return $fetch(api, defu(options, {
     headers: {
-      Authorization: localStorage.getItem('token') || '',
+      Authorization: `Bearer ${localStorage.getItem('siteToken') || ''}`,
     },
     server: false,
     transform: (value: { data: unknown }) => {

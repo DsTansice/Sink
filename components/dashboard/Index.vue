@@ -9,7 +9,7 @@
       </b>
     </CardHeader>
     <main class="space-y-6">
-      <DashboardStats />
+      <DashboardCounters />
       <DashboardViews />
       <DashboardMap />
     </main>

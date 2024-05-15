@@ -15,7 +15,7 @@ const getLinkViews = async () => {
       unit: 'hour',
     },
   })
-  views.value = data?.value || []
+  views.value = data || []
 }
 
 onMounted(async () => {
@@ -29,6 +29,6 @@ onMounted(async () => {
     :data="views"
     index="time"
     type="stacked"
-    :categories="['views', 'visitors']"
+    :categories="['visits', 'visitors']"
   />
 </template>

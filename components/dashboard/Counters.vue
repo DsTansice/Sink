@@ -1,5 +1,5 @@
 <script setup>
-import { MousePointerClick } from 'lucide-vue-next'
+import { MousePointerClick, Users, Flame } from 'lucide-vue-next'
 
 const props = defineProps({
   id: {
@@ -7,21 +7,25 @@ const props = defineProps({
   },
 })
 
-const counters = ref({})
+const counters = ref({
+  visits: 0,
+  visitors: 0,
+  referers: 0,
+})
 
-const getLinkStats = async () => {
+const getLinkCounters = async () => {
   const { data } = await useAPI('/api/stats/counters', {
     watch: props.id,
     query: {
       id: props.id,
     },
   })
-  counters.value = data?.value?.[0]
+  counters.value = data?.[0]
 }
 
 onMounted(async () => {
   await nextTick()
-  getLinkStats()
+  getLinkCounters()
 })
 </script>
 
@@ -30,16 +34,19 @@ onMounted(async () => {
     <Card>
       <CardHeader class="flex flex-row items-center justify-between pb-2 space-y-0">
         <CardTitle class="text-sm font-medium">
-          Views
+          Visits
         </CardTitle>
         <MousePointerClick class="w-4 h-4 text-muted-foreground" />
       </CardHeader>
       <CardContent>
-        <div class="text-2xl font-bold">
-          {{ counters.views }}
+        <div
+          class="text-2xl font-bold"
+          :class="{ 'blur-lg': !counters.visits }"
+        >
+          {{ counters.visits }}
         </div>
         <!-- <p class="text-xs text-muted-foreground">
-          +20.1% from last month
+          +90
         </p> -->
       </CardContent>
     </Card>
@@ -48,14 +55,17 @@ onMounted(async () => {
         <CardTitle class="text-sm font-medium">
           Visitors
         </CardTitle>
-        <MousePointerClick class="w-4 h-4 text-muted-foreground" />
+        <Users class="w-4 h-4 text-muted-foreground" />
       </CardHeader>
       <CardContent>
-        <div class="text-2xl font-bold">
+        <div
+          class="text-2xl font-bold"
+          :class="{ 'blur-lg': !counters.visitors }"
+        >
           {{ counters.visitors }}
         </div>
         <!-- <p class="text-xs text-muted-foreground">
-          +180.1% from last month
+          +90
         </p> -->
       </CardContent>
     </Card>
@@ -64,14 +74,17 @@ onMounted(async () => {
         <CardTitle class="text-sm font-medium">
           Referers
         </CardTitle>
-        <MousePointerClick class="w-4 h-4 text-muted-foreground" />
+        <Flame class="w-4 h-4 text-muted-foreground" />
       </CardHeader>
       <CardContent>
-        <div class="text-2xl font-bold">
+        <div
+          class="text-2xl font-bold"
+          :class="{ 'blur-lg': !counters.referers }"
+        >
           {{ counters.referers }}
         </div>
         <!-- <p class="text-xs text-muted-foreground">
-          +19% from last month
+          -20
         </p> -->
       </CardContent>
     </Card>
