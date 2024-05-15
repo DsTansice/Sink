@@ -9,4 +9,7 @@ export default withNuxt(
   //     '@stylistic': stylistic
   //   },
   // }
+  {
+    ignores: ['components/ui'],
+  },
 )
