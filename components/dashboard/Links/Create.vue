@@ -1,5 +1,21 @@
 <script setup>
-// import { LinkSchema } from '@/schemas/link'
+// import { z } from 'zod'
+import { LinkSchema } from '@/schemas/link'
+
+const CreateLinkSchema = LinkSchema.pick({
+  url: true,
+  slug: true,
+}).extend({
+  optional: LinkSchema.omit({
+    id: true,
+    url: true,
+    slug: true,
+    createdAt: true,
+    updatedAt: true,
+  }).optional(),
+})
+
+console.log(CreateLinkSchema)
 
 const props = defineProps({
   link: {
@@ -8,6 +24,10 @@ const props = defineProps({
   },
 })
 const link = ref(props.link)
+
+const onSubmit = (values) => {
+  console.log(values)
+}
 </script>
 
 <template>
@@ -24,22 +44,25 @@ const link = ref(props.link)
       <DialogHeader>
         <DialogTitle>{{ link.id ? 'Edit Link' : 'Create Link' }}</DialogTitle>
       </DialogHeader>
-      <div class="grid gap-4 py-4">
-        ABC
-      </div>
-      <DialogFooter>
-        <DialogClose as-child>
-          <Button
-            type="button"
-            variant="secondary"
-          >
-            Close
+      <AutoForm
+        class="space-y-2"
+        :schema="CreateLinkSchema"
+        @submit="onSubmit"
+      >
+        <DialogFooter>
+          <DialogClose as-child>
+            <Button
+              type="button"
+              variant="secondary"
+            >
+              Close
+            </Button>
+          </DialogClose>
+          <Button type="submit">
+            Save
           </Button>
-        </DialogClose>
-        <Button type="submit">
-          Save
-        </Button>
-      </DialogFooter>
+        </DialogFooter>
+      </AutoForm>
     </DialogContent>
   </Dialog>
 </template>

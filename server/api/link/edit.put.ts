@@ -2,7 +2,7 @@ import type { z } from 'zod'
 import { LinkSchema } from '@/schemas/link'
 
 export default eventHandler(async (event) => {
-  const { previewMode } = useRuntimeConfig(event)
+  const { previewMode } = useRuntimeConfig(event).public
   if (previewMode) {
     throw createError({
       status: 403,
