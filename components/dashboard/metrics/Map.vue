@@ -8,7 +8,7 @@ const areaData = ref([])
 const getMapData = async () => {
   const { data } = await useAPI('/api/stats/metrics', {
     query: {
-      type: 'countryCode',
+      type: 'country',
     },
   })
   if (Array.isArray(data)) {
