@@ -15,8 +15,6 @@ const CreateLinkSchema = LinkSchema.pick({
   }).optional(),
 })
 
-console.log(CreateLinkSchema)
-
 const props = defineProps({
   link: {
     type: Object,
@@ -24,14 +22,23 @@ const props = defineProps({
   },
 })
 const link = ref(props.link)
+const dialogOpen = ref(false)
 
-const onSubmit = (values) => {
-  console.log(values)
+const onSubmit = async (formData) => {
+  const link = {
+    url: formData.url,
+    slug: formData.slug,
+  }
+  await useAPI('/api/link/create', {
+    method: 'POST',
+    body: link,
+  })
+  dialogOpen.value = false
 }
 </script>
 
 <template>
-  <Dialog>
+  <Dialog v-model:open="dialogOpen">
     <DialogTrigger as-child>
       <Button
         class="ml-2"
