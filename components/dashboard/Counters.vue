@@ -13,11 +13,16 @@ const counters = ref({
   referers: 0,
 })
 
+const startAt = inject('startAt')
+const endAt = inject('endAt')
+
 const getLinkCounters = async () => {
   const { data } = await useAPI('/api/stats/counters', {
     watch: props.id,
     query: {
       id: props.id,
+      startAt: startAt.value,
+      endAt: endAt.value,
     },
   })
   counters.value = data?.[0]
@@ -25,6 +30,12 @@ const getLinkCounters = async () => {
 
 onMounted(async () => {
   getLinkCounters()
+})
+
+const stopWatchTime = watch([startAt, endAt], getLinkCounters)
+
+onBeforeUnmount(() => {
+  stopWatchTime()
 })
 </script>
 

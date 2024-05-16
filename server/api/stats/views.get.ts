@@ -8,7 +8,7 @@ import { QuerySchema } from '@/schemas/query'
 const { select } = SqlBricks
 
 const unitMap: { [x: string]: string } = {
-  minute: '%Y-%m-%d %H:%M',
+  // minute: '%Y-%m-%d %H:%M',
   hour: '%Y-%m-%d %H',
   day: '%Y-%m-%d',
 }

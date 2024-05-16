@@ -7,12 +7,25 @@ const props = defineProps({
 
 const views = ref([])
 
+const startAt = inject('startAt')
+const endAt = inject('endAt')
+
+const OneDay = 24 * 60 * 60 // 1 day in seconds
+function getUnit(startAt, endAt) {
+  if (startAt && endAt && endAt - startAt <= OneDay) {
+    return 'hour'
+  }
+  return 'day'
+}
+
 const getLinkViews = async () => {
   const { data } = await useAPI('/api/stats/views', {
     watch: props.id,
     query: {
       id: props.id,
-      unit: 'hour',
+      unit: getUnit(startAt.value, endAt.value),
+      startAt: startAt.value,
+      endAt: endAt.value,
     },
   })
   views.value = data || []
@@ -20,6 +33,12 @@ const getLinkViews = async () => {
 
 onMounted(async () => {
   getLinkViews()
+})
+
+const stopWatchTime = watch([startAt, endAt], getLinkViews)
+
+onBeforeUnmount(() => {
+  stopWatchTime()
 })
 </script>
 
