@@ -4,7 +4,20 @@ defineProps({
     type: Array,
     required: true,
   },
+  type: {
+    type: String,
+    required: true,
+  },
 })
+function formatName(name, type) {
+  if (type === 'country') {
+    return name.toUpperCase()
+  }
+  return name
+}
+function formatNumber(number) {
+  return new Intl.NumberFormat().format(number)
+}
 </script>
 
 <template>
@@ -27,7 +40,7 @@ defineProps({
           :key="metric.name"
         >
           <TableCell class="py-3 font-medium">
-            {{ metric.name || '(None)' }}
+            {{ formatName(metric.name) || '(None)' }}
           </TableCell>
           <TableCell
             class="py-3"
@@ -39,7 +52,7 @@ defineProps({
             />
           </TableCell>
           <TableCell class="py-3 text-right">
-            {{ metric.count }}
+            {{ formatNumber(metric.count) }}
           </TableCell>
         </TableRow>
       </TableBody>

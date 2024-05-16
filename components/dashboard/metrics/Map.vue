@@ -39,17 +39,26 @@ const Tooltip = {
 </script>
 
 <template>
-  <VisSingleContainer
-    :data="{ areas: areaData }"
-    width="100%"
-  >
-    <VisTopoJSONMap :topojson="WorldMapTopoJSON" />
-    <ChartSingleTooltip
-      index="id"
-      :selector="VisTopoJSONMapSelectors.feature"
-      :items="areaData"
-      :value-formatter="valueFormatter"
-      :custom-tooltip="Tooltip"
-    />
-  </VisSingleContainer>
+  <Card class="flex flex-col h-[620px]">
+    <CardHeader>
+      <CardTitle>Location</CardTitle>
+    </CardHeader>
+    <CardContent class="flex-1 flex [&_[data-radix-aspect-ratio-wrapper]]:flex-1">
+      <AspectRatio :ratio="65 / 30">
+        <VisSingleContainer
+          :data="{ areas: areaData }"
+          class="h-full"
+        >
+          <VisTopoJSONMap :topojson="WorldMapTopoJSON" />
+          <ChartSingleTooltip
+            index="id"
+            :selector="VisTopoJSONMapSelectors.feature"
+            :items="areaData"
+            :value-formatter="valueFormatter"
+            :custom-tooltip="Tooltip"
+          />
+        </VisSingleContainer>
+      </AspectRatio>
+    </CardContent>
+  </Card>
 </template>

@@ -24,7 +24,7 @@ const getLinkMetrics = async () => {
     total.value = data.reduce((acc, cur) => acc + Number(cur.count), 0)
     metrics.value = data.map((item, i) => {
       item.color = colors[i]
-      item.percent = Math.floor(item.count / total.value * 100)
+      item.percent = Math.floor(item.count / total.value * 100) || (item.count ? 1 : 0)
       return item
     })
     top10.value = metrics.value.slice(0, 10)
@@ -38,7 +38,10 @@ onMounted(() => {
 
 <template>
   <Card>
-    <DashboardMetricsTable :metrics="top10" />
+    <DashboardMetricsTable
+      :metrics="top10"
+      :type="type"
+    />
     <CardFooter v-if="metrics.length > top10.length">
       <Dialog>
         <DialogTrigger

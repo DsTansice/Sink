@@ -69,7 +69,7 @@ function query2string(query: QueryValue) {
   if (Array.isArray(query)) {
     return query.join(',')
   }
-  return query
+  return query ? String(query) : ''
 }
 
 export const useAccessLog = (event: H3Event) => {
