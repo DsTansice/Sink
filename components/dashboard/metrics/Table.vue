@@ -10,7 +10,10 @@ defineProps({
   },
 })
 function formatNumber(number) {
-  return new Intl.NumberFormat(navigator.language).format(number)
+  if (!number || typeof Intl === 'undefined') {
+    return number
+  }
+  return new Intl.NumberFormat('en').format(number)
 }
 </script>
 

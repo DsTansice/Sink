@@ -37,12 +37,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <Card>
+  <Card class="flex flex-col">
     <DashboardMetricsTable
+      class="flex-1"
       :metrics="top10"
       :type="type"
     />
-    <CardFooter v-if="metrics.length > top10.length">
+    <CardFooter v-if="metrics.length">
       <Dialog>
         <DialogTrigger
           as-child
@@ -64,6 +65,7 @@ onMounted(() => {
           <DashboardMetricsTable
             class="grid overflow-y-auto"
             :metrics="metrics"
+            :type="type"
           />
         </DialogContent>
       </Dialog>

@@ -14,20 +14,53 @@ function formatName(name, type) {
   if (!name || typeof Intl === 'undefined') {
     return name
   }
-  if (type === 'country') {
-    const regionNames = new Intl.DisplayNames([navigator.language], { type: 'region' })
-    return regionNames.of(name)
+  try {
+    if (type === 'country') {
+      const regionNames = new Intl.DisplayNames(['en'], { type: 'region' })
+      return getFlag(name) + ' ' + regionNames.of(name)
+    }
+    if (type === 'language') {
+      const languageNames = new Intl.DisplayNames(['en'], { type: 'language' })
+      return languageNames.of(name)
+    }
+    return name
   }
-  if (type === 'language') {
-    const languageNames = new Intl.DisplayNames([navigator.language], { type: 'language' })
-    return languageNames.of(name)
+  catch (e) {
+    console.error(e)
+    return name
   }
-  return name
 }
 </script>
 
 <template>
-  <div>
-    {{ formatName(name, type) || '(None)' }}
-  </div>
+  <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger class="text-left">
+        <DashboardMetricsNameSource
+          v-if="name && type === 'source'"
+          :name="name"
+        />
+        <DashboardMetricsNameSlug
+          v-else-if="name && type === 'slug'"
+          :name="name"
+        />
+        <DashboardMetricsNameIcon
+          v-else-if="name && ['os', 'browser', 'browserType', 'device', 'deviceType'].includes(type)"
+          :name="name"
+          :type="type"
+        />
+        <div
+          v-else
+          class="w-40 truncate"
+        >
+          {{ formatName(name, type) || '(None)' }}
+        </div>
+      </TooltipTrigger>
+      <TooltipContent v-if="name">
+        <p>
+          {{ formatName(name, type) }}
+        </p>
+      </TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
 </template>
