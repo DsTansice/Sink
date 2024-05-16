@@ -1,6 +1,8 @@
 import type { H3Event } from 'h3'
 import { z } from 'zod'
-import SqlBricks from 'sql-bricks'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+import SqlBricks from 'sql-bricks-sqlite'
 import { QuerySchema } from '@/schemas/query'
 
 const { select } = SqlBricks
@@ -14,7 +16,7 @@ function query2sql(query: z.infer<typeof MetricsQuerySchema>, event: H3Event): s
   const { dataset } = useRuntimeConfig(event)
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
-  return select(`${logsMap[query.type]} as name, SUM(_sample_interval) as count`).from(dataset).where(filter).groupBy('name').orderBy('count DESC').toString()
+  return select(`${logsMap[query.type]} as name, SUM(_sample_interval) as count`).from(dataset).where(filter).groupBy('name').orderBy('count DESC').limit(query.limit).toString()
 }
 
 export default eventHandler(async (event) => {

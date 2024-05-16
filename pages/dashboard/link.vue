@@ -1,3 +1,3 @@
 <template>
-  <Dashboard />
+  <div>Link</div>
 </template>

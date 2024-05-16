@@ -13,10 +13,15 @@ const total = ref(0)
 const metrics = ref([])
 const top10 = ref([])
 
+const startAt = inject('startAt')
+const endAt = inject('endAt')
+
 const getLinkMetrics = async () => {
   const { data } = await useAPI('/api/stats/metrics', {
     query: {
       type: props.type,
+      startAt: startAt.value,
+      endAt: endAt.value,
     },
   })
   if (Array.isArray(data)) {
@@ -24,7 +29,7 @@ const getLinkMetrics = async () => {
     total.value = data.reduce((acc, cur) => acc + Number(cur.count), 0)
     metrics.value = data.map((item, i) => {
       item.color = colors[i]
-      item.percent = Math.floor(item.count / total.value * 100)
+      item.percent = Math.floor(item.count / total.value * 100) || (item.count ? 1 : 0)
       return item
     })
     top10.value = metrics.value.slice(0, 10)
@@ -34,36 +39,68 @@ const getLinkMetrics = async () => {
 onMounted(() => {
   getLinkMetrics()
 })
+
+const stopWatchTime = watch([startAt, endAt], getLinkMetrics)
+
+onBeforeUnmount(() => {
+  stopWatchTime()
+})
 </script>
 
 <template>
-  <Card>
-    <DashboardMetricsTable :metrics="top10" />
-    <CardFooter v-if="metrics.length > top10.length">
-      <Dialog>
-        <DialogTrigger
-          as-child
-          class="w-full mt-2"
-        >
-          <Button
-            variant="link"
+  <Card class="flex flex-col">
+    <template v-if="metrics.length">
+      <DashboardMetricsTable
+        class="flex-1"
+        :metrics="top10"
+        :type="type"
+      />
+      <CardFooter>
+        <Dialog>
+          <DialogTrigger
+            as-child
+            class="w-full mt-2"
           >
-            <IconMaximize
-              class="w-4 h-4 mr-2"
-              :stroke="2"
-            /> DETAILS
-          </Button>
-        </DialogTrigger>
-        <DialogContent class="max-w-[90svw] max-h-[90svh] md:max-w-screen-md grid-rows-[auto_minmax(0,1fr)_auto]">
-          <DialogHeader>
-            <DialogTitle>{{ type.toUpperCase() }}</DialogTitle>
-          </DialogHeader>
-          <DashboardMetricsTable
-            class="grid overflow-y-auto"
-            :metrics="metrics"
-          />
-        </DialogContent>
-      </Dialog>
-    </CardFooter>
+            <Button
+              variant="link"
+            >
+              <IconMaximize
+                class="w-4 h-4 mr-2"
+                :stroke="2"
+              /> DETAILS
+            </Button>
+          </DialogTrigger>
+          <DialogContent class="max-w-[90svw] max-h-[90svh] md:max-w-screen-md grid-rows-[auto_minmax(0,1fr)_auto]">
+            <DialogHeader>
+              <DialogTitle>{{ type.toUpperCase() }}</DialogTitle>
+            </DialogHeader>
+            <DashboardMetricsTable
+              class="grid overflow-y-auto"
+              :metrics="metrics"
+              :type="type"
+            />
+          </DialogContent>
+        </Dialog>
+      </CardFooter>
+    </template>
+    <template v-else>
+      <div class="flex items-center justify-between h-12 px-4">
+        <Skeleton
+          class="w-32 h-4 rounded-full"
+        />
+        <Skeleton
+          class="w-20 h-4 rounded-full"
+        />
+      </div>
+      <div
+        v-for="i in 3"
+        :key="i"
+        class="px-4 py-4"
+      >
+        <Skeleton
+          class="w-full h-4 rounded-full"
+        />
+      </div>
+    </template>
   </Card>
 </template>

@@ -1,7 +1,3 @@
 <template>
-  <main>
-    <ClientOnly>
-      <DashboardLinks />
-    </ClientOnly>
-  </main>
+  <DashboardLinks />
 </template>

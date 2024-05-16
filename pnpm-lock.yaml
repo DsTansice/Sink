@@ -35,6 +35,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      dayjs:
+        specifier: ^1.11.11
+        version: 1.11.11
       intl-parse-accept-language:
         specifier: ^1.0.0
         version: 1.0.0
@@ -53,9 +56,9 @@ importers:
       shadcn-nuxt:
         specifier: ^0.10.4
         version: 0.10.4(rollup@4.17.2)
-      sql-bricks:
-        specifier: ^3.0.1
-        version: 3.0.1
+      sql-bricks-sqlite:
+        specifier: ^1.0.0
+        version: 1.0.0
       tailwind-merge:
         specifier: ^2.3.0
         version: 2.3.0
@@ -2739,6 +2742,9 @@ packages:
   data-uri-to-buffer@2.0.2:
     resolution: {integrity: sha512-ND9qDTLc6diwj+Xe5cdAgVTbLVdXbtxTJRXRhli8Mowuaan+0EJOtdqJ0QCHNSSPyoXGx9HX2/VMnKeC34AChA==}
 
+  dayjs@1.11.11:
+    resolution: {integrity: sha512-okzr3f11N6WuqYtZSvm+F776mB41wRZMhKP+hc34YdW+KmtYYK9iqvHSwo2k9FEH3fhGXvOPV6yz2IcSrfRUDg==}
+
   db0@0.1.4:
     resolution: {integrity: sha512-Ft6eCwONYxlwLjBXSJxw0t0RYtA5gW9mq8JfBXn9TtC0nDPlqePAhpv9v4g9aONBi6JI1OXHTKKkUYGd+BOrCA==}
     peerDependencies:
@@ -5330,6 +5336,9 @@ packages:
   sprintf-js@1.1.3:
     resolution: {integrity: sha512-Oo+0REFV59/rz3gfJNKQiBlwfHaSESl1pcGyABQsnnIfWOFt6JNj5gCog2U6MLZ//IGYD+nA8nI+mTShREReaA==}
 
+  sql-bricks-sqlite@1.0.0:
+    resolution: {integrity: sha512-+AqF7BrwJgmiCxuN+4r4ZdopZy3IYFfau9RGhVKqM70W4aTlGtks/lsDkO8r65PyGirdtRJzwkvwjXnghnc5OQ==}
+
   sql-bricks@3.0.1:
     resolution: {integrity: sha512-ZkU/R+bwf7d9FxlwMJp/31P5bluVCjUuftutkqJjQKH1QMCE1iaEc0xeY0aVepc38fxC+ljUrqausGCzzcHzHQ==}
 
@@ -5652,6 +5661,9 @@ packages:
 
   unctx@2.3.1:
     resolution: {integrity: sha512-PhKke8ZYauiqh3FEMVNm7ljvzQiph0Mt3GBRve03IJm7ukfaON2OBK795tLwhbyfzknuRRkW0+Ze+CQUmzOZ+A==}
+
+  underscore@1.13.6:
+    resolution: {integrity: sha512-+A5Sja4HP1M08MaXya7p5LvjuM7K6q/2EaC0+iovj/wOcMsTzMvDFbasi/oSapiwOlt252IqsKqPjCl7huKS0A==}
 
   undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
@@ -9510,6 +9522,8 @@ snapshots:
 
   data-uri-to-buffer@2.0.2: {}
 
+  dayjs@1.11.11: {}
+
   db0@0.1.4: {}
 
   de-indent@1.0.2: {}
@@ -12787,6 +12801,11 @@ snapshots:
 
   sprintf-js@1.1.3: {}
 
+  sql-bricks-sqlite@1.0.0:
+    dependencies:
+      sql-bricks: 3.0.1
+      underscore: 1.13.6
+
   sql-bricks@3.0.1: {}
 
   ssri@10.0.6:
@@ -13138,6 +13157,8 @@ snapshots:
       estree-walker: 3.0.3
       magic-string: 0.30.10
       unplugin: 1.10.1
+
+  underscore@1.13.6: {}
 
   undici-types@5.26.5: {}
 
