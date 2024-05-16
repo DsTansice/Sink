@@ -2,7 +2,7 @@ import type { H3Event } from 'h3'
 import { z } from 'zod'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
-import SqlBricks from 'sql-bricks-sqlite'
+import SqlBricks from 'mysql-bricks'
 import { QuerySchema } from '@/schemas/query'
 
 const { select } = SqlBricks
