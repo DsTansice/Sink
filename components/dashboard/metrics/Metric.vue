@@ -38,37 +38,58 @@ onMounted(() => {
 
 <template>
   <Card class="flex flex-col">
-    <DashboardMetricsTable
-      class="flex-1"
-      :metrics="top10"
-      :type="type"
-    />
-    <CardFooter v-if="metrics.length">
-      <Dialog>
-        <DialogTrigger
-          as-child
-          class="w-full mt-2"
-        >
-          <Button
-            variant="link"
+    <template v-if="metrics.length">
+      <DashboardMetricsTable
+        class="flex-1"
+        :metrics="top10"
+        :type="type"
+      />
+      <CardFooter>
+        <Dialog>
+          <DialogTrigger
+            as-child
+            class="w-full mt-2"
           >
-            <IconMaximize
-              class="w-4 h-4 mr-2"
-              :stroke="2"
-            /> DETAILS
-          </Button>
-        </DialogTrigger>
-        <DialogContent class="max-w-[90svw] max-h-[90svh] md:max-w-screen-md grid-rows-[auto_minmax(0,1fr)_auto]">
-          <DialogHeader>
-            <DialogTitle>{{ type.toUpperCase() }}</DialogTitle>
-          </DialogHeader>
-          <DashboardMetricsTable
-            class="grid overflow-y-auto"
-            :metrics="metrics"
-            :type="type"
-          />
-        </DialogContent>
-      </Dialog>
-    </CardFooter>
+            <Button
+              variant="link"
+            >
+              <IconMaximize
+                class="w-4 h-4 mr-2"
+                :stroke="2"
+              /> DETAILS
+            </Button>
+          </DialogTrigger>
+          <DialogContent class="max-w-[90svw] max-h-[90svh] md:max-w-screen-md grid-rows-[auto_minmax(0,1fr)_auto]">
+            <DialogHeader>
+              <DialogTitle>{{ type.toUpperCase() }}</DialogTitle>
+            </DialogHeader>
+            <DashboardMetricsTable
+              class="grid overflow-y-auto"
+              :metrics="metrics"
+              :type="type"
+            />
+          </DialogContent>
+        </Dialog>
+      </CardFooter>
+    </template>
+    <template v-else>
+      <div class="flex items-center justify-between h-12 px-4">
+        <Skeleton
+          class="w-32 h-4 rounded-full"
+        />
+        <Skeleton
+          class="w-20 h-4 rounded-full"
+        />
+      </div>
+      <div
+        v-for="i in 3"
+        :key="i"
+        class="px-4 py-4"
+      >
+        <Skeleton
+          class="w-full h-4 rounded-full"
+        />
+      </div>
+    </template>
   </Card>
 </template>

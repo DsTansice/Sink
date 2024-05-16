@@ -5,7 +5,6 @@ export const QuerySchema = z.object({
   startAt: z.coerce.number().int().safe().optional(),
   endAt: z.coerce.number().int().safe().optional(),
   source: z.string().optional(),
-  countryCode: z.string().optional(),
   country: z.string().optional(),
   region: z.string().optional(),
   city: z.string().optional(),
