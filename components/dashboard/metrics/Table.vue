@@ -9,14 +9,8 @@ defineProps({
     required: true,
   },
 })
-function formatName(name, type) {
-  if (type === 'country') {
-    return name.toUpperCase()
-  }
-  return name
-}
 function formatNumber(number) {
-  return new Intl.NumberFormat().format(number)
+  return new Intl.NumberFormat(navigator.language).format(number)
 }
 </script>
 
@@ -40,7 +34,10 @@ function formatNumber(number) {
           :key="metric.name"
         >
           <TableCell class="py-3 font-medium">
-            {{ formatName(metric.name) || '(None)' }}
+            <DashboardMetricsName
+              :name="metric.name"
+              :type="type"
+            />
           </TableCell>
           <TableCell
             class="py-3"
