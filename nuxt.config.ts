@@ -9,6 +9,17 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxt/image',
   ],
+  routeRules: {
+    '/': {
+      prerender: true,
+    },
+    '/dashboard/**': {
+      ssr: false,
+    },
+    '/docs/**': {
+      prerender: true,
+    },
+  },
   hub: {
     analytics: true,
     blob: false,

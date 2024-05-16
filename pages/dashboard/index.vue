@@ -1,7 +1,3 @@
 <template>
-  <main>
-    <ClientOnly>
-      <Dashboard />
-    </ClientOnly>
-  </main>
+  <Dashboard />
 </template>

@@ -19,7 +19,6 @@ const getLinkViews = async () => {
 }
 
 onMounted(async () => {
-  await nextTick()
   getLinkViews()
 })
 </script>

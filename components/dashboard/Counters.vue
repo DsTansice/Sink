@@ -24,7 +24,6 @@ const getLinkCounters = async () => {
 }
 
 onMounted(async () => {
-  await nextTick()
   getLinkCounters()
 })
 </script>
