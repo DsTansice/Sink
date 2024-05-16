@@ -9,12 +9,6 @@ defineProps({
     required: true,
   },
 })
-function formatNumber(number) {
-  if (!number || typeof Intl === 'undefined') {
-    return number
-  }
-  return new Intl.NumberFormat('en').format(number)
-}
 </script>
 
 <template>

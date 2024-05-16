@@ -53,7 +53,7 @@ onBeforeUnmount(() => {
           class="text-2xl font-bold"
           :class="{ 'blur-lg': !counters.visits }"
         >
-          {{ counters.visits }}
+          {{ formatNumber(counters.visits) }}
         </div>
         <!-- <p class="text-xs text-muted-foreground">
           +90
@@ -72,7 +72,7 @@ onBeforeUnmount(() => {
           class="text-2xl font-bold"
           :class="{ 'blur-lg': !counters.visitors }"
         >
-          {{ counters.visitors }}
+          {{ formatNumber(counters.visitors) }}
         </div>
         <!-- <p class="text-xs text-muted-foreground">
           +90
@@ -91,7 +91,7 @@ onBeforeUnmount(() => {
           class="text-2xl font-bold"
           :class="{ 'blur-lg': !counters.referers }"
         >
-          {{ counters.referers }}
+          {{ formatNumber(counters.referers) }}
         </div>
         <!-- <p class="text-xs text-muted-foreground">
           -20
