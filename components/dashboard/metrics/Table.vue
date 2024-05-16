@@ -45,11 +45,20 @@ function formatNumber(number) {
           <TableCell
             class="py-3"
           >
-            <Progress
-              v-model="metric.percent"
-              class="h-3"
-              :color="metric.color"
-            />
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger class="w-full">
+                  <Progress
+                    v-model="metric.percent"
+                    class="h-3"
+                    :color="metric.color"
+                  />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{{ metric.percent }}%</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </TableCell>
           <TableCell class="py-3 text-right">
             {{ formatNumber(metric.count) }}

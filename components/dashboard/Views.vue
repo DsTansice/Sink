@@ -24,7 +24,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <Card class="p-4">
+  <Card class="p-6">
     <CardTitle>
       Views
     </CardTitle>

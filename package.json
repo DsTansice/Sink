@@ -31,7 +31,7 @@
     "nuxt": "^3.11.2",
     "radix-vue": "^1.7.4",
     "shadcn-nuxt": "^0.10.4",
-    "sql-bricks": "^3.0.1",
+    "sql-bricks-sqlite": "^1.0.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "ua-parser-js": "next",
