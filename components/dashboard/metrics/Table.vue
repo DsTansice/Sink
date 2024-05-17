@@ -4,6 +4,10 @@ defineProps({
     type: Array,
     required: true,
   },
+  type: {
+    type: String,
+    required: true,
+  },
 })
 </script>
 
@@ -27,19 +31,31 @@ defineProps({
           :key="metric.name"
         >
           <TableCell class="py-3 font-medium">
-            {{ metric.name || '(None)' }}
+            <DashboardMetricsName
+              :name="metric.name"
+              :type="type"
+            />
           </TableCell>
           <TableCell
             class="py-3"
           >
-            <Progress
-              v-model="metric.percent"
-              class="h-3"
-              :color="metric.color"
-            />
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger class="w-full">
+                  <Progress
+                    v-model="metric.percent"
+                    class="h-3"
+                    :color="metric.color"
+                  />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{{ metric.percent }}%</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </TableCell>
           <TableCell class="py-3 text-right">
-            {{ metric.count }}
+            {{ formatNumber(metric.count) }}
           </TableCell>
         </TableRow>
       </TableBody>

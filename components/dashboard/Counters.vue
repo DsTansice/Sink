@@ -13,19 +13,29 @@ const counters = ref({
   referers: 0,
 })
 
+const startAt = inject('startAt')
+const endAt = inject('endAt')
+
 const getLinkCounters = async () => {
   const { data } = await useAPI('/api/stats/counters', {
     watch: props.id,
     query: {
       id: props.id,
+      startAt: startAt.value,
+      endAt: endAt.value,
     },
   })
   counters.value = data?.[0]
 }
 
 onMounted(async () => {
-  await nextTick()
   getLinkCounters()
+})
+
+const stopWatchTime = watch([startAt, endAt], getLinkCounters)
+
+onBeforeUnmount(() => {
+  stopWatchTime()
 })
 </script>
 
@@ -43,7 +53,7 @@ onMounted(async () => {
           class="text-2xl font-bold"
           :class="{ 'blur-lg': !counters.visits }"
         >
-          {{ counters.visits }}
+          {{ formatNumber(counters.visits) }}
         </div>
         <!-- <p class="text-xs text-muted-foreground">
           +90
@@ -62,7 +72,7 @@ onMounted(async () => {
           class="text-2xl font-bold"
           :class="{ 'blur-lg': !counters.visitors }"
         >
-          {{ counters.visitors }}
+          {{ formatNumber(counters.visitors) }}
         </div>
         <!-- <p class="text-xs text-muted-foreground">
           +90
@@ -81,7 +91,7 @@ onMounted(async () => {
           class="text-2xl font-bold"
           :class="{ 'blur-lg': !counters.referers }"
         >
-          {{ counters.referers }}
+          {{ formatNumber(counters.referers) }}
         </div>
         <!-- <p class="text-xs text-muted-foreground">
           -20

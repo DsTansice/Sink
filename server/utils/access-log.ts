@@ -12,6 +12,7 @@ import {
   Modules,
 } from 'ua-parser-js/extensions'
 import { parseAcceptLanguage } from 'intl-parse-accept-language'
+import { getFlag } from '@/utils/flag'
 
 function toBlobNumber(blob: string) {
   return +blob.replace(/[^\d]/g, '')
@@ -69,7 +70,7 @@ function query2string(query: QueryValue) {
   if (Array.isArray(query)) {
     return query.join(',')
   }
-  return query
+  return query ? String(query) : ''
 }
 
 export const useAccessLog = (event: H3Event) => {
@@ -98,6 +99,8 @@ export const useAccessLog = (event: H3Event) => {
   const { request: { cf } } = event.context.cloudflare
   const link = event.context.link || {}
 
+  const regionNames = new Intl.DisplayNames(['en'], { type: 'region' })
+  const countryName = regionNames.of(cf?.country || 'WD') // fallback to "Worldwide"
   const accessLogs = {
     url: link.url,
     slug: link.slug,
@@ -105,8 +108,8 @@ export const useAccessLog = (event: H3Event) => {
     ip,
     source,
     country: cf?.country,
-    region: cf?.region,
-    city: cf?.city,
+    region: getFlag(cf?.country) + ' ' + [cf?.region, countryName].filter(Boolean).join(','),
+    city: getFlag(cf?.country) + ' ' + [cf?.city, countryName].filter(Boolean).join(','),
     timezone: cf?.timezone,
     language,
     os: uaInfo?.os?.name,

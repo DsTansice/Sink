@@ -9,7 +9,7 @@ export function useWAE(event: H3Event, query: string) {
       Authorization: `Bearer ${cfApiToken}`,
     },
     body: query,
-    retry: 3,
+    retry: 1,
     retryDelay: 100, // ms
   })
 }

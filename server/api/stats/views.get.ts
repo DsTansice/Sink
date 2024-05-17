@@ -1,12 +1,14 @@
 import type { H3Event } from 'h3'
 import { z } from 'zod'
-import SqlBricks from 'sql-bricks'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+import SqlBricks from 'mysql-bricks'
 import { QuerySchema } from '@/schemas/query'
 
 const { select } = SqlBricks
 
 const unitMap: { [x: string]: string } = {
-  minute: '%Y-%m-%d %H:%M',
+  // minute: '%Y-%m-%d %H:%M',
   hour: '%Y-%m-%d %H',
   day: '%Y-%m-%d',
 }
