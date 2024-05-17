@@ -1,8 +1,5 @@
 import type { H3Event } from 'h3'
 import { z } from 'zod'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-import SqlBricks from 'mysql-bricks'
 import { QuerySchema } from '@/schemas/query'
 
 const { select } = SqlBricks
@@ -21,7 +18,9 @@ const ViewsQuerySchema = QuerySchema.extend({
 function query2sql(query: z.infer<typeof ViewsQuerySchema>, event: H3Event): string {
   const filter = query2filter(query)
   const { dataset } = useRuntimeConfig(event)
-  return select(`formatDateTime(timestamp, '${unitMap[query.unit]}', '${query.clientTimezone}') as time, SUM(_sample_interval) as visits, COUNT(DISTINCT ${logsMap['ip']}) as visitors`).from(dataset).where(filter).groupBy('time').orderBy('time').toString()
+  const sql = select(`formatDateTime(timestamp, '${unitMap[query.unit]}', '${query.clientTimezone}') as time, SUM(_sample_interval) as visits, COUNT(DISTINCT ${logsMap['ip']}) as visitors`).from(dataset).where(filter).groupBy('time').orderBy('time')
+  appendTimeFilter(sql, query)
+  return sql.toString()
 }
 
 export default eventHandler(async (event) => {

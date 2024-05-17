@@ -1,4 +1,5 @@
 import type { z } from 'zod'
+import type { SelectStatement } from 'sql-bricks'
 import type { QuerySchema, FilterSchema } from '@/schemas/query'
 
 export type Query = z.infer<typeof QuerySchema>
@@ -19,4 +20,14 @@ export function query2filter(query: Query): Filter {
     }
   })
   return filter
+}
+
+export function appendTimeFilter(sql: SelectStatement, query: Query): unknown {
+  if (query.startAt) {
+    sql.where(SqlBricks.gte('timestamp', SqlBricks(`toDateTime(${query.startAt})`)))
+  }
+  if (query.endAt) {
+    sql.where(SqlBricks.lte('timestamp', SqlBricks(`toDateTime(${query.endAt})`)))
+  }
+  return sql
 }

@@ -7,16 +7,19 @@ const props = defineProps({
   },
 })
 
-const counters = ref({
+const defaultData = Object.freeze({
   visits: 0,
   visitors: 0,
   referers: 0,
 })
 
+const counters = ref(defaultData)
+
 const startAt = inject('startAt')
 const endAt = inject('endAt')
 
 const getLinkCounters = async () => {
+  counters.value = defaultData
   const { data } = await useAPI('/api/stats/counters', {
     watch: props.id,
     query: {
