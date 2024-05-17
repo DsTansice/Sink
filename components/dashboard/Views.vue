@@ -19,6 +19,7 @@ function getUnit(startAt, endAt) {
 }
 
 const getLinkViews = async () => {
+  views.value = []
   const { data } = await useAPI('/api/stats/views', {
     watch: props.id,
     query: {

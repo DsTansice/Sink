@@ -17,6 +17,9 @@ const startAt = inject('startAt')
 const endAt = inject('endAt')
 
 const getLinkMetrics = async () => {
+  total.value = 0
+  metrics.value = []
+  top10.value = []
   const { data } = await useAPI('/api/stats/metrics', {
     query: {
       type: props.type,

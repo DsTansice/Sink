@@ -1,16 +1,16 @@
 import type { H3Event } from 'h3'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-import SqlBricks from 'mysql-bricks'
 import { QuerySchema } from '@/schemas/query'
 
 const { select } = SqlBricks
 
 function query2sql(query: Query, event: H3Event): string {
+  console.log('query2sql', SqlBricks)
   const filter = query2filter(query)
   const { dataset } = useRuntimeConfig(event)
   // visitors did not consider sampling
-  return select(`SUM(_sample_interval) as visits, COUNT(DISTINCT ${logsMap['ip']}) as visitors, COUNT(DISTINCT ${logsMap['source']}) as referers`).from(dataset).where(filter).toString()
+  const sql = select(`SUM(_sample_interval) as visits, COUNT(DISTINCT ${logsMap['ip']}) as visitors, COUNT(DISTINCT ${logsMap['source']}) as referers`).from(dataset).where(filter)
+  appendTimeFilter(sql, query)
+  return sql.toString()
 }
 
 export default eventHandler(async (event) => {
