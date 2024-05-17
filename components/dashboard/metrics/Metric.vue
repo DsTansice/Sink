@@ -13,6 +13,7 @@ const total = ref(0)
 const metrics = ref([])
 const top10 = ref([])
 
+const id = inject('id')
 const startAt = inject('startAt')
 const endAt = inject('endAt')
 
@@ -23,6 +24,7 @@ const getLinkMetrics = async () => {
   const { data } = await useAPI('/api/stats/metrics', {
     query: {
       type: props.type,
+      id: id.value,
       startAt: startAt.value,
       endAt: endAt.value,
     },

@@ -4,7 +4,6 @@ import { QuerySchema } from '@/schemas/query'
 const { select } = SqlBricks
 
 function query2sql(query: Query, event: H3Event): string {
-  console.log('query2sql', SqlBricks)
   const filter = query2filter(query)
   const { dataset } = useRuntimeConfig(event)
   // visitors did not consider sampling

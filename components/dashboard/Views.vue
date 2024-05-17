@@ -1,12 +1,7 @@
 <script setup>
-const props = defineProps({
-  id: {
-    type: String,
-  },
-})
-
 const views = ref([])
 
+const id = inject('id')
 const startAt = inject('startAt')
 const endAt = inject('endAt')
 
@@ -21,9 +16,8 @@ function getUnit(startAt, endAt) {
 const getLinkViews = async () => {
   views.value = []
   const { data } = await useAPI('/api/stats/views', {
-    watch: props.id,
     query: {
-      id: props.id,
+      id: id.value,
       unit: getUnit(startAt.value, endAt.value),
       clientTimezone: getTimeZone(),
       startAt: startAt.value,
