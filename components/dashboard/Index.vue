@@ -1,6 +1,13 @@
 <script setup>
 import dayjs from 'dayjs'
 
+defineProps({
+  link: {
+    type: Object,
+    default: () => null,
+  },
+})
+
 const startAt = ref(dayjs().subtract('7', 'day').unix())
 const endAt = ref(dayjs().unix())
 
@@ -16,8 +23,15 @@ const changeTime = (time) => {
 
 <template>
   <main class="space-y-6">
-    <DashboardBreadcrumb title="Analysis" />
     <DashboardNav>
+      <template
+        v-if="link"
+        #left
+      >
+        <h3 class="text-xl font-bold leading-10">
+          {{ link.slug }}'s Stats
+        </h3>
+      </template>
       <DashboardTimePicker @update:time-range="changeTime" />
     </DashboardNav>
     <DashboardCounters />

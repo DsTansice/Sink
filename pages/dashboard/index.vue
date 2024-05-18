@@ -1,3 +1,10 @@
+<script setup>
+provide('id', ref())
+</script>
+
 <template>
-  <Dashboard />
+  <main class="space-y-6">
+    <DashboardBreadcrumb title="Analysis" />
+    <Dashboard />
+  </main>
 </template>

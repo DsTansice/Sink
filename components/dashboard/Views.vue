@@ -1,12 +1,10 @@
 <script setup>
-const props = defineProps({
-  id: {
-    type: String,
-  },
-})
+import { AreaChart } from '@/components/ui/chart-area'
+import { BarChart } from '@/components/ui/chart-bar'
 
 const views = ref([])
 
+const id = inject('id')
 const startAt = inject('startAt')
 const endAt = inject('endAt')
 
@@ -19,16 +17,21 @@ function getUnit(startAt, endAt) {
 }
 
 const getLinkViews = async () => {
+  views.value = []
   const { data } = await useAPI('/api/stats/views', {
-    watch: props.id,
     query: {
-      id: props.id,
+      id: id.value,
       unit: getUnit(startAt.value, endAt.value),
+      clientTimezone: getTimeZone(),
       startAt: startAt.value,
       endAt: endAt.value,
     },
   })
-  views.value = data || []
+  views.value = (data || []).map((item) => {
+    item.visitors = +item.visitors
+    item.visits = +item.visits
+    return item
+  })
 }
 
 onMounted(async () => {
@@ -40,6 +43,18 @@ const stopWatchTime = watch([startAt, endAt], getLinkViews)
 onBeforeUnmount(() => {
   stopWatchTime()
 })
+
+const formatTime = (tick) => {
+  if (Number.isInteger(tick) && views.value[tick]) {
+    if (getUnit(startAt.value, endAt.value) === 'hour') {
+      return views.value[tick].time.split(' ')[1] || ''
+    }
+    return views.value[tick].time
+  }
+  return ''
+}
+
+const chart = computed(() => views.value.length > 1 ? AreaChart : BarChart)
 </script>
 
 <template>
@@ -47,11 +62,13 @@ onBeforeUnmount(() => {
     <CardTitle>
       Views
     </CardTitle>
-    <BarChart
+    <component
+      :is="chart"
       :data="views"
       index="time"
-      type="stacked"
-      :categories="['visits', 'visitors']"
+      :categories="['visitors', 'visits']"
+      :x-formatter="formatTime"
+      :y-formatter="formatNumber"
     />
   </Card>
 </template>

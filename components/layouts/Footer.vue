@@ -17,7 +17,7 @@
       >
         <a
           ref="email"
-          href="mailto:email.ml$miantiao.me"
+          href="mailto:sink.cool$miantiao.me"
           title="Email"
           class="text-gray-400 hover:text-gray-500"
         >

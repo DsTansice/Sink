@@ -7,13 +7,13 @@ import { IconBrandGithub } from '@tabler/icons-vue'
     class="grid pt-16 pb-8 lg:grid-cols-2 place-items-center md:py-12"
   >
     <div class="hidden py-6 md:order-1 md:block">
-      <NuxtImg
+      <img
         src="https://static.miantiao.me/share/2024/4GKVzD/PHzXDJ.png"
         alt="Astronaut in the air"
         widths="{[200,400,600]}"
         sizes="(max-width: 800px) 100vw, 620px"
         loading="eager"
-      />
+      >
     </div>
     <div>
       <h1

@@ -22,7 +22,7 @@ export const QuerySchema = z.object({
   UTMCampaign: z.string().optional(),
   UTMTerm: z.string().optional(),
   UTMContent: z.string().optional(),
-  limit: z.coerce.number().int().max(1000).default(1000),
+  limit: z.coerce.number().int().safe().default(500),
 })
 
 export const FilterSchema = QuerySchema.omit({ id: true, startAt: true, endAt: true, limit: true }).extend({

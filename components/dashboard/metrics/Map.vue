@@ -5,10 +5,18 @@ import { ChartTooltip } from '@/components/ui/chart'
 
 const areaData = ref([])
 
+const id = inject('id')
+const startAt = inject('startAt')
+const endAt = inject('endAt')
+
 const getMapData = async () => {
+  areaData.value = []
   const { data } = await useAPI('/api/stats/metrics', {
     query: {
       type: 'country',
+      id: id.value,
+      startAt: startAt.value,
+      endAt: endAt.value,
     },
   })
   if (Array.isArray(data)) {
@@ -21,6 +29,12 @@ const getMapData = async () => {
 
 onMounted(() => {
   getMapData()
+})
+
+const stopWatchTime = watch([startAt, endAt], getMapData)
+
+onBeforeUnmount(() => {
+  stopWatchTime()
 })
 
 const valueFormatter = v => v

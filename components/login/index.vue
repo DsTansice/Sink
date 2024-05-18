@@ -6,12 +6,20 @@ import { toast } from 'vue-sonner'
 const LoginSchema = z.object({
   token: z.string().describe('SiteToken'),
 })
+const loginFieldConfig = {
+  token: {
+    inputProps: {
+      type: 'password',
+      placeholder: '********',
+    },
+  },
+}
 
 const { previewMode } = useRuntimeConfig().public
 
 const onSubmit = async (form) => {
   try {
-    localStorage.setItem('siteToken', form.token)
+    localStorage.setItem('SinkSiteToken', form.token)
     await useAPI('/api/verify')
     navigateTo('/dashboard')
   }
@@ -38,6 +46,7 @@ const onSubmit = async (form) => {
       <AutoForm
         class="space-y-6"
         :schema="LoginSchema"
+        :field-config="loginFieldConfig"
         @submit="onSubmit"
       >
         <Alert v-if="previewMode">
