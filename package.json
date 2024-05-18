@@ -13,7 +13,8 @@
     "lint:fix": "eslint . --fix",
     "typecheck": "nuxt typecheck",
     "wrangler": "wrangler",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "docs": "mkdocs serve"
   },
   "dependencies": {
     "@tabler/icons-vue": "^3.3.0",
