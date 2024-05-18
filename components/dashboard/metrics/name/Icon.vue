@@ -1,13 +1,12 @@
 <script setup>
 import {
-  IconBrandAndroid,
   IconBrandApple,
   IconBrandGoogle,
   IconBrandEdge,
   IconBrandChrome,
   IconBrandSafari,
-  IconBrandWindows,
   IconBrandDebian,
+  IconBrandFirefox,
   IconBrandFacebook,
   IconBrandUbuntu,
   IconBrandWechat,
@@ -17,7 +16,24 @@ import {
   IconDeviceMobile,
   IconDeviceTablet,
   IconDeviceIpad,
+  IconBrandOpera,
+  IconBrandYandex,
+  IconTerminal2,
 } from '@tabler/icons-vue'
+
+// https://vue3-simple-icons.wyatt-herkamp.dev/
+import {
+  HuaweiIcon,
+  VivoIcon,
+  XiaomiIcon,
+  MacOsIcon,
+  IOsIcon,
+  LinuxIcon,
+  AndroidIcon,
+  WindowsIcon,
+  SamsungIcon,
+  InternetExplorerIcon,
+} from 'vue3-simple-icons'
 
 defineProps({
   name: {
@@ -31,33 +47,47 @@ defineProps({
 })
 
 const iconMaps = {
-  'android': IconBrandAndroid,
-  'macos': IconBrandApple,
-  'ios': IconBrandApple,
+  'android': AndroidIcon,
   'iphone': IconBrandApple,
   'ipod': IconBrandApple,
   'ipad': IconDeviceIpad,
   'macintosh': IconBrandApple,
   'edge': IconBrandEdge,
+  'ie': InternetExplorerIcon,
   'chrome': IconBrandChrome,
   'safari': IconBrandSafari,
   'debian': IconBrandDebian,
   'ubuntu': IconBrandUbuntu,
-  'windows': IconBrandWindows,
+  'windows': WindowsIcon,
+  'opera': IconBrandOpera,
   'mobile safari': IconBrandSafari,
   'mobile chrome': IconBrandChrome,
   'chrome headless': IconBrandChrome,
+  'chrome webview': IconBrandChrome,
   'googlebot': IconBrandGoogle,
   'googlebot-image': IconBrandGoogle,
   'chromium': IconBrandChrome,
   'wechat': IconBrandWechat,
   'facebookexternalhit': IconBrandFacebook,
+  'facebook': IconBrandFacebook,
+  'firefox': IconBrandFirefox,
+  'mobile firefox': IconBrandFirefox,
+  'yandex': IconBrandYandex,
   'browser': IconBrowser,
   'os': IconDeviceDesktop,
   'desktop': IconDeviceDesktop,
   'tablet': IconDeviceTablet,
   'mobile': IconDeviceMobile,
   'laptop': IconDeviceLaptop,
+  'curl': IconTerminal2,
+  'vivo browser': VivoIcon,
+  'huawei browser': HuaweiIcon,
+  'harmonyos': HuaweiIcon,
+  'miui browser': XiaomiIcon,
+  'macos': MacOsIcon,
+  'ios': IOsIcon,
+  'linux': LinuxIcon,
+  'samsung internet': SamsungIcon,
 }
 </script>
 

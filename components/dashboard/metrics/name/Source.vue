@@ -12,11 +12,10 @@ defineProps({
     class="inline-flex items-center justify-start"
   >
     <Avatar
-      size="sm"
       class="w-4 h-4 mr-1"
     >
       <AvatarImage
-        :src="`https://icons.duckduckgo.com/ip3/${name}.ico`"
+        :src="`https://unavatar.io/${name}?fallback=false`"
         alt="@radix-vue"
       />
       <AvatarFallback>
