@@ -1,5 +1,7 @@
 # NuxtHub Starter Template
 
+https://github.com/prismaneui/prismane
+
 This starter lets you get started with [NuxtHub](https://hub.nuxt.com) in seconds.
 
 - [Documentation](https://hub.nuxt.com)
