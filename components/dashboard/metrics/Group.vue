@@ -16,7 +16,7 @@ function type2name(type) {
 <template>
   <Tabs
     :default-value="tabs[0]"
-    class="flex flex-col col-span-2"
+    class="flex flex-col"
   >
     <TabsList class="w-fit">
       <TabsTrigger

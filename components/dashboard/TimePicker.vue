@@ -8,19 +8,19 @@ const emit = defineEmits(['update:timeRange'])
 watch(timeRange, (newValue) => {
   switch (newValue) {
     case 'today':
-      emit('update:timeRange', [dayjs().hour(0).unix(), dayjs().unix()])
+      emit('update:timeRange', [dayjs().startOf('day').unix(), dayjs().unix()])
       break
     case 'last-24h':
       emit('update:timeRange', [dayjs().subtract('24', 'hour').unix(), dayjs().unix()])
       break
     case 'this-week':
-      emit('update:timeRange', [dayjs().day(0).unix(), dayjs().unix()])
+      emit('update:timeRange', [dayjs().day(0).startOf('day').unix(), dayjs().unix()])
       break
     case 'last-7d':
       emit('update:timeRange', [dayjs().subtract('7', 'day').unix(), dayjs().unix()])
       break
     case 'this-month':
-      emit('update:timeRange', [dayjs().month(0).unix(), dayjs().unix()])
+      emit('update:timeRange', [dayjs().date(1).startOf('day').unix(), dayjs().unix()])
       break
     case 'last-30d':
       emit('update:timeRange', [dayjs().subtract('30', 'day').unix(), dayjs().unix()])

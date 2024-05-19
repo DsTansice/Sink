@@ -36,8 +36,8 @@ function formatName(name, type) {
   <TooltipProvider>
     <Tooltip>
       <TooltipTrigger class="text-left">
-        <DashboardMetricsNameSource
-          v-if="name && type === 'source'"
+        <DashboardMetricsNameReferer
+          v-if="name && type === 'referer'"
           :name="name"
         />
         <DashboardMetricsNameSlug

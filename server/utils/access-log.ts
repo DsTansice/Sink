@@ -1,5 +1,4 @@
 import type { H3Event } from 'h3'
-import type { QueryValue } from 'ufo'
 import { parseURL } from 'ufo'
 import { UAParser } from 'ua-parser-js'
 import {
@@ -23,7 +22,7 @@ export const blobsMap = {
   blob2: 'url',
   blob3: 'ua',
   blob4: 'ip',
-  blob5: 'source',
+  blob5: 'referer',
   blob6: 'country',
   blob7: 'region',
   blob8: 'city',
@@ -34,11 +33,6 @@ export const blobsMap = {
   blob13: 'browserType',
   blob14: 'device',
   blob15: 'deviceType',
-  blob16: 'UTMSource',
-  blob17: 'UTMMedium',
-  blob18: 'UTMCampaign',
-  blob19: 'UTMTerm',
-  blob20: 'UTMContent',
 } as const
 
 export type BlobsMap = typeof blobsMap
@@ -66,18 +60,10 @@ function blobs2logs(blobs: string[]) {
   }, {})
 }
 
-function query2string(query: QueryValue) {
-  if (Array.isArray(query)) {
-    return query.join(',')
-  }
-  return query ? String(query) : ''
-}
-
 export const useAccessLog = (event: H3Event) => {
   const ip = getHeader(event, 'x-real-ip') || getRequestIP(event, { xForwardedFor: true })
 
-  const referer = getHeader(event, 'referer')
-  const { host: source } = parseURL(referer)
+  const { host: referer } = parseURL(getHeader(event, 'referer'))
 
   const acceptLanguage = getHeader(event, 'accept-language') || ''
   const language = (parseAcceptLanguage(acceptLanguage) || [])[0]
@@ -87,14 +73,6 @@ export const useAccessLog = (event: H3Event) => {
     browser: [Apps.browser || [], Bots.browser || [], CLIs.browser || [], Emails.browser || [], MediaPlayers.browser || [], Modules.browser || []].flat(),
     device: [ExtraDevices.device || []].flat(),
   })).getResult()
-
-  const {
-    utm_source: UTMSource,
-    utm_medium: UTMMedium,
-    utm_campaign: UTMCampaign,
-    utm_term: UTMTerm,
-    utm_content: UTMContent,
-  } = getQuery(event)
 
   const { request: { cf } } = event.context.cloudflare
   const link = event.context.link || {}
@@ -106,7 +84,7 @@ export const useAccessLog = (event: H3Event) => {
     slug: link.slug,
     ua: userAgent,
     ip,
-    source,
+    referer,
     country: cf?.country,
     region: getFlag(cf?.country) + ' ' + [cf?.region, countryName].filter(Boolean).join(','),
     city: getFlag(cf?.country) + ' ' + [cf?.city, countryName].filter(Boolean).join(','),
@@ -119,11 +97,6 @@ export const useAccessLog = (event: H3Event) => {
     browserType: uaInfo?.browser?.type,
     device: uaInfo?.device?.model,
     deviceType: uaInfo?.device?.type,
-    UTMSource: query2string(UTMSource),
-    UTMMedium: query2string(UTMMedium),
-    UTMCampaign: query2string(UTMCampaign),
-    UTMTerm: query2string(UTMTerm),
-    UTMContent: query2string(UTMContent),
   }
 
   if (process.env.NODE_ENV === 'production') {
