@@ -11,15 +11,15 @@
     />
     <DashboardMetricsGroup
       class="lg:col-span-3"
-      :tabs="['os', 'browser', 'browserType']"
-    />
-    <DashboardMetricsGroup
-      class="lg:col-span-3"
       :tabs="['language', 'timezone']"
     />
     <DashboardMetricsGroup
       class="lg:col-span-3"
       :tabs="['device', 'deviceType']"
+    />
+    <DashboardMetricsGroup
+      class="lg:col-span-3"
+      :tabs="['os', 'browser', 'browserType']"
     />
   </main>
 </template>
