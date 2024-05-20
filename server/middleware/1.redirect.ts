@@ -5,7 +5,12 @@ import type { LinkSchema } from '@/schemas/link'
 export default eventHandler(async (event) => {
   const { pathname: slug } = parsePath(event.path.slice(1)) // remove leading slash
   const { slugRegex, reserveSlug } = useAppConfig(event)
+  const { homeURL } = useRuntimeConfig(event)
   const { cloudflare } = event.context
+
+  if (event.path === '/' && homeURL) {
+    return sendRedirect(event, homeURL)
+  }
 
   if (slug && !reserveSlug.includes(slug) && slugRegex.test(slug) && cloudflare) {
     const { KV } = cloudflare.env
