@@ -23,7 +23,9 @@ onMounted(() => {
 <template>
   <main class="space-y-6">
     <DashboardBreadcrumb title="Link" />
-    <div>Link {{ link }}</div>
+    <DashboardLinksLink
+      :link="link"
+    />
     <Dashboard
       v-if="link.id"
       :link="link"

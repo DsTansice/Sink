@@ -1,15 +1,31 @@
 <script setup>
+import { Loader } from 'lucide-vue-next'
+import { useInfiniteScroll } from '@vueuse/core'
+
 const links = ref([])
+const limit = 24
+let cursor = ''
+let listComplete = false
 
 const getLinks = async () => {
-  const data = await useAPI('/api/link/list')
+  if (listComplete) return
+  const data = await useAPI('/api/link/list', {
+    query: {
+      limit,
+      cursor,
+    },
+  })
   console.log(data)
-  links.value = data.links
+  links.value = links.value.concat(data.links)
+  cursor = data.cursor
+  listComplete = data.list_complete
 }
 
-onMounted(() => {
-  getLinks()
-})
+const { isLoading } = useInfiniteScroll(
+  document,
+  getLinks,
+  { distance: 10 },
+)
 </script>
 
 <template>
@@ -25,5 +41,11 @@ onMounted(() => {
         :link="link"
       />
     </section>
+    <div
+      v-if="isLoading"
+      class="flex items-center justify-center"
+    >
+      <Loader class="animate-spin" />
+    </div>
   </main>
 </template>

@@ -1,9 +1,11 @@
 <script setup>
-import { Link as LinkIcon, QrCode, CalendarPlus2, Hourglass } from 'lucide-vue-next'
+import { Link as LinkIcon, QrCode, CalendarPlus2, Hourglass, Copy, CopyCheck } from 'lucide-vue-next'
+import { useClipboard } from '@vueuse/core'
+import { toast } from 'vue-sonner'
 import { parseURL } from 'ufo'
 import QRCode from './QRCode.vue'
 
-defineProps({
+const props = defineProps({
   link: {
     type: Object,
     required: true,
@@ -15,16 +17,11 @@ const getLinkHost = (url) => {
   const { host } = parseURL(url)
   return host
 }
-const shortDate = (unix = 0) => {
-  const shortDate = new Intl.DateTimeFormat({
-    dateStyle: 'short',
-  })
-  return shortDate.format(unix * 1000)
-}
 
-const longDate = (unix = 0) => {
-  return new Date(unix * 1000).toLocaleString()
-}
+const shortLink = computed(() => `${origin}/${props.link.slug}`)
+const linkIcon = computed(() => `https://unavatar.io/${getLinkHost(props.link.url)}?fallback=https://sink.cool/sink.png`)
+
+const { copy, copied } = useClipboard({ source: shortLink.value, copiedDuring: 400 })
 </script>
 
 <template>
@@ -36,7 +33,7 @@ const longDate = (unix = 0) => {
       <div class="flex items-center justify-center space-x-3">
         <Avatar>
           <AvatarImage
-            :src="`https://unavatar.io/${getLinkHost(link.url)}?fallback=false`"
+            :src="linkIcon"
             alt="@radix-vue"
           />
           <AvatarFallback>
@@ -47,24 +44,36 @@ const longDate = (unix = 0) => {
           </AvatarFallback>
         </Avatar>
 
-        <div class="flex-1 overflow-hidden ">
-          <div>
-            <p class="font-bold truncate text-md">
+        <div class="flex-1 overflow-hidden">
+          <div class="flex items-center">
+            <div class="font-bold leading-5 truncate text-md">
               {{ host }}/{{ link.slug }}
-            </p>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger as-child>
-                  <p class="text-sm truncate">
-                    {{ link.comment || link.title || link.description }}
-                  </p>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>{{ link.comment || link.title || link.description }}</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            </div>
+
+            <CopyCheck
+              v-if="copied"
+              class="w-4 h-4 ml-1 shrink-0"
+              @click.prevent
+            />
+            <Copy
+              v-else
+              class="w-4 h-4 ml-1 shrink-0"
+              @click.prevent="copy(shortLink);toast('Copy successful!')"
+            />
           </div>
+
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger as-child>
+                <p class="text-sm truncate">
+                  {{ link.comment || link.title || link.description }}
+                </p>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{{ link.comment || link.title || link.description }}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
 
         <HoverCard :open-delay="200">
@@ -72,10 +81,12 @@ const longDate = (unix = 0) => {
             <QrCode class="w-6 h-6" />
           </HoverCardTrigger>
           <HoverCardContent class="w-300 h-300">
-            <QRCode
-              :data="`${origin}/${link.slug}`"
-              :image="`https://unavatar.io/${getLinkHost(link.url)}?fallback=https://sink.cool/sink.png`"
-            />
+            <NuxtErrorBoundary>
+              <QRCode
+                :data="shortLink"
+                :image="linkIcon"
+              />
+            </NuxtErrorBoundary>
           </HoverCardContent>
         </HoverCard>
 

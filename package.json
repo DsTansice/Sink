@@ -14,7 +14,9 @@
     "typecheck": "nuxt typecheck",
     "wrangler": "wrangler",
     "lint-staged": "lint-staged",
-    "docs": "mkdocs serve"
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
     "@tabler/icons-vue": "^3.3.0",
@@ -27,6 +29,7 @@
     "lucide-vue-next": "^0.378.0",
     "mysql-bricks": "^1.1.2",
     "nanoid": "^5.0.7",
+    "pluralize": "^8.0.0",
     "qr-code-styling": "1.6.0-rc.1",
     "radix-vue": "^1.7.4",
     "shadcn-nuxt": "^0.10.4",
@@ -49,6 +52,7 @@
     "simple-git-hooks": "^2.11.1",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
+    "vitepress": "^1.2.0",
     "vue-tsc": "^2.0.16",
     "wrangler": "^3.55.0"
   },

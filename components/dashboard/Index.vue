@@ -1,5 +1,5 @@
 <script setup>
-import dayjs from 'dayjs'
+import { now } from '@internationalized/date'
 
 defineProps({
   link: {
@@ -8,13 +8,13 @@ defineProps({
   },
 })
 
-const startAt = ref(dayjs().subtract('7', 'day').unix())
-const endAt = ref(dayjs().unix())
+const startAt = ref(date2unix(now().subtract({ days: 7 })))
+const endAt = ref(date2unix(now()))
 
 provide('startAt', startAt)
 provide('endAt', endAt)
 
-const changeTime = (time) => {
+const changeDate = (time) => {
   console.log(new Date(time[0] * 1000), new Date(time[1] * 1000))
   startAt.value = time[0]
   endAt.value = time[1]
@@ -32,7 +32,7 @@ const changeTime = (time) => {
           {{ link.slug }}'s Stats
         </h3>
       </template>
-      <DashboardTimePicker @update:time-range="changeTime" />
+      <DashboardDatePicker @update:date-range="changeDate" />
     </DashboardNav>
     <DashboardCounters />
     <DashboardViews />
