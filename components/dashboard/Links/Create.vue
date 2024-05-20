@@ -47,7 +47,7 @@ const onSubmit = async (formData) => {
         Create Link
       </Button>
     </DialogTrigger>
-    <DialogContent class="sm:max-w-[425px]">
+    <DialogContent class="max-w-[95svw] max-h-[95svh] md:max-w-screen-md grid-rows-[auto_minmax(0,1fr)_auto]">
       <DialogHeader>
         <DialogTitle>{{ link.id ? 'Edit Link' : 'Create Link' }}</DialogTitle>
       </DialogHeader>

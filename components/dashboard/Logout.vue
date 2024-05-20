@@ -14,7 +14,7 @@ const logOut = () => {
         class="w-4 h-4 cursor-pointer"
       />
     </AlertDialogTrigger>
-    <AlertDialogContent>
+    <AlertDialogContent class="max-w-[95svw]">
       <AlertDialogHeader>
         <AlertDialogTitle>LogOut ?</AlertDialogTitle>
         <AlertDialogDescription>

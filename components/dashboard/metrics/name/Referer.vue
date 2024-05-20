@@ -9,10 +9,9 @@ defineProps({
     :href="`http://${name}`"
     target="_blank"
     rel="noopener noreferrer"
-    class="inline-flex items-center justify-start"
   >
     <Avatar
-      class="w-4 h-4 mr-1"
+      class="w-5 h-5 p-0.5 float-left"
     >
       <AvatarImage
         :src="`https://unavatar.io/${name}?fallback=false`"
@@ -25,6 +24,6 @@ defineProps({
         >
       </AvatarFallback>
     </Avatar>
-    <span class="w-32 truncate">{{ name }}</span>
+    <span class="w-32 leading-5 truncate">{{ name }}</span>
   </a>
 </template>
