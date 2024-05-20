@@ -4,7 +4,6 @@ export default defineNuxtConfig({
   modules: [
     '@nuxthub/core',
     'shadcn-nuxt',
-    '@nuxt/content',
     '@nuxt/eslint',
     '@nuxtjs/tailwindcss',
   ],
@@ -14,9 +13,6 @@ export default defineNuxtConfig({
     },
     '/dashboard/**': {
       ssr: false,
-    },
-    '/docs/**': {
-      prerender: true,
     },
   },
   hub: {

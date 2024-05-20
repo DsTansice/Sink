@@ -28,6 +28,7 @@ useHead({
 
 <template>
   <NuxtLayout>
+    <NuxtLoadingIndicator color="#000" />
     <NuxtPage />
     <Toaster />
   </NuxtLayout>

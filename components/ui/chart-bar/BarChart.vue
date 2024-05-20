@@ -1,10 +1,10 @@
 <script setup lang="ts" generic="T extends Record<string, any>">
-import type { BulletLegendItemInterface, Spacing } from '@unovis/ts'
+import type { BulletLegendItemInterface } from '@unovis/ts'
 import { VisAxis, VisGroupedBar, VisStackedBar, VisXYContainer } from '@unovis/vue'
 import { Axis, GroupedBar, StackedBar } from '@unovis/ts'
 import { type Component, computed, ref } from 'vue'
 import { useMounted } from '@vueuse/core'
-import { type BaseChartProps, ChartCrosshair, ChartLegend, defaultColors } from '../chart'
+import { type BaseChartProps, ChartCrosshair, ChartLegend, defaultColors } from '@/components/ui/chart'
 import { cn } from '@/utils'
 
 const props = withDefaults(defineProps<BaseChartProps<T> & {
@@ -60,24 +60,14 @@ const selectorsBar = computed(() => props.type === 'grouped' ? GroupedBar.select
 
 <template>
   <div :class="cn('w-full h-[400px] flex flex-col items-end', $attrs.class ?? '')">
-    <ChartLegend
-      v-if="showLegend"
-      v-model:items="legendItems"
-      @legend-item-click="handleLegendItemClick"
-    />
+    <ChartLegend v-if="showLegend" v-model:items="legendItems" @legend-item-click="handleLegendItemClick" />
 
     <VisXYContainer
       :data="data"
       :style="{ height: isMounted ? '100%' : 'auto' }"
       :margin="margin"
     >
-      <ChartCrosshair
-        v-if="showTooltip"
-        :colors="colors"
-        :items="legendItems"
-        :custom-tooltip="customTooltip"
-        :index="index"
-      />
+      <ChartCrosshair v-if="showTooltip" :colors="colors" :items="legendItems" :custom-tooltip="customTooltip" :index="index" />
 
       <VisBarComponent
         :x="(d: Data, i: number) => i"

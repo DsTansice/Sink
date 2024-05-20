@@ -1,4 +1,6 @@
 <script setup>
+import { NuxtLink } from '#components'
+
 defineProps({
   title: {
     type: String,
@@ -8,7 +10,7 @@ defineProps({
 </script>
 
 <template>
-  <Breadcrumb>
+  <Breadcrumb class="flex justify-between">
     <BreadcrumbList>
       <BreadcrumbItem>
         <BreadcrumbLink href="/">
@@ -17,8 +19,19 @@ defineProps({
       </BreadcrumbItem>
       <BreadcrumbSeparator />
       <BreadcrumbItem>
+        <BreadcrumbLink
+          :as="NuxtLink"
+          to="/dashboard"
+        >
+          Dashboard
+        </BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
         <BreadcrumbPage>{{ title }}</BreadcrumbPage>
       </BreadcrumbItem>
     </BreadcrumbList>
+
+    <DashboardLogout />
   </Breadcrumb>
 </template>

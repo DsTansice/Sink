@@ -13,7 +13,8 @@
     "lint:fix": "eslint . --fix",
     "typecheck": "nuxt typecheck",
     "wrangler": "wrangler",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "docs": "mkdocs serve"
   },
   "dependencies": {
     "@tabler/icons-vue": "^3.3.0",
@@ -26,15 +27,16 @@
     "lucide-vue-next": "^0.378.0",
     "mysql-bricks": "^1.1.2",
     "nanoid": "^5.0.7",
+    "qr-code-styling": "1.6.0-rc.1",
     "radix-vue": "^1.7.4",
     "shadcn-nuxt": "^0.10.4",
     "ua-parser-js": "next",
     "vee-validate": "^4.12.8",
     "vue-sonner": "^1.1.2",
+    "vue3-simple-icons": "^11.13.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@nuxt/content": "^2.12.1",
     "@nuxt/eslint": "^0.3.10",
     "@nuxt/eslint-config": "^0.3.10",
     "@nuxthub/core": "^0.5.16",

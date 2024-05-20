@@ -1,6 +1,5 @@
 <script setup>
 import { IconMaximize } from '@tabler/icons-vue'
-import { defaultColors } from '@/components/ui/chart'
 
 const props = defineProps({
   type: {
@@ -30,7 +29,7 @@ const getLinkMetrics = async () => {
     },
   })
   if (Array.isArray(data)) {
-    const colors = defaultColors(data.length)
+    const colors = colorGradation(data.length)
     total.value = data.reduce((acc, cur) => acc + Number(cur.count), 0)
     metrics.value = data.map((item, i) => {
       item.color = colors[i]

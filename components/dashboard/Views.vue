@@ -1,4 +1,7 @@
 <script setup>
+import { AreaChart } from '@/components/ui/chart-area'
+import { BarChart } from '@/components/ui/chart-bar'
+
 const views = ref([])
 
 const id = inject('id')
@@ -50,6 +53,8 @@ const formatTime = (tick) => {
   }
   return ''
 }
+
+const chart = computed(() => views.value.length > 1 ? AreaChart : BarChart)
 </script>
 
 <template>
@@ -57,7 +62,8 @@ const formatTime = (tick) => {
     <CardTitle>
       Views
     </CardTitle>
-    <AreaChart
+    <component
+      :is="chart"
       :data="views"
       index="time"
       :categories="['visitors', 'visits']"

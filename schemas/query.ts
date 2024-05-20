@@ -6,7 +6,7 @@ export const QuerySchema = z.object({
   endAt: z.coerce.number().int().safe().optional(),
   url: z.string().optional(),
   slug: z.string().optional(),
-  source: z.string().optional(),
+  referer: z.string().optional(),
   country: z.string().optional(),
   region: z.string().optional(),
   city: z.string().optional(),
@@ -17,12 +17,7 @@ export const QuerySchema = z.object({
   browserType: z.string().optional(),
   device: z.string().optional(),
   deviceType: z.string().optional(),
-  UTMSource: z.string().optional(),
-  UTMMedium: z.string().optional(),
-  UTMCampaign: z.string().optional(),
-  UTMTerm: z.string().optional(),
-  UTMContent: z.string().optional(),
-  limit: z.coerce.number().int().max(1000).default(1000),
+  limit: z.coerce.number().int().safe().default(500),
 })
 
 export const FilterSchema = QuerySchema.omit({ id: true, startAt: true, endAt: true, limit: true }).extend({
