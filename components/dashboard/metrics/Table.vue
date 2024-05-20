@@ -19,7 +19,7 @@ defineProps({
           <TableHead class="w-1/5">
             Name
           </TableHead>
-          <TableHead />
+          <TableHead class="hidden sm:block" />
           <TableHead class="w-1/5 text-right">
             Count
           </TableHead>
@@ -37,7 +37,7 @@ defineProps({
             />
           </TableCell>
           <TableCell
-            class="py-3"
+            class="hidden py-3 sm:block"
           >
             <TooltipProvider>
               <Tooltip>

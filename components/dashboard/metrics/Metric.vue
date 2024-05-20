@@ -74,12 +74,12 @@ onBeforeUnmount(() => {
               /> DETAILS
             </Button>
           </DialogTrigger>
-          <DialogContent class="max-w-[90svw] max-h-[90svh] md:max-w-screen-md grid-rows-[auto_minmax(0,1fr)_auto]">
+          <DialogContent class="max-w-[95svw] max-h-[95svh] md:max-w-screen-md grid-rows-[auto_minmax(0,1fr)_auto]">
             <DialogHeader>
               <DialogTitle>{{ type.toUpperCase() }}</DialogTitle>
             </DialogHeader>
             <DashboardMetricsTable
-              class="grid overflow-y-auto"
+              class="overflow-y-auto"
               :metrics="metrics"
               :type="type"
             />

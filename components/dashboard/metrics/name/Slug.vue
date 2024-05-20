@@ -9,7 +9,6 @@ defineProps({
     :to="`/dashboard/link?slug=${name}`"
     class="inline-flex items-center justify-start"
   >
-    <!-- TODO: add url icon -->
-    <span class="w-32 truncate">{{ name }}</span>
+    <span class="w-40 leading-5 truncate">{{ name }}</span>
   </NuxtLink>
 </template>

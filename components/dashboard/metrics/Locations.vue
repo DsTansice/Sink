@@ -53,7 +53,7 @@ const Tooltip = {
 </script>
 
 <template>
-  <Card class="flex flex-col h-[620px]">
+  <Card class="flex flex-col">
     <CardHeader>
       <CardTitle>Locations</CardTitle>
     </CardHeader>

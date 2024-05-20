@@ -51,7 +51,7 @@ function formatName(name, type) {
         />
         <div
           v-else
-          class="w-40 truncate"
+          class="w-40 leading-5 truncate"
         >
           {{ formatName(name, type) || '(None)' }}
         </div>
