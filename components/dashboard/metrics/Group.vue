@@ -1,4 +1,6 @@
 <script setup>
+import pluralize from 'pluralize'
+
 defineProps({
   tabs: {
     type: Array,
@@ -9,7 +11,7 @@ function type2name(type) {
   if (['os'].includes(type)) {
     return type.toUpperCase()
   }
-  return type.replace(type[0], type[0].toUpperCase())
+  return pluralize(type.replace(type[0], type[0].toUpperCase()))
 }
 </script>
 

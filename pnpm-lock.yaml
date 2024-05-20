@@ -38,6 +38,9 @@ importers:
       nanoid:
         specifier: ^5.0.7
         version: 5.0.7
+      pluralize:
+        specifier: ^8.0.0
+        version: 8.0.0
       qr-code-styling:
         specifier: 1.6.0-rc.1
         version: 1.6.0-rc.1
