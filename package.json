@@ -14,7 +14,9 @@
     "typecheck": "nuxt typecheck",
     "wrangler": "wrangler",
     "lint-staged": "lint-staged",
-    "docs": "mkdocs serve"
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
     "@tabler/icons-vue": "^3.3.0",
@@ -49,6 +51,7 @@
     "simple-git-hooks": "^2.11.1",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
+    "vitepress": "^1.2.0",
     "vue-tsc": "^2.0.16",
     "wrangler": "^3.55.0"
   },
