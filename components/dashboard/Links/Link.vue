@@ -17,16 +17,6 @@ const getLinkHost = (url) => {
   const { host } = parseURL(url)
   return host
 }
-const shortDate = (unix = 0) => {
-  const shortDate = new Intl.DateTimeFormat({
-    dateStyle: 'short',
-  })
-  return shortDate.format(unix * 1000)
-}
-
-const longDate = (unix = 0) => {
-  return new Date(unix * 1000).toLocaleString()
-}
 
 const shortLink = computed(() => `${origin}/${props.link.slug}`)
 const linkIcon = computed(() => `https://unavatar.io/${getLinkHost(props.link.url)}?fallback=https://sink.cool/sink.png`)
