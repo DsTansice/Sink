@@ -9,14 +9,26 @@ const dateRange = ref('last-7d')
 const emit = defineEmits(['update:dateRange'])
 
 const openCustomDateRange = ref(false)
+const customDate = ref()
 const customDateRange = ref()
 const locale = getLocale()
 
-const updateCustomDateRange = (customDateRange) => {
-  if (customDateRange.start && customDateRange.end) {
+const updateCustomDate = (customDateValue) => {
+  emit('update:dateRange', [date2unix(customDateValue, 'start'), date2unix(customDateValue, 'end')])
+  openCustomDateRange.value = false
+  customDate.value = undefined
+}
+
+const updateCustomDateRange = (customDateRangeValue) => {
+  if (customDateRangeValue.start && customDateRangeValue.end) {
+    emit('update:dateRange', [date2unix(customDateRangeValue.start, 'start'), date2unix(customDateRangeValue.end, 'end')])
     openCustomDateRange.value = false
-    emit('update:dateRange', [date2unix(customDateRange.start, 'start'), date2unix(customDateRange.end, 'end')])
+    customDateRange.value = undefined
   }
+}
+
+function isDateDisabled(dateValue) {
+  return dateValue.toDate() > new Date()
 }
 
 watch(dateRange, (newValue) => {
@@ -95,14 +107,38 @@ watch(dateRange, (newValue) => {
   <Dialog v-model:open="openCustomDateRange">
     <DialogContent class="w-auto max-w-full">
       <DialogHeader>
-        <DialogTitle>Custom Date Range</DialogTitle>
+        <DialogTitle>Custom Date</DialogTitle>
       </DialogHeader>
-      <RangeCalendar
-        v-model="customDateRange"
-        initial-focus
-        :number-of-months="2"
-        @update:model-value="updateCustomDateRange"
-      />
+      <Tabs
+        default-value="range"
+      >
+        <div class="flex justify-center">
+          <TabsList>
+            <TabsTrigger value="date">
+              Date
+            </TabsTrigger>
+            <TabsTrigger value="range">
+              Date Range
+            </TabsTrigger>
+          </TabsList>
+        </div>
+        <TabsContent value="date">
+          <Calendar
+            :model-value="customDate"
+            :is-date-disabled="isDateDisabled"
+            @update:model-value="updateCustomDate"
+          />
+        </TabsContent>
+        <TabsContent value="range">
+          <RangeCalendar
+            :model-value="customDateRange"
+            initial-focus
+            :number-of-months="2"
+            :is-date-disabled="isDateDisabled"
+            @update:model-value="updateCustomDateRange"
+          />
+        </TabsContent>
+      </Tabs>
     </DialogContent>
   </Dialog>
 </template>
