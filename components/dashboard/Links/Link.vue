@@ -27,6 +27,7 @@ const { copy, copied } = useClipboard({ source: shortLink.value, copiedDuring: 4
 <template>
   <Card>
     <NuxtLink
+      v-if="link.id"
       class="flex flex-col p-4 space-y-3"
       :to="`/dashboard/link?slug=${link.slug}`"
     >
@@ -70,13 +71,15 @@ const { copy, copied } = useClipboard({ source: shortLink.value, copiedDuring: 4
                 </p>
               </TooltipTrigger>
               <TooltipContent>
-                <p>{{ link.comment || link.title || link.description }}</p>
+                <p class="max-w-[90svw] break-all">
+                  {{ link.comment || link.title || link.description }}
+                </p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </div>
 
-        <HoverCard :open-delay="200">
+        <HoverCard>
           <HoverCardTrigger @click.prevent>
             <QrCode class="w-6 h-6" />
           </HoverCardTrigger>

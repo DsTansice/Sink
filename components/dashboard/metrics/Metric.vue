@@ -6,6 +6,10 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  name: {
+    type: String,
+    required: true,
+  },
 })
 
 const total = ref(0)
@@ -76,7 +80,7 @@ onBeforeUnmount(() => {
           </DialogTrigger>
           <DialogContent class="max-w-[95svw] max-h-[95svh] md:max-w-screen-md grid-rows-[auto_minmax(0,1fr)_auto]">
             <DialogHeader>
-              <DialogTitle>{{ type.toUpperCase() }}</DialogTitle>
+              <DialogTitle>{{ name }}</DialogTitle>
             </DialogHeader>
             <DashboardMetricsTable
               class="overflow-y-auto"
