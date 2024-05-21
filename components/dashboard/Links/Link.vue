@@ -1,5 +1,5 @@
 <script setup>
-import { Link as LinkIcon, QrCode, CalendarPlus2, Hourglass, Copy, CopyCheck, SquarePen } from 'lucide-vue-next'
+import { Link as LinkIcon, QrCode, CalendarPlus2, Hourglass, Copy, CopyCheck, SquarePen, SquareChevronDown, Eraser } from 'lucide-vue-next'
 import { useClipboard } from '@vueuse/core'
 import { toast } from 'vue-sonner'
 import { parseURL } from 'ufo'
@@ -84,35 +84,6 @@ const { copy, copied } = useClipboard({ source: shortLink.value, copiedDuring: 4
           </TooltipProvider>
         </div>
 
-        <DashboardLinksDelete
-          :link="link"
-          @update:link="updateLink"
-        />
-
-        <DashboardLinksEditor
-          :link="link"
-          @update:link="updateLink"
-        >
-          <SquarePen
-            class="w-5 h-5"
-            @click.prevent
-          />
-        </DashboardLinksEditor>
-
-        <HoverCard>
-          <HoverCardTrigger @click.prevent>
-            <QrCode class="w-5 h-5" />
-          </HoverCardTrigger>
-          <HoverCardContent class="w-300 h-300">
-            <NuxtErrorBoundary>
-              <QRCode
-                :data="shortLink"
-                :image="linkIcon"
-              />
-            </NuxtErrorBoundary>
-          </HoverCardContent>
-        </HoverCard>
-
         <a
           :href="link.url"
           target="_blank"
@@ -121,6 +92,64 @@ const { copy, copied } = useClipboard({ source: shortLink.value, copiedDuring: 4
         >
           <LinkIcon class="w-5 h-5" />
         </a>
+
+        <Popover>
+          <PopoverTrigger>
+            <QrCode
+              class="w-5 h-5"
+              @click.prevent
+            />
+          </PopoverTrigger>
+          <PopoverContent>
+            <QRCode
+              :data="shortLink"
+              :image="linkIcon"
+            />
+          </PopoverContent>
+        </Popover>
+
+        <Menubar
+          class="!ml-0 border-none !-mr-4"
+          @click.prevent
+        >
+          <MenubarMenu>
+            <MenubarTrigger
+              class="px-2"
+            >
+              <SquareChevronDown class="w-5 h-5" />
+            </MenubarTrigger>
+            <MenubarContent class="min-w-0">
+              <DashboardLinksEditor
+                :link="link"
+                @update:link="updateLink"
+              >
+                <div
+                  class="cursor-pointer flex select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground"
+                >
+                  <SquarePen
+                    class="w-5 h-5 mr-2"
+                  />
+                  Edit
+                </div>
+              </DashboardLinksEditor>
+
+              <MenubarSeparator />
+
+              <DashboardLinksDelete
+                :link="link"
+                @update:link="updateLink"
+              >
+                <div
+                  class="cursor-pointer flex select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground"
+                >
+                  <Eraser
+                    class="w-5 h-5 mr-2"
+                  /> Delete
+                </div>
+              </DashboardLinksDelete>
+            </MenubarContent>
+          </MenubarMenu>
+        </Menubar>
       </div>
       <div class="flex w-full h-5 space-x-2 text-sm">
         <TooltipProvider>

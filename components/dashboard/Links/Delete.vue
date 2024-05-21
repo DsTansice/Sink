@@ -24,12 +24,7 @@ const deleteLink = async () => {
 <template>
   <AlertDialog>
     <AlertDialogTrigger as-child>
-      <div
-        class="w-5 h-5"
-        @click.prevent
-      >
-        DEL
-      </div>
+      <slot />
     </AlertDialogTrigger>
     <AlertDialogContent>
       <AlertDialogHeader>
