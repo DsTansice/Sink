@@ -84,6 +84,11 @@ const { copy, copied } = useClipboard({ source: shortLink.value, copiedDuring: 4
           </TooltipProvider>
         </div>
 
+        <DashboardLinksDelete
+          :link="link"
+          @update:link="updateLink"
+        />
+
         <DashboardLinksEditor
           :link="link"
           @update:link="updateLink"

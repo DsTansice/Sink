@@ -30,6 +30,10 @@ const updateLinkList = (link, type) => {
     const index = links.value.findIndex(l => l.id === link.id)
     links.value[index] = link
   }
+  else if (type === 'delete') {
+    const index = links.value.findIndex(l => l.id === link.id)
+    links.value.splice(index, 1)
+  }
   else {
     links.value.unshift(link)
   }
