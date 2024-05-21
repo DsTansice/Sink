@@ -1,5 +1,5 @@
 <script setup>
-import { Link as LinkIcon, QrCode, CalendarPlus2, Hourglass, Copy, CopyCheck } from 'lucide-vue-next'
+import { Link as LinkIcon, QrCode, CalendarPlus2, Hourglass, Copy, CopyCheck, SquarePen } from 'lucide-vue-next'
 import { useClipboard } from '@vueuse/core'
 import { toast } from 'vue-sonner'
 import { parseURL } from 'ufo'
@@ -11,6 +11,12 @@ const props = defineProps({
     required: true,
   },
 })
+const emit = defineEmits(['update:link'])
+
+const updateLink = (link, type) => {
+  emit('update:link', link, type)
+}
+
 const { host, origin } = location
 
 const getLinkHost = (url) => {
@@ -25,9 +31,8 @@ const { copy, copied } = useClipboard({ source: shortLink.value, copiedDuring: 4
 </script>
 
 <template>
-  <Card>
+  <Card v-if="link.id">
     <NuxtLink
-      v-if="link.id"
       class="flex flex-col p-4 space-y-3"
       :to="`/dashboard/link?slug=${link.slug}`"
     >
@@ -79,9 +84,19 @@ const { copy, copied } = useClipboard({ source: shortLink.value, copiedDuring: 4
           </TooltipProvider>
         </div>
 
+        <DashboardLinksEditor
+          :link="link"
+          @update:link="updateLink"
+        >
+          <SquarePen
+            class="w-5 h-5"
+            @click.prevent
+          />
+        </DashboardLinksEditor>
+
         <HoverCard>
           <HoverCardTrigger @click.prevent>
-            <QrCode class="w-6 h-6" />
+            <QrCode class="w-5 h-5" />
           </HoverCardTrigger>
           <HoverCardContent class="w-300 h-300">
             <NuxtErrorBoundary>
@@ -99,7 +114,7 @@ const { copy, copied } = useClipboard({ source: shortLink.value, copiedDuring: 4
           rel="noopener noreferrer"
           @click.stop
         >
-          <LinkIcon class="w-6 h-6" />
+          <LinkIcon class="w-5 h-5" />
         </a>
       </div>
       <div class="flex w-full h-5 space-x-2 text-sm">

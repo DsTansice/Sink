@@ -4,6 +4,7 @@ import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import { Shuffle, Sparkles } from 'lucide-vue-next'
 import { toast } from 'vue-sonner'
+import { DependencyType } from '@/components/ui/auto-form/interface'
 import { LinkSchema, nanoid } from '@/schemas/link'
 
 const EditLinkSchema = LinkSchema.pick({
@@ -24,24 +25,7 @@ const EditLinkSchema = LinkSchema.pick({
   }).optional(),
 })
 
-function isDateDisabled(dateValue) {
-  console.log(dateValue)
-  return dateValue.toDate() < new Date()
-}
-
-const fieldConfig = {
-  optional: {
-    comment: {
-      component: 'textarea',
-    },
-    expiration: {
-      inputProps: {
-        isDateDisabled,
-      },
-    },
-  },
-}
-
+const emit = defineEmits(['update:link'])
 const props = defineProps({
   link: {
     type: Object,
@@ -49,9 +33,41 @@ const props = defineProps({
   },
 })
 const link = ref(props.link)
+const isEdit = !!props.link.id
+
+const fieldConfig = {
+  slug: {
+    disabled: isEdit,
+  },
+  optional: {
+    comment: {
+      component: 'textarea',
+    },
+  },
+}
+
+const dependencies = [
+  {
+    sourceField: 'slug',
+    type: DependencyType.DISABLES,
+    targetField: 'slug',
+    when: () => isEdit,
+  },
+]
+
 const dialogOpen = ref(false)
 const form = useForm({
   validationSchema: toTypedSchema(EditLinkSchema),
+  initialValues: {
+    slug: link.value.slug,
+    url: link.value.url,
+    optional: {
+      comment: link.value.comment,
+      expiration: link.value.expiration,
+    },
+  },
+  validateOnMount: isEdit,
+  keepValuesOnUnmount: isEdit,
 })
 
 const randomSlug = () => {
@@ -71,7 +87,6 @@ const aiSlug = async () => {
 }
 
 const onSubmit = async (formData) => {
-  console.log(formData)
   const link = {
     url: formData.url,
     slug: formData.slug,
@@ -79,11 +94,13 @@ const onSubmit = async (formData) => {
     expiration: formData.optional?.expiration ? date2unix(formData.optional?.expiration, 'end') : undefined,
   }
   try {
-    await useAPI('/api/link/create', {
-      method: 'POST',
+    const { link: newLink } = await useAPI(isEdit ? '/api/link/edit' : '/api/link/create', {
+      method: isEdit ? 'PUT' : 'POST',
       body: link,
     })
     dialogOpen.value = false
+    emit('update:link', newLink, isEdit ? 'edit' : 'create')
+    isEdit ? toast('Link updated successfully') : toast('Link created successfully')
   }
   catch (e) {
     toast(e?.message)
@@ -95,13 +112,15 @@ const onSubmit = async (formData) => {
 <template>
   <Dialog v-model:open="dialogOpen">
     <DialogTrigger as-child>
-      <Button
-        class="ml-2"
-        variant="outline"
-        @click="randomSlug"
-      >
-        Create Link
-      </Button>
+      <slot>
+        <Button
+          class="ml-2"
+          variant="outline"
+          @click="randomSlug"
+        >
+          Create Link
+        </Button>
+      </slot>
     </DialogTrigger>
     <DialogContent class="max-w-[95svw] max-h-[95svh] md:max-w-screen-md grid-rows-[auto_minmax(0,1fr)_auto]">
       <DialogHeader>
@@ -112,10 +131,14 @@ const onSubmit = async (formData) => {
         :schema="EditLinkSchema"
         :form="form"
         :field-config="fieldConfig"
+        :dependencies="dependencies"
         @submit="onSubmit"
       >
         <template #slug="slotProps">
-          <div class="relative">
+          <div
+            v-if="!isEdit"
+            class="relative"
+          >
             <div class="absolute top-0 right-0 flex space-x-3">
               <Shuffle
                 class="w-4 h-4 cursor-pointer"
