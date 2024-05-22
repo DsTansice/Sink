@@ -1,24 +1,5 @@
----
-# https://vitepress.dev/reference/default-theme-home-page
-layout: home
+# Welcome to Sink
 
-hero:
-  name: "Sink Docs"
-  text: "Sink Docs Website"
-  tagline: My great project tagline
-  actions:
-    - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
-    - theme: alt
-      text: API Examples
-      link: /api-examples
+## Introduction
 
-features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
----
+Sink is a Simple Link Shortener with Analytics, 100% run on Cloudflare.
