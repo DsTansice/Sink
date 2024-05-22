@@ -14,7 +14,7 @@ function logOut() {
         class="w-4 h-4 cursor-pointer"
       />
     </AlertDialogTrigger>
-    <AlertDialogContent class="max-w-[95svw]">
+    <AlertDialogContent class="max-w-[95svw] max-h-[95svh] md:max-w-lg grid-rows-[auto_minmax(0,1fr)_auto]">
       <AlertDialogHeader>
         <AlertDialogTitle>LogOut ?</AlertDialogTitle>
         <AlertDialogDescription>

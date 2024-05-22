@@ -133,7 +133,7 @@ async function onSubmit(formData) {
         </Button>
       </slot>
     </DialogTrigger>
-    <DialogContent class="max-w-[95svw] max-h-[95svh] md:max-w-screen-sm grid-rows-[auto_minmax(0,1fr)_auto]">
+    <DialogContent class="max-w-[95svw] max-h-[95svh] md:max-w-lg grid-rows-[auto_minmax(0,1fr)_auto]">
       <DialogHeader>
         <DialogTitle>{{ link.id ? 'Edit Link' : 'Create Link' }}</DialogTitle>
       </DialogHeader>

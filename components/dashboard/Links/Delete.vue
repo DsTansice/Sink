@@ -27,7 +27,7 @@ async function deleteLink() {
     <AlertDialogTrigger as-child>
       <slot />
     </AlertDialogTrigger>
-    <AlertDialogContent>
+    <AlertDialogContent class="max-w-[95svw] max-h-[95svh] md:max-w-lg grid-rows-[auto_minmax(0,1fr)_auto]">
       <AlertDialogHeader>
         <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
         <AlertDialogDescription>

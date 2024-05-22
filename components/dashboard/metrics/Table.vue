@@ -16,11 +16,11 @@ defineProps({
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead class="w-1/5">
+          <TableHead>
             Name
           </TableHead>
           <TableHead class="hidden sm:block" />
-          <TableHead class="w-1/5 text-right">
+          <TableHead class="text-right">
             Count
           </TableHead>
         </TableRow>
@@ -30,7 +30,7 @@ defineProps({
           v-for="metric in metrics"
           :key="metric.name"
         >
-          <TableCell class="py-3 font-medium">
+          <TableCell class="w-1/5 py-3 font-medium">
             <DashboardMetricsName
               :name="metric.name"
               :type="type"
@@ -54,9 +54,9 @@ defineProps({
               </Tooltip>
             </TooltipProvider>
           </TableCell>
-          <TableCell class="py-3 text-right">
+          <TableCell class="w-1/5 py-3 text-right">
             {{ formatNumber(metric.count) }}
-            <span class="text-xs text-gray-500">({{ metric.percent }}%)</span>
+            <!-- <span class="text-xs text-gray-500">({{ metric.percent }}%)</span> -->
           </TableCell>
         </TableRow>
       </TableBody>

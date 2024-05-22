@@ -105,7 +105,7 @@ watch(dateRange, (newValue) => {
   </Select>
 
   <Dialog v-model:open="openCustomDateRange">
-    <DialogContent class="w-auto max-w-[95svw] max-h-[95svh] md:max-w-screen-sm grid-rows-[auto_minmax(0,1fr)_auto]">
+    <DialogContent class="w-auto max-w-[95svw] max-h-[95svh] md:max-w-screen-md grid-rows-[auto_minmax(0,1fr)_auto]">
       <DialogHeader>
         <DialogTitle>Custom Date</DialogTitle>
       </DialogHeader>
@@ -128,6 +128,7 @@ watch(dateRange, (newValue) => {
         >
           <Calendar
             :model-value="customDate"
+            weekday-format="short"
             :is-date-disabled="isDateDisabled"
             @update:model-value="updateCustomDate"
           />
@@ -139,6 +140,7 @@ watch(dateRange, (newValue) => {
           <RangeCalendar
             :model-value="customDateRange"
             initial-focus
+            weekday-format="short"
             :number-of-months="2"
             :is-date-disabled="isDateDisabled"
             @update:model-value="updateCustomDateRange"
