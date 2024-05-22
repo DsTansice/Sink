@@ -110,43 +110,50 @@ const { copy, copied } = useClipboard({ source: shortLink.value, copiedDuring: 4
 
         <Menubar
           class="!ml-0 border-none !-mr-4"
-          @click.prevent
         >
           <MenubarMenu>
             <MenubarTrigger
               class="px-2"
+              @click.prevent
             >
               <SquareChevronDown class="w-5 h-5" />
             </MenubarTrigger>
-            <MenubarContent class="min-w-0">
-              <DashboardLinksEditor
-                :link="link"
-                @update:link="updateLink"
-              >
-                <div
-                  class="cursor-pointer flex select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground"
+            <MenubarContent
+              class="min-w-0"
+            >
+              <MenubarItem>
+                <DashboardLinksEditor
+                  :link="link"
+                  @update:link="updateLink"
                 >
-                  <SquarePen
-                    class="w-5 h-5 mr-2"
-                  />
-                  Edit
-                </div>
-              </DashboardLinksEditor>
+                  <div
+                    class="flex"
+                    @click.stop
+                  >
+                    <SquarePen
+                      class="w-5 h-5 mr-2"
+                    />
+                    Edit
+                  </div>
+                </DashboardLinksEditor>
+              </MenubarItem>
 
               <MenubarSeparator />
-
-              <DashboardLinksDelete
-                :link="link"
-                @update:link="updateLink"
-              >
-                <div
-                  class="cursor-pointer flex select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground"
+              <MenubarItem>
+                <DashboardLinksDelete
+                  :link="link"
+                  @update:link="updateLink"
                 >
-                  <Eraser
-                    class="w-5 h-5 mr-2"
-                  /> Delete
-                </div>
-              </DashboardLinksDelete>
+                  <div
+                    class="flex"
+                    @click.stop
+                  >
+                    <Eraser
+                      class="w-5 h-5 mr-2"
+                    /> Delete
+                  </div>
+                </DashboardLinksDelete>
+              </MenubarItem>
             </MenubarContent>
           </MenubarMenu>
         </Menubar>
