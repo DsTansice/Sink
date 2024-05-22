@@ -13,8 +13,11 @@ const props = defineProps({
 })
 const emit = defineEmits(['update:link'])
 
+const editPopoverOpen = ref(false)
+
 const updateLink = (link, type) => {
   emit('update:link', link, type)
+  editPopoverOpen.value = false
 }
 
 const { host, origin } = location
@@ -108,55 +111,47 @@ const { copy, copied } = useClipboard({ source: shortLink.value, copiedDuring: 4
           </PopoverContent>
         </Popover>
 
-        <Menubar
-          class="!ml-0 border-none !-mr-4"
-        >
-          <MenubarMenu>
-            <MenubarTrigger
-              class="px-2"
+        <Popover v-model:open="editPopoverOpen">
+          <PopoverTrigger>
+            <SquareChevronDown
+              class="w-5 h-5"
               @click.prevent
+            />
+          </PopoverTrigger>
+          <PopoverContent
+            class="w-auto p-0"
+            :hide-when-detached="false"
+          >
+            <DashboardLinksEditor
+              :link="link"
+              @update:link="updateLink"
             >
-              <SquareChevronDown class="w-5 h-5" />
-            </MenubarTrigger>
-            <MenubarContent
-              class="min-w-0"
-            >
-              <MenubarItem>
-                <DashboardLinksEditor
-                  :link="link"
-                  @update:link="updateLink"
-                >
-                  <div
-                    class="flex"
-                    @click.stop
-                  >
-                    <SquarePen
-                      class="w-5 h-5 mr-2"
-                    />
-                    Edit
-                  </div>
-                </DashboardLinksEditor>
-              </MenubarItem>
+              <div
+                class="cursor-pointer flex select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground"
+              >
+                <SquarePen
+                  class="w-5 h-5 mr-2"
+                />
+                Edit
+              </div>
+            </DashboardLinksEditor>
 
-              <MenubarSeparator />
-              <MenubarItem>
-                <DashboardLinksDelete
-                  :link="link"
-                  @update:link="updateLink"
-                >
-                  <div
-                    class="flex"
-                    @click.stop
-                  >
-                    <Eraser
-                      class="w-5 h-5 mr-2"
-                    /> Delete
-                  </div>
-                </DashboardLinksDelete>
-              </MenubarItem>
-            </MenubarContent>
-          </MenubarMenu>
-        </Menubar>
+            <Separator />
+
+            <DashboardLinksDelete
+              :link="link"
+              @update:link="updateLink"
+            >
+              <div
+                class="cursor-pointer flex select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground"
+              >
+                <Eraser
+                  class="w-5 h-5 mr-2"
+                /> Delete
+              </div>
+            </DashboardLinksDelete>
+          </PopoverContent>
+        </Popover>
       </div>
       <div class="flex w-full h-5 space-x-2 text-sm">
         <TooltipProvider>
