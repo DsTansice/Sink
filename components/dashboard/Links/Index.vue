@@ -42,7 +42,6 @@ function updateLinkList(link, type) {
 
 <template>
   <main class="space-y-6">
-    <DashboardBreadcrumb title="Links" />
     <DashboardNav>
       <DashboardLinksEditor @update:link="updateLinkList" />
     </DashboardNav>

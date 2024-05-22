@@ -1,8 +1,9 @@
 <script setup>
 const slug = useRoute().query.slug
-const link = ref({})
 
+const link = ref({})
 const id = computed(() => link.value.id)
+
 provide('id', id)
 
 async function getLink() {
@@ -15,20 +16,21 @@ async function getLink() {
   link.value = data
 }
 
-onMounted(() => {
-  getLink()
-})
-
 function updateLink(link, type) {
   if (type === 'delete')
     navigateTo('/dashboard/links')
 }
+
+onMounted(() => {
+  getLink()
+})
 </script>
 
 <template>
   <main class="space-y-6">
     <DashboardBreadcrumb title="Link" />
     <DashboardLinksLink
+      v-if="link.id"
       :link="link"
       @update:link="updateLink"
     />

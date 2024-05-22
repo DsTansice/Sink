@@ -34,7 +34,7 @@ const { copy, copied } = useClipboard({ source: shortLink.value, copiedDuring: 4
 </script>
 
 <template>
-  <Card v-if="link.id">
+  <Card>
     <NuxtLink
       class="flex flex-col p-4 space-y-3"
       :to="`/dashboard/link?slug=${link.slug}`"
