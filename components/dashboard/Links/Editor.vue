@@ -7,6 +7,15 @@ import { toast } from 'vue-sonner'
 import { DependencyType } from '@/components/ui/auto-form/interface'
 import { LinkSchema, nanoid } from '@/schemas/link'
 
+const props = defineProps({
+  link: {
+    type: Object,
+    default: () => ({}),
+  },
+})
+
+const emit = defineEmits(['update:link'])
+
 const EditLinkSchema = LinkSchema.pick({
   url: true,
   slug: true,
@@ -25,13 +34,6 @@ const EditLinkSchema = LinkSchema.pick({
   }).optional(),
 })
 
-const emit = defineEmits(['update:link'])
-const props = defineProps({
-  link: {
-    type: Object,
-    default: () => ({}),
-  },
-})
 const link = ref(props.link)
 const isEdit = !!props.link.id
 

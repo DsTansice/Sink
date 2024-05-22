@@ -1,12 +1,11 @@
 <script setup>
 import { now, startOfWeek, startOfMonth } from '@internationalized/date'
 
+const emit = defineEmits(['update:dateRange'])
 const startAt = inject('startAt')
 const endAt = inject('endAt')
 
 const dateRange = ref('last-7d')
-
-const emit = defineEmits(['update:dateRange'])
 
 const openCustomDateRange = ref(false)
 const customDate = ref()

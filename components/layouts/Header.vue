@@ -1,3 +1,12 @@
+<script setup>
+import { IconClick, IconDots, IconX, IconBrandGithub } from '@tabler/icons-vue'
+
+const showMenu = ref(false)
+const share = () => {
+  navigator.share({ title: document.title, url: location.href })
+}
+</script>
+
 <template>
   <section class="pb-6 bg-white">
     <nav class="container relative z-50 h-24 select-none">
@@ -87,12 +96,3 @@
     </nav>
   </section>
 </template>
-
-<script setup>
-import { IconClick, IconDots, IconX, IconBrandGithub } from '@tabler/icons-vue'
-
-const showMenu = ref(false)
-const share = () => {
-  navigator.share({ title: document.title, url: location.href })
-}
-</script>

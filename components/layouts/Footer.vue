@@ -1,3 +1,12 @@
+<script setup>
+import { IconMail, IconBrandTelegram, IconBrandBlogger, IconBrandTwitter, IconBrandMastodon, IconBrandGithub } from '@tabler/icons-vue'
+
+const email = ref(null)
+onMounted(() => {
+  email.value.href = email.value.href.replace('$', '@')
+})
+</script>
+
 <template>
   <section class="text-gray-700 bg-white md:pt-6">
     <div class="container flex flex-col items-center py-8 mx-auto sm:flex-row">
@@ -94,12 +103,3 @@
     </div>
   </section>
 </template>
-
-<script setup>
-import { IconMail, IconBrandTelegram, IconBrandBlogger, IconBrandTwitter, IconBrandMastodon, IconBrandGithub } from '@tabler/icons-vue'
-
-const email = ref(null)
-onMounted(() => {
-  email.value.href = email.value.href.replace('$', '@')
-})
-</script>

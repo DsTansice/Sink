@@ -12,4 +12,15 @@ export default withNuxt(
   {
     ignores: ['components/ui'],
   },
+  {
+    rules: {
+      'vue/block-order': ['warn', {
+        order: ['script', 'template', 'style'],
+      }],
+      'vue/define-macros-order': ['warn', {
+        order: ['defineOptions', 'defineModel', 'defineProps', 'defineEmits', 'defineSlots'],
+        defineExposeLast: true,
+      }],
+    },
+  },
 )
