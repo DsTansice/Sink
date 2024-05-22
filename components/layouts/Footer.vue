@@ -1,5 +1,5 @@
 <script setup>
-import { IconBrandBlogger, IconBrandGithub, IconBrandMastodon, IconBrandTelegram, IconBrandTwitter, IconMail } from '@tabler/icons-vue'
+import { GmailIcon, TelegramIcon, BloggerIcon, XIcon, MastodonIcon, GitHubIcon } from 'vue3-simple-icons'
 
 const email = ref(null)
 onMounted(() => {
@@ -31,8 +31,7 @@ onMounted(() => {
           class="text-gray-400 hover:text-gray-500"
         >
           <span class="sr-only">Email</span>
-          <IconMail
-            stroke="2"
+          <GmailIcon
             class="w-6 h-6"
           />
         </a>
@@ -43,8 +42,7 @@ onMounted(() => {
           class="text-gray-400 hover:text-gray-500"
         >
           <span class="sr-only">Telegram</span>
-          <IconBrandTelegram
-            stroke="2"
+          <TelegramIcon
             class="w-6 h-6"
           />
         </a>
@@ -55,21 +53,19 @@ onMounted(() => {
           class="text-gray-400 hover:text-gray-500"
         >
           <span class="sr-only">Blog</span>
-          <IconBrandBlogger
-            stroke="2"
+          <BloggerIcon
             class="w-6 h-6"
           />
         </a>
 
         <a
-          href="https://twitter.com/ccbikai"
+          href="https://x.com/ccbikai"
           target="_blank"
           title="Twitter"
           class="text-gray-400 hover:text-gray-500"
         >
           <span class="sr-only">Twitter</span>
-          <IconBrandTwitter
-            stroke="2"
+          <XIcon
             class="w-6 h-6"
           />
         </a>
@@ -81,8 +77,7 @@ onMounted(() => {
           class="text-gray-400 hover:text-gray-500"
         >
           <span class="sr-only">Mastodon</span>
-          <IconBrandMastodon
-            stroke="2"
+          <MastodonIcon
             class="w-6 h-6"
           />
         </a>
@@ -94,8 +89,7 @@ onMounted(() => {
           class="text-gray-400 hover:text-gray-500"
         >
           <span class="sr-only">GitHub</span>
-          <IconBrandGithub
-            stroke="2"
+          <GitHubIcon
             class="w-6 h-6"
           />
         </a>

@@ -1,5 +1,5 @@
 <script setup>
-import { IconBrandGithub, IconClick, IconDots, IconX } from '@tabler/icons-vue'
+import { IconBrandGithub, IconDots, IconX } from '@tabler/icons-vue'
 
 const showMenu = ref(false)
 </script>
@@ -18,10 +18,11 @@ const showMenu = ref(false)
             <span
               class="flex items-center justify-center w-8 h-8 text-white bg-gray-900 rounded-full"
             >
-              <IconClick
-                stroke="1.5"
-                class="w-6 h-6"
-              />
+              <img
+                src="/sink.png"
+                alt="Sink"
+                class="w-full h-full rounded-full"
+              >
             </span>
             <span class="mx-2">Sink</span>
           </a>
@@ -43,10 +44,11 @@ const showMenu = ref(false)
               <span
                 class="flex items-center justify-center w-8 h-8 text-white bg-gray-900 rounded-full"
               >
-                <IconClick
-                  stroke="1.5"
-                  class="w-6 h-6"
-                />
+                <img
+                  src="/sink.png"
+                  alt="Sink"
+                  class="w-full h-full rounded-full"
+                >
               </span>
               <span class="mx-2">Sink</span>
             </a>
