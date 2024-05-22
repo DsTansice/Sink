@@ -52,12 +52,14 @@ const showMenu = ref(false)
               </span>
               <span class="mx-2">Sink</span>
             </a>
-            <div class="w-full mx-4">
-              <LayoutsNavigation />
-            </div>
+            <div class="w-full mx-4" />
             <div
               class="flex flex-col items-start justify-end w-full pt-4 md:items-center md:w-1/3 md:flex-row md:py-0"
             >
+              <a
+                class="w-full px-6 py-2 mr-0 text-gray-700 cursor-pointer md:px-3 md:mr-2 lg:mr-3 md:w-auto"
+                href="https://docs.sink.cool"
+              >Documents</a>
               <a
                 class="w-full px-6 py-2 mr-0 text-gray-700 cursor-pointer md:px-3 md:mr-2 lg:mr-3 md:w-auto"
                 href="/dashboard"
