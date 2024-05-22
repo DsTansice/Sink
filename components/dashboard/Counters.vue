@@ -25,11 +25,11 @@ async function getLinkCounters() {
   counters.value = data?.[0]
 }
 
+const stopWatchTime = watch([startAt, endAt], getLinkCounters)
+
 onMounted(async () => {
   getLinkCounters()
 })
-
-const stopWatchTime = watch([startAt, endAt], getLinkCounters)
 
 onBeforeUnmount(() => {
   stopWatchTime()

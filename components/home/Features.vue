@@ -1,6 +1,5 @@
 <script setup>
 import { IconClick } from '@tabler/icons-vue'
-import { ref } from 'vue'
 
 const features = ref([
   {

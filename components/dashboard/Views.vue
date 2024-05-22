@@ -3,6 +3,7 @@ import { AreaChart } from '@/components/ui/chart-area'
 import { BarChart } from '@/components/ui/chart-bar'
 
 const views = ref([])
+const chart = computed(() => views.value.length > 1 ? AreaChart : BarChart)
 
 const id = inject('id')
 const startAt = inject('startAt')
@@ -34,11 +35,11 @@ async function getLinkViews() {
   })
 }
 
+const stopWatchTime = watch([startAt, endAt], getLinkViews)
+
 onMounted(async () => {
   getLinkViews()
 })
-
-const stopWatchTime = watch([startAt, endAt], getLinkViews)
 
 onBeforeUnmount(() => {
   stopWatchTime()
@@ -53,8 +54,6 @@ function formatTime(tick) {
   }
   return ''
 }
-
-const chart = computed(() => views.value.length > 1 ? AreaChart : BarChart)
 </script>
 
 <template>

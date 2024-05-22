@@ -7,6 +7,7 @@ defineProps({
     required: true,
   },
 })
+
 function type2name(type) {
   if (['os'].includes(type))
     return type.toUpperCase()

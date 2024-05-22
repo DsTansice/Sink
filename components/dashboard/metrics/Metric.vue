@@ -12,13 +12,13 @@ const props = defineProps({
   },
 })
 
-const total = ref(0)
-const metrics = ref([])
-const top10 = ref([])
-
 const id = inject('id')
 const startAt = inject('startAt')
 const endAt = inject('endAt')
+
+const total = ref(0)
+const metrics = ref([])
+const top10 = ref([])
 
 async function getLinkMetrics() {
   total.value = 0
@@ -44,11 +44,11 @@ async function getLinkMetrics() {
   }
 }
 
+const stopWatchTime = watch([startAt, endAt], getLinkMetrics)
+
 onMounted(() => {
   getLinkMetrics()
 })
-
-const stopWatchTime = watch([startAt, endAt], getLinkMetrics)
 
 onBeforeUnmount(() => {
   stopWatchTime()

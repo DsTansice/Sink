@@ -16,6 +16,11 @@ const props = defineProps({
 
 const emit = defineEmits(['update:link'])
 
+const link = ref(props.link)
+const dialogOpen = ref(false)
+
+const isEdit = !!props.link.id
+
 const EditLinkSchema = LinkSchema.pick({
   url: true,
   slug: true,
@@ -33,9 +38,6 @@ const EditLinkSchema = LinkSchema.pick({
     expiration: z.coerce.date().optional(),
   }).optional(),
 })
-
-const link = ref(props.link)
-const isEdit = !!props.link.id
 
 const fieldConfig = {
   slug: {
@@ -57,7 +59,6 @@ const dependencies = [
   },
 ]
 
-const dialogOpen = ref(false)
 const form = useForm({
   validationSchema: toTypedSchema(EditLinkSchema),
   initialValues: {

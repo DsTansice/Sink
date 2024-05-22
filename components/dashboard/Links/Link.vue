@@ -15,11 +15,6 @@ const emit = defineEmits(['update:link'])
 
 const editPopoverOpen = ref(false)
 
-function updateLink(link, type) {
-  emit('update:link', link, type)
-  editPopoverOpen.value = false
-}
-
 const { host, origin } = location
 
 function getLinkHost(url) {
@@ -31,6 +26,11 @@ const shortLink = computed(() => `${origin}/${props.link.slug}`)
 const linkIcon = computed(() => `https://unavatar.io/${getLinkHost(props.link.url)}?fallback=https://sink.cool/sink.png`)
 
 const { copy, copied } = useClipboard({ source: shortLink.value, copiedDuring: 400 })
+
+function updateLink(link, type) {
+  emit('update:link', link, type)
+  editPopoverOpen.value = false
+}
 </script>
 
 <template>
