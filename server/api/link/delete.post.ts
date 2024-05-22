@@ -12,6 +12,4 @@ export default eventHandler(async (event) => {
     const { KV } = cloudflare.env
     await KV.delete(`link:${slug}`)
   }
-  setResponseStatus(event, 204)
-  return {}
 })
