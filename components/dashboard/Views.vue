@@ -10,13 +10,13 @@ const endAt = inject('endAt')
 
 const OneDay = 24 * 60 * 60 // 1 day in seconds
 function getUnit(startAt, endAt) {
-  if (startAt && endAt && endAt - startAt <= OneDay) {
+  if (startAt && endAt && endAt - startAt <= OneDay)
     return 'hour'
-  }
+
   return 'day'
 }
 
-const getLinkViews = async () => {
+async function getLinkViews() {
   views.value = []
   const { data } = await useAPI('/api/stats/views', {
     query: {
@@ -44,11 +44,11 @@ onBeforeUnmount(() => {
   stopWatchTime()
 })
 
-const formatTime = (tick) => {
+function formatTime(tick) {
   if (Number.isInteger(tick) && views.value[tick]) {
-    if (getUnit(startAt.value, endAt.value) === 'hour') {
+    if (getUnit(startAt.value, endAt.value) === 'hour')
       return views.value[tick].time.split(' ')[1] || ''
-    }
+
     return views.value[tick].time
   }
   return ''

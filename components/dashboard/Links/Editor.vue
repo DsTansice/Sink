@@ -72,14 +72,14 @@ const form = useForm({
   keepValuesOnUnmount: isEdit,
 })
 
-const randomSlug = () => {
+function randomSlug() {
   form.setFieldValue('slug', nanoid()())
 }
 
-const aiSlug = async () => {
-  if (!form.values.url) {
+async function aiSlug() {
+  if (!form.values.url)
     return
-  }
+
   const { slug } = await useAPI('/api/link/ai', {
     query: {
       url: form.values.url,
@@ -88,7 +88,7 @@ const aiSlug = async () => {
   form.setFieldValue('slug', slug)
 }
 
-const onSubmit = async (formData) => {
+async function onSubmit(formData) {
   const link = {
     url: formData.url,
     slug: formData.slug,

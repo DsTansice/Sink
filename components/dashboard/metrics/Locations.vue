@@ -9,7 +9,7 @@ const id = inject('id')
 const startAt = inject('startAt')
 const endAt = inject('endAt')
 
-const getMapData = async () => {
+async function getMapData() {
   areaData.value = []
   const { data } = await useAPI('/api/stats/metrics', {
     query: {

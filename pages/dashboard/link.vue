@@ -5,7 +5,7 @@ const link = ref({})
 const id = computed(() => link.value.id)
 provide('id', id)
 
-const getLink = async () => {
+async function getLink() {
   const data = await useAPI('/api/link/query', {
     query: {
       slug,
@@ -19,10 +19,9 @@ onMounted(() => {
   getLink()
 })
 
-const updateLink = (link, type) => {
-  if (type === 'delete') {
+function updateLink(link, type) {
+  if (type === 'delete')
     navigateTo('/dashboard/links')
-  }
 }
 </script>
 

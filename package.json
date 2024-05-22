@@ -1,8 +1,9 @@
 {
   "name": "sink",
+  "type": "module",
   "version": "0.0.1",
   "private": true,
-  "type": "module",
+  "packageManager": "pnpm@9.1.0+sha256.22e36fba7f4880ecf749a5ca128b8435da085ecd49575e7fb9e64d6bf4fad394",
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt build",
@@ -40,6 +41,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^2.18.1",
     "@nuxt/eslint": "^0.3.10",
     "@nuxt/eslint-config": "^0.3.10",
     "@nuxthub/core": "^0.5.16",
@@ -63,6 +65,5 @@
     "*.{js,jsx,ts,tsx,vue}": [
       "eslint --fix"
     ]
-  },
-  "packageManager": "pnpm@9.1.0+sha256.22e36fba7f4880ecf749a5ca128b8435da085ecd49575e7fb9e64d6bf4fad394"
+  }
 }

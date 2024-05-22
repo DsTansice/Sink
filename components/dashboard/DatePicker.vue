@@ -1,5 +1,5 @@
 <script setup>
-import { now, startOfWeek, startOfMonth } from '@internationalized/date'
+import { now, startOfMonth, startOfWeek } from '@internationalized/date'
 
 const emit = defineEmits(['update:dateRange'])
 const startAt = inject('startAt')
@@ -12,13 +12,13 @@ const customDate = ref()
 const customDateRange = ref()
 const locale = getLocale()
 
-const updateCustomDate = (customDateValue) => {
+function updateCustomDate(customDateValue) {
   emit('update:dateRange', [date2unix(customDateValue, 'start'), date2unix(customDateValue, 'end')])
   openCustomDateRange.value = false
   customDate.value = undefined
 }
 
-const updateCustomDateRange = (customDateRangeValue) => {
+function updateCustomDateRange(customDateRangeValue) {
   if (customDateRangeValue.start && customDateRangeValue.end) {
     emit('update:dateRange', [date2unix(customDateRangeValue.start, 'start'), date2unix(customDateRangeValue.end, 'end')])
     openCustomDateRange.value = false

@@ -17,7 +17,7 @@ const loginFieldConfig = {
 
 const { previewMode } = useRuntimeConfig().public
 
-const onSubmit = async (form) => {
+async function onSubmit(form) {
   try {
     localStorage.setItem('SinkSiteToken', form.token)
     await useAPI('/api/verify')

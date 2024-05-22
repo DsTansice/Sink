@@ -11,13 +11,13 @@ defineProps({
 })
 
 function formatName(name, type) {
-  if (!name || typeof Intl === 'undefined') {
+  if (!name || typeof Intl === 'undefined')
     return name
-  }
+
   try {
     if (type === 'country') {
       const regionNames = new Intl.DisplayNames(['en'], { type: 'region' })
-      return getFlag(name) + ' ' + regionNames.of(name)
+      return `${getFlag(name)} ${regionNames.of(name)}`
     }
     if (type === 'language') {
       const languageNames = new Intl.DisplayNames(['en'], { type: 'language' })

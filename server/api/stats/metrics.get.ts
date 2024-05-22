@@ -11,8 +11,8 @@ const MetricsQuerySchema = QuerySchema.extend({
 function query2sql(query: z.infer<typeof MetricsQuerySchema>, event: H3Event): string {
   const filter = query2filter(query)
   const { dataset } = useRuntimeConfig(event)
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
+
+  // @ts-expect-error todo
   const sql = select(`${logsMap[query.type]} as name, SUM(_sample_interval) as count`).from(dataset).where(filter).groupBy('name').orderBy('count DESC').limit(query.limit)
   appendTimeFilter(sql, query)
   return sql.toString()

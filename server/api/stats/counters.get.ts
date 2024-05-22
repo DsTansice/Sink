@@ -7,7 +7,7 @@ function query2sql(query: Query, event: H3Event): string {
   const filter = query2filter(query)
   const { dataset } = useRuntimeConfig(event)
   // visitors did not consider sampling
-  const sql = select(`SUM(_sample_interval) as visits, COUNT(DISTINCT ${logsMap['ip']}) as visitors, COUNT(DISTINCT ${logsMap['referer']}) as referers`).from(dataset).where(filter)
+  const sql = select(`SUM(_sample_interval) as visits, COUNT(DISTINCT ${logsMap.ip}) as visitors, COUNT(DISTINCT ${logsMap.referer}) as referers`).from(dataset).where(filter)
   appendTimeFilter(sql, query)
   return sql.toString()
 }

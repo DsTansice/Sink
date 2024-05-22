@@ -7,9 +7,10 @@ const props = defineProps({
     required: true,
   },
 })
+
 const emit = defineEmits(['update:link'])
 
-const deleteLink = async () => {
+async function deleteLink() {
   await useAPI('/api/link/delete', {
     method: 'DELETE',
     body: {

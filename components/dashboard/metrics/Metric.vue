@@ -20,7 +20,7 @@ const id = inject('id')
 const startAt = inject('startAt')
 const endAt = inject('endAt')
 
-const getLinkMetrics = async () => {
+async function getLinkMetrics() {
   total.value = 0
   metrics.value = []
   top10.value = []

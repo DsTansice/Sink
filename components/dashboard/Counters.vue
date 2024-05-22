@@ -1,5 +1,5 @@
 <script setup>
-import { MousePointerClick, Users, Flame } from 'lucide-vue-next'
+import { Flame, MousePointerClick, Users } from 'lucide-vue-next'
 
 const defaultData = Object.freeze({
   visits: 0,
@@ -13,7 +13,7 @@ const id = inject('id')
 const startAt = inject('startAt')
 const endAt = inject('endAt')
 
-const getLinkCounters = async () => {
+async function getLinkCounters() {
   counters.value = defaultData
   const { data } = await useAPI('/api/stats/counters', {
     query: {

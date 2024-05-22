@@ -1,8 +1,8 @@
 <script setup>
-import { IconClick, IconDots, IconX, IconBrandGithub } from '@tabler/icons-vue'
+import { IconBrandGithub, IconClick, IconDots, IconX } from '@tabler/icons-vue'
 
 const showMenu = ref(false)
-const share = () => {
+function share() {
   navigator.share({ title: document.title, url: location.href })
 }
 </script>

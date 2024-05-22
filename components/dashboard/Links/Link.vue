@@ -1,5 +1,5 @@
 <script setup>
-import { Link as LinkIcon, QrCode, CalendarPlus2, Hourglass, Copy, CopyCheck, SquarePen, SquareChevronDown, Eraser } from 'lucide-vue-next'
+import { CalendarPlus2, Copy, CopyCheck, Eraser, Hourglass, Link as LinkIcon, QrCode, SquareChevronDown, SquarePen } from 'lucide-vue-next'
 import { useClipboard } from '@vueuse/core'
 import { toast } from 'vue-sonner'
 import { parseURL } from 'ufo'
@@ -15,14 +15,14 @@ const emit = defineEmits(['update:link'])
 
 const editPopoverOpen = ref(false)
 
-const updateLink = (link, type) => {
+function updateLink(link, type) {
   emit('update:link', link, type)
   editPopoverOpen.value = false
 }
 
 const { host, origin } = location
 
-const getLinkHost = (url) => {
+function getLinkHost(url) {
   const { host } = parseURL(url)
   return host
 }

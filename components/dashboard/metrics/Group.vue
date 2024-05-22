@@ -8,9 +8,9 @@ defineProps({
   },
 })
 function type2name(type) {
-  if (['os'].includes(type)) {
+  if (['os'].includes(type))
     return type.toUpperCase()
-  }
+
   return pluralize(type.replace(type[0], type[0].toUpperCase()))
 }
 </script>

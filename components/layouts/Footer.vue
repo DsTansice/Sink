@@ -1,5 +1,5 @@
 <script setup>
-import { IconMail, IconBrandTelegram, IconBrandBlogger, IconBrandTwitter, IconBrandMastodon, IconBrandGithub } from '@tabler/icons-vue'
+import { IconBrandBlogger, IconBrandGithub, IconBrandMastodon, IconBrandTelegram, IconBrandTwitter, IconMail } from '@tabler/icons-vue'
 
 const email = ref(null)
 onMounted(() => {
