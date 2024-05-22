@@ -1,5 +1,5 @@
 <script setup>
-import { Link as LinkIcon, QrCode, CalendarPlus2, Hourglass, Copy, CopyCheck } from 'lucide-vue-next'
+import { Link as LinkIcon, QrCode, CalendarPlus2, Hourglass, Copy, CopyCheck, SquarePen, SquareChevronDown, Eraser } from 'lucide-vue-next'
 import { useClipboard } from '@vueuse/core'
 import { toast } from 'vue-sonner'
 import { parseURL } from 'ufo'
@@ -11,6 +11,12 @@ const props = defineProps({
     required: true,
   },
 })
+const emit = defineEmits(['update:link'])
+
+const updateLink = (link, type) => {
+  emit('update:link', link, type)
+}
+
 const { host, origin } = location
 
 const getLinkHost = (url) => {
@@ -25,7 +31,7 @@ const { copy, copied } = useClipboard({ source: shortLink.value, copiedDuring: 4
 </script>
 
 <template>
-  <Card>
+  <Card v-if="link.id">
     <NuxtLink
       class="flex flex-col p-4 space-y-3"
       :to="`/dashboard/link?slug=${link.slug}`"
@@ -70,25 +76,13 @@ const { copy, copied } = useClipboard({ source: shortLink.value, copiedDuring: 4
                 </p>
               </TooltipTrigger>
               <TooltipContent>
-                <p>{{ link.comment || link.title || link.description }}</p>
+                <p class="max-w-[90svw] break-all">
+                  {{ link.comment || link.title || link.description }}
+                </p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </div>
-
-        <HoverCard :open-delay="200">
-          <HoverCardTrigger @click.prevent>
-            <QrCode class="w-6 h-6" />
-          </HoverCardTrigger>
-          <HoverCardContent class="w-300 h-300">
-            <NuxtErrorBoundary>
-              <QRCode
-                :data="shortLink"
-                :image="linkIcon"
-              />
-            </NuxtErrorBoundary>
-          </HoverCardContent>
-        </HoverCard>
 
         <a
           :href="link.url"
@@ -96,8 +90,73 @@ const { copy, copied } = useClipboard({ source: shortLink.value, copiedDuring: 4
           rel="noopener noreferrer"
           @click.stop
         >
-          <LinkIcon class="w-6 h-6" />
+          <LinkIcon class="w-5 h-5" />
         </a>
+
+        <Popover>
+          <PopoverTrigger>
+            <QrCode
+              class="w-5 h-5"
+              @click.prevent
+            />
+          </PopoverTrigger>
+          <PopoverContent>
+            <QRCode
+              :data="shortLink"
+              :image="linkIcon"
+            />
+          </PopoverContent>
+        </Popover>
+
+        <Menubar
+          class="!ml-0 border-none !-mr-4"
+        >
+          <MenubarMenu>
+            <MenubarTrigger
+              class="px-2"
+              @click.prevent
+            >
+              <SquareChevronDown class="w-5 h-5" />
+            </MenubarTrigger>
+            <MenubarContent
+              class="min-w-0"
+            >
+              <MenubarItem>
+                <DashboardLinksEditor
+                  :link="link"
+                  @update:link="updateLink"
+                >
+                  <div
+                    class="flex"
+                    @click.stop
+                  >
+                    <SquarePen
+                      class="w-5 h-5 mr-2"
+                    />
+                    Edit
+                  </div>
+                </DashboardLinksEditor>
+              </MenubarItem>
+
+              <MenubarSeparator />
+              <MenubarItem>
+                <DashboardLinksDelete
+                  :link="link"
+                  @update:link="updateLink"
+                >
+                  <div
+                    class="flex"
+                    @click.stop
+                  >
+                    <Eraser
+                      class="w-5 h-5 mr-2"
+                    /> Delete
+                  </div>
+                </DashboardLinksDelete>
+              </MenubarItem>
+            </MenubarContent>
+          </MenubarMenu>
+        </Menubar>
       </div>
       <div class="flex w-full h-5 space-x-2 text-sm">
         <TooltipProvider>

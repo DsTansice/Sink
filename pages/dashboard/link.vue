@@ -18,6 +18,12 @@ const getLink = async () => {
 onMounted(() => {
   getLink()
 })
+
+const updateLink = (link, type) => {
+  if (type === 'delete') {
+    navigateTo('/dashboard/links')
+  }
+}
 </script>
 
 <template>
@@ -25,6 +31,7 @@ onMounted(() => {
     <DashboardBreadcrumb title="Link" />
     <DashboardLinksLink
       :link="link"
+      @update:link="updateLink"
     />
     <Dashboard
       v-if="link.id"

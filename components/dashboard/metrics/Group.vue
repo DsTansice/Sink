@@ -37,6 +37,7 @@ function type2name(type) {
     >
       <DashboardMetricsMetric
         :type="tab"
+        :name="type2name(tab)"
         class="h-full"
       />
     </TabsContent>

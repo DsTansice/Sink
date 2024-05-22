@@ -8,14 +8,12 @@ let cursor = ''
 let listComplete = false
 
 const getLinks = async () => {
-  if (listComplete) return
   const data = await useAPI('/api/link/list', {
     query: {
       limit,
       cursor,
     },
   })
-  console.log(data)
   links.value = links.value.concat(data.links)
   cursor = data.cursor
   listComplete = data.list_complete
@@ -24,21 +22,36 @@ const getLinks = async () => {
 const { isLoading } = useInfiniteScroll(
   document,
   getLinks,
-  { distance: 10 },
+  { distance: 10, canLoadMore: () => !listComplete },
 )
+
+const updateLinkList = (link, type) => {
+  if (type === 'edit') {
+    const index = links.value.findIndex(l => l.id === link.id)
+    links.value[index] = link
+  }
+  else if (type === 'delete') {
+    const index = links.value.findIndex(l => l.id === link.id)
+    links.value.splice(index, 1)
+  }
+  else {
+    links.value.unshift(link)
+  }
+}
 </script>
 
 <template>
   <main class="space-y-6">
     <DashboardBreadcrumb title="Links" />
     <DashboardNav>
-      <DashboardLinksCreate />
+      <DashboardLinksEditor @update:link="updateLinkList" />
     </DashboardNav>
     <section class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
       <DashboardLinksLink
         v-for="link in links"
         :key="link.id"
         :link="link"
+        @update:link="updateLinkList"
       />
     </section>
     <div
