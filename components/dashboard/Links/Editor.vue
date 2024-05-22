@@ -104,19 +104,13 @@ async function onSubmit(formData) {
     ...(formData.optional || []),
     expiration: formData.optional?.expiration ? date2unix(formData.optional?.expiration, 'end') : undefined,
   }
-  try {
-    const { link: newLink } = await useAPI(isEdit ? '/api/link/edit' : '/api/link/create', {
-      method: isEdit ? 'PUT' : 'POST',
-      body: link,
-    })
-    dialogOpen.value = false
-    emit('update:link', newLink, isEdit ? 'edit' : 'create')
-    isEdit ? toast('Link updated successfully') : toast('Link created successfully')
-  }
-  catch (e) {
-    toast(e?.message)
-    console.error(e)
-  }
+  const { link: newLink } = await useAPI(isEdit ? '/api/link/edit' : '/api/link/create', {
+    method: isEdit ? 'PUT' : 'POST',
+    body: link,
+  })
+  dialogOpen.value = false
+  emit('update:link', newLink, isEdit ? 'edit' : 'create')
+  isEdit ? toast('Link updated successfully') : toast('Link created successfully')
 }
 </script>
 
