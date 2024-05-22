@@ -3,13 +3,13 @@ import { VisSingleContainer, VisTopoJSONMap, VisTopoJSONMapSelectors } from '@un
 import { WorldMapTopoJSON } from '@unovis/ts/maps'
 import { ChartTooltip } from '@/components/ui/chart'
 
-const areaData = ref([])
-
 const id = inject('id')
 const startAt = inject('startAt')
 const endAt = inject('endAt')
 
-const getMapData = async () => {
+const areaData = ref([])
+
+async function getMapData() {
   areaData.value = []
   const { data } = await useAPI('/api/stats/metrics', {
     query: {
@@ -27,11 +27,11 @@ const getMapData = async () => {
   }
 }
 
+const stopWatchTime = watch([startAt, endAt], getMapData)
+
 onMounted(() => {
   getMapData()
 })
-
-const stopWatchTime = watch([startAt, endAt], getMapData)
 
 onBeforeUnmount(() => {
   stopWatchTime()

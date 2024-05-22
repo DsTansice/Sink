@@ -8,9 +8,8 @@ export default eventHandler(async (event) => {
   const { homeURL } = useRuntimeConfig(event)
   const { cloudflare } = event.context
 
-  if (event.path === '/' && homeURL) {
+  if (event.path === '/' && homeURL)
     return sendRedirect(event, homeURL)
-  }
 
   if (slug && !reserveSlug.includes(slug) && slugRegex.test(slug) && cloudflare) {
     const { KV } = cloudflare.env

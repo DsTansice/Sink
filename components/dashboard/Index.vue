@@ -14,8 +14,8 @@ const endAt = ref(date2unix(now()))
 provide('startAt', startAt)
 provide('endAt', endAt)
 
-const changeDate = (time) => {
-  console.log(new Date(time[0] * 1000), new Date(time[1] * 1000))
+function changeDate(time) {
+  console.log('dashboard date', new Date(time[0] * 1000), new Date(time[1] * 1000))
   startAt.value = time[0]
   endAt.value = time[1]
 }

@@ -7,6 +7,20 @@ import { toast } from 'vue-sonner'
 import { DependencyType } from '@/components/ui/auto-form/interface'
 import { LinkSchema, nanoid } from '@/schemas/link'
 
+const props = defineProps({
+  link: {
+    type: Object,
+    default: () => ({}),
+  },
+})
+
+const emit = defineEmits(['update:link'])
+
+const link = ref(props.link)
+const dialogOpen = ref(false)
+
+const isEdit = !!props.link.id
+
 const EditLinkSchema = LinkSchema.pick({
   url: true,
   slug: true,
@@ -24,16 +38,6 @@ const EditLinkSchema = LinkSchema.pick({
     expiration: z.coerce.date().optional(),
   }).optional(),
 })
-
-const emit = defineEmits(['update:link'])
-const props = defineProps({
-  link: {
-    type: Object,
-    default: () => ({}),
-  },
-})
-const link = ref(props.link)
-const isEdit = !!props.link.id
 
 const fieldConfig = {
   slug: {
@@ -55,7 +59,6 @@ const dependencies = [
   },
 ]
 
-const dialogOpen = ref(false)
 const form = useForm({
   validationSchema: toTypedSchema(EditLinkSchema),
   initialValues: {
@@ -70,23 +73,31 @@ const form = useForm({
   keepValuesOnUnmount: isEdit,
 })
 
-const randomSlug = () => {
+function randomSlug() {
   form.setFieldValue('slug', nanoid()())
 }
 
-const aiSlug = async () => {
-  if (!form.values.url) {
+const aiSlugPending = ref(false)
+async function aiSlug() {
+  if (!form.values.url)
     return
+
+  aiSlugPending.value = true
+  try {
+    const { slug } = await useAPI('/api/link/ai', {
+      query: {
+        url: form.values.url,
+      },
+    })
+    form.setFieldValue('slug', slug)
   }
-  const { slug } = await useAPI('/api/link/ai', {
-    query: {
-      url: form.values.url,
-    },
-  })
-  form.setFieldValue('slug', slug)
+  catch (error) {
+    console.log(error)
+  }
+  aiSlugPending.value = false
 }
 
-const onSubmit = async (formData) => {
+async function onSubmit(formData) {
   const link = {
     url: formData.url,
     slug: formData.slug,
@@ -122,12 +133,12 @@ const onSubmit = async (formData) => {
         </Button>
       </slot>
     </DialogTrigger>
-    <DialogContent class="max-w-[95svw] max-h-[95svh] md:max-w-screen-md grid-rows-[auto_minmax(0,1fr)_auto]">
+    <DialogContent class="max-w-[95svw] max-h-[95svh] md:max-w-lg grid-rows-[auto_minmax(0,1fr)_auto]">
       <DialogHeader>
         <DialogTitle>{{ link.id ? 'Edit Link' : 'Create Link' }}</DialogTitle>
       </DialogHeader>
       <AutoForm
-        class="space-y-2"
+        class="px-2 space-y-2 overflow-y-auto"
         :schema="EditLinkSchema"
         :form="form"
         :field-config="fieldConfig"
@@ -139,13 +150,14 @@ const onSubmit = async (formData) => {
             v-if="!isEdit"
             class="relative"
           >
-            <div class="absolute top-0 right-0 flex space-x-3">
+            <div class="absolute right-0 flex space-x-3 top-1">
               <Shuffle
                 class="w-4 h-4 cursor-pointer"
                 @click="randomSlug"
               />
               <Sparkles
                 class="w-4 h-4 cursor-pointer"
+                :class="{ 'animate-bounce': aiSlugPending }"
                 @click="aiSlug"
               />
             </div>
@@ -159,6 +171,7 @@ const onSubmit = async (formData) => {
             <Button
               type="button"
               variant="secondary"
+              class="mt-2 sm:mt-0"
             >
               Close
             </Button>

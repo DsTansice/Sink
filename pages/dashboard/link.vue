@@ -1,11 +1,12 @@
 <script setup>
 const slug = useRoute().query.slug
-const link = ref({})
 
+const link = ref({})
 const id = computed(() => link.value.id)
+
 provide('id', id)
 
-const getLink = async () => {
+async function getLink() {
   const data = await useAPI('/api/link/query', {
     query: {
       slug,
@@ -15,21 +16,21 @@ const getLink = async () => {
   link.value = data
 }
 
+function updateLink(link, type) {
+  if (type === 'delete')
+    navigateTo('/dashboard/links')
+}
+
 onMounted(() => {
   getLink()
 })
-
-const updateLink = (link, type) => {
-  if (type === 'delete') {
-    navigateTo('/dashboard/links')
-  }
-}
 </script>
 
 <template>
   <main class="space-y-6">
     <DashboardBreadcrumb title="Link" />
     <DashboardLinksLink
+      v-if="link.id"
       :link="link"
       @update:link="updateLink"
     />

@@ -1,3 +1,9 @@
+<script setup>
+import { IconBrandGithub, IconDots, IconX } from '@tabler/icons-vue'
+
+const showMenu = ref(false)
+</script>
+
 <template>
   <section class="pb-6 bg-white">
     <nav class="container relative z-50 h-24 select-none">
@@ -12,10 +18,11 @@
             <span
               class="flex items-center justify-center w-8 h-8 text-white bg-gray-900 rounded-full"
             >
-              <IconClick
-                stroke="1.5"
-                class="w-6 h-6"
-              />
+              <img
+                src="/sink.png"
+                alt="Sink"
+                class="w-full h-full rounded-full"
+              >
             </span>
             <span class="mx-2">Sink</span>
           </a>
@@ -37,23 +44,26 @@
               <span
                 class="flex items-center justify-center w-8 h-8 text-white bg-gray-900 rounded-full"
               >
-                <IconClick
-                  stroke="1.5"
-                  class="w-6 h-6"
-                />
+                <img
+                  src="/sink.png"
+                  alt="Sink"
+                  class="w-full h-full rounded-full"
+                >
               </span>
               <span class="mx-2">Sink</span>
             </a>
-            <div class="w-full mx-4">
-              <LayoutsNavigation />
-            </div>
+            <div class="w-full mx-4" />
             <div
               class="flex flex-col items-start justify-end w-full pt-4 md:items-center md:w-1/3 md:flex-row md:py-0"
             >
-              <span
+              <a
                 class="w-full px-6 py-2 mr-0 text-gray-700 cursor-pointer md:px-3 md:mr-2 lg:mr-3 md:w-auto"
-                @click="share"
-              >Share</span>
+                href="https://docs.sink.cool"
+              >Documents</a>
+              <a
+                class="w-full px-6 py-2 mr-0 text-gray-700 cursor-pointer md:px-3 md:mr-2 lg:mr-3 md:w-auto"
+                href="/dashboard"
+              >Dashboard</a>
               <a
                 href="https://github.com/ccbikai/sink"
                 target="_blank"
@@ -87,12 +97,3 @@
     </nav>
   </section>
 </template>
-
-<script setup>
-import { IconClick, IconDots, IconX, IconBrandGithub } from '@tabler/icons-vue'
-
-const showMenu = ref(false)
-const share = () => {
-  navigator.share({ title: document.title, url: location.href })
-}
-</script>

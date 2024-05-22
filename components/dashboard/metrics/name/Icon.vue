@@ -1,38 +1,38 @@
 <script setup>
 import {
   IconBrandApple,
-  IconBrandGoogle,
-  IconBrandEdge,
   IconBrandChrome,
-  IconBrandSafari,
   IconBrandDebian,
-  IconBrandFirefox,
+  IconBrandEdge,
   IconBrandFacebook,
+  IconBrandFirefox,
+  IconBrandGoogle,
+  IconBrandOpera,
+  IconBrandSafari,
   IconBrandUbuntu,
   IconBrandWechat,
+  IconBrandYandex,
   IconBrowser,
   IconDeviceDesktop,
+  IconDeviceIpad,
   IconDeviceLaptop,
   IconDeviceMobile,
   IconDeviceTablet,
-  IconDeviceIpad,
-  IconBrandOpera,
-  IconBrandYandex,
   IconTerminal2,
 } from '@tabler/icons-vue'
 
 // https://vue3-simple-icons.wyatt-herkamp.dev/
 import {
-  HuaweiIcon,
-  VivoIcon,
-  XiaomiIcon,
-  MacOsIcon,
-  IOsIcon,
-  LinuxIcon,
   AndroidIcon,
-  WindowsIcon,
-  SamsungIcon,
+  HuaweiIcon,
+  IOsIcon,
   InternetExplorerIcon,
+  LinuxIcon,
+  MacOsIcon,
+  SamsungIcon,
+  VivoIcon,
+  WindowsIcon,
+  XiaomiIcon,
 } from 'vue3-simple-icons'
 
 defineProps({

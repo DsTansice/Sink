@@ -1,5 +1,5 @@
 <script setup>
-import { Link as LinkIcon, QrCode, CalendarPlus2, Hourglass, Copy, CopyCheck, SquarePen, SquareChevronDown, Eraser } from 'lucide-vue-next'
+import { CalendarPlus2, Copy, CopyCheck, Eraser, Hourglass, Link as LinkIcon, QrCode, SquareChevronDown, SquarePen } from 'lucide-vue-next'
 import { useClipboard } from '@vueuse/core'
 import { toast } from 'vue-sonner'
 import { parseURL } from 'ufo'
@@ -13,13 +13,11 @@ const props = defineProps({
 })
 const emit = defineEmits(['update:link'])
 
-const updateLink = (link, type) => {
-  emit('update:link', link, type)
-}
+const editPopoverOpen = ref(false)
 
 const { host, origin } = location
 
-const getLinkHost = (url) => {
+function getLinkHost(url) {
   const { host } = parseURL(url)
   return host
 }
@@ -28,10 +26,15 @@ const shortLink = computed(() => `${origin}/${props.link.slug}`)
 const linkIcon = computed(() => `https://unavatar.io/${getLinkHost(props.link.url)}?fallback=https://sink.cool/sink.png`)
 
 const { copy, copied } = useClipboard({ source: shortLink.value, copiedDuring: 400 })
+
+function updateLink(link, type) {
+  emit('update:link', link, type)
+  editPopoverOpen.value = false
+}
 </script>
 
 <template>
-  <Card v-if="link.id">
+  <Card>
     <NuxtLink
       class="flex flex-col p-4 space-y-3"
       :to="`/dashboard/link?slug=${link.slug}`"
@@ -108,55 +111,47 @@ const { copy, copied } = useClipboard({ source: shortLink.value, copiedDuring: 4
           </PopoverContent>
         </Popover>
 
-        <Menubar
-          class="!ml-0 border-none !-mr-4"
-        >
-          <MenubarMenu>
-            <MenubarTrigger
-              class="px-2"
+        <Popover v-model:open="editPopoverOpen">
+          <PopoverTrigger>
+            <SquareChevronDown
+              class="w-5 h-5"
               @click.prevent
+            />
+          </PopoverTrigger>
+          <PopoverContent
+            class="w-auto p-0"
+            :hide-when-detached="false"
+          >
+            <DashboardLinksEditor
+              :link="link"
+              @update:link="updateLink"
             >
-              <SquareChevronDown class="w-5 h-5" />
-            </MenubarTrigger>
-            <MenubarContent
-              class="min-w-0"
-            >
-              <MenubarItem>
-                <DashboardLinksEditor
-                  :link="link"
-                  @update:link="updateLink"
-                >
-                  <div
-                    class="flex"
-                    @click.stop
-                  >
-                    <SquarePen
-                      class="w-5 h-5 mr-2"
-                    />
-                    Edit
-                  </div>
-                </DashboardLinksEditor>
-              </MenubarItem>
+              <div
+                class="cursor-pointer flex select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground"
+              >
+                <SquarePen
+                  class="w-5 h-5 mr-2"
+                />
+                Edit
+              </div>
+            </DashboardLinksEditor>
 
-              <MenubarSeparator />
-              <MenubarItem>
-                <DashboardLinksDelete
-                  :link="link"
-                  @update:link="updateLink"
-                >
-                  <div
-                    class="flex"
-                    @click.stop
-                  >
-                    <Eraser
-                      class="w-5 h-5 mr-2"
-                    /> Delete
-                  </div>
-                </DashboardLinksDelete>
-              </MenubarItem>
-            </MenubarContent>
-          </MenubarMenu>
-        </Menubar>
+            <Separator />
+
+            <DashboardLinksDelete
+              :link="link"
+              @update:link="updateLink"
+            >
+              <div
+                class="cursor-pointer flex select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground"
+              >
+                <Eraser
+                  class="w-5 h-5 mr-2"
+                /> Delete
+              </div>
+            </DashboardLinksDelete>
+          </PopoverContent>
+        </Popover>
       </div>
       <div class="flex w-full h-5 space-x-2 text-sm">
         <TooltipProvider>

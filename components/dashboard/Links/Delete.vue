@@ -7,9 +7,10 @@ const props = defineProps({
     required: true,
   },
 })
+
 const emit = defineEmits(['update:link'])
 
-const deleteLink = async () => {
+async function deleteLink() {
   await useAPI('/api/link/delete', {
     method: 'DELETE',
     body: {
@@ -26,7 +27,7 @@ const deleteLink = async () => {
     <AlertDialogTrigger as-child>
       <slot />
     </AlertDialogTrigger>
-    <AlertDialogContent>
+    <AlertDialogContent class="max-w-[95svw] max-h-[95svh] md:max-w-lg grid-rows-[auto_minmax(0,1fr)_auto]">
       <AlertDialogHeader>
         <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
         <AlertDialogDescription>

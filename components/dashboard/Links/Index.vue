@@ -7,7 +7,7 @@ const limit = 24
 let cursor = ''
 let listComplete = false
 
-const getLinks = async () => {
+async function getLinks() {
   const data = await useAPI('/api/link/list', {
     query: {
       limit,
@@ -25,7 +25,7 @@ const { isLoading } = useInfiniteScroll(
   { distance: 10, canLoadMore: () => !listComplete },
 )
 
-const updateLinkList = (link, type) => {
+function updateLinkList(link, type) {
   if (type === 'edit') {
     const index = links.value.findIndex(l => l.id === link.id)
     links.value[index] = link
@@ -42,7 +42,6 @@ const updateLinkList = (link, type) => {
 
 <template>
   <main class="space-y-6">
-    <DashboardBreadcrumb title="Links" />
     <DashboardNav>
       <DashboardLinksEditor @update:link="updateLinkList" />
     </DashboardNav>

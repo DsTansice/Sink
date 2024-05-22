@@ -1,15 +1,17 @@
 // @ts-check
+// import antfu from '@antfu/eslint-config'
 import withNuxt from './.nuxt/eslint.config.mjs'
-// import stylistic from '@stylistic/eslint-plugin'
 
 export default withNuxt(
-  // Your custom configs here
-  // {
-  //   plugins: {
-  //     '@stylistic': stylistic
-  //   },
-  // }
+  // antfu(),
   {
     ignores: ['components/ui'],
+  },
+  {
+    rules: {
+      '@typescript-eslint/ban-ts-comment': 'off',
+      'no-console': 'off',
+      'node/prefer-global/process': 'off',
+    },
   },
 )
