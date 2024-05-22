@@ -12,7 +12,7 @@ const emit = defineEmits(['update:link'])
 
 async function deleteLink() {
   await useAPI('/api/link/delete', {
-    method: 'DELETE',
+    method: 'POST',
     body: {
       slug: props.link.slug,
     },
