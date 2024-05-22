@@ -105,7 +105,7 @@ watch(dateRange, (newValue) => {
   </Select>
 
   <Dialog v-model:open="openCustomDateRange">
-    <DialogContent class="w-auto max-w-[95svw] max-h-[95svh] md:max-w-screen-md grid-rows-[auto_minmax(0,1fr)_auto]">
+    <DialogContent class="w-auto max-w-[95svw] max-h-[95svh] md:max-w-screen-sm grid-rows-[auto_minmax(0,1fr)_auto]">
       <DialogHeader>
         <DialogTitle>Custom Date</DialogTitle>
       </DialogHeader>
@@ -122,14 +122,20 @@ watch(dateRange, (newValue) => {
             </TabsTrigger>
           </TabsList>
         </div>
-        <TabsContent value="date">
+        <TabsContent
+          value="date"
+          class="overflow-y-auto h-80"
+        >
           <Calendar
             :model-value="customDate"
             :is-date-disabled="isDateDisabled"
             @update:model-value="updateCustomDate"
           />
         </TabsContent>
-        <TabsContent value="range">
+        <TabsContent
+          value="range"
+          class="overflow-y-auto h-80"
+        >
           <RangeCalendar
             :model-value="customDateRange"
             initial-focus

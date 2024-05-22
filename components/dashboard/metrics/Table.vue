@@ -56,6 +56,7 @@ defineProps({
           </TableCell>
           <TableCell class="py-3 text-right">
             {{ formatNumber(metric.count) }}
+            <span class="text-xs text-gray-500">({{ metric.percent }}%)</span>
           </TableCell>
         </TableRow>
       </TableBody>
