@@ -1,5 +1,5 @@
 <script setup>
-import { IconMaximize } from '@tabler/icons-vue'
+import { Maximize } from 'lucide-vue-next'
 
 const props = defineProps({
   type: {
@@ -72,9 +72,8 @@ onBeforeUnmount(() => {
             <Button
               variant="link"
             >
-              <IconMaximize
+              <Maximize
                 class="w-4 h-4 mr-2"
-                :stroke="2"
               /> DETAILS
             </Button>
           </DialogTrigger>

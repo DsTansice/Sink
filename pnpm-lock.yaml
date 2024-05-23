@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@tabler/icons-vue':
-        specifier: ^3.5.0
-        version: 3.5.0(vue@3.4.27(typescript@5.4.5))
       '@unovis/ts':
         specifier: ^1.4.1
         version: 1.4.1
@@ -23,9 +20,6 @@ importers:
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.27(typescript@5.4.5))
-      dayjs:
-        specifier: ^1.11.11
-        version: 1.11.11
       intl-parse-accept-language:
         specifier: ^1.0.0
         version: 1.0.0
@@ -1438,14 +1432,6 @@ packages:
   '@swc/helpers@0.5.11':
     resolution: {integrity: sha512-YNlnKRWF2sVojTpIyzwou9XoTNbzbzONwRhOoniEioF1AtaitTvVZblaQRrAzChWQ1bLYyYSWzM18y4WwgzJ+A==}
 
-  '@tabler/icons-vue@3.5.0':
-    resolution: {integrity: sha512-55gxPKpT8rk2SoYh82tHfTAuMah4W2cseMabKY1WchRHe4Hqd2JgKFxlvI4na2YVeByaG1KgMiIrmkDz5NRyqQ==}
-    peerDependencies:
-      vue: '>=3.0.1'
-
-  '@tabler/icons@3.5.0':
-    resolution: {integrity: sha512-I53dC3ZSHQ2MZFGvDYJelfXm91L2bTTixS4w5jTAulLhHbCZso5Bih4Rk/NYZxlngLQMKHvEYwZQ+6w/WluKiA==}
-
   '@tanstack/virtual-core@3.5.0':
     resolution: {integrity: sha512-KnPRCkQTyqhanNC0K63GBG3wA8I+D1fQuVnAvcBF8f13akOKeQp1gSbu6f77zCxhEk727iV5oQnbHLYzHrECLg==}
 
@@ -2732,9 +2718,6 @@ packages:
 
   data-uri-to-buffer@2.0.2:
     resolution: {integrity: sha512-ND9qDTLc6diwj+Xe5cdAgVTbLVdXbtxTJRXRhli8Mowuaan+0EJOtdqJ0QCHNSSPyoXGx9HX2/VMnKeC34AChA==}
-
-  dayjs@1.11.11:
-    resolution: {integrity: sha512-okzr3f11N6WuqYtZSvm+F776mB41wRZMhKP+hc34YdW+KmtYYK9iqvHSwo2k9FEH3fhGXvOPV6yz2IcSrfRUDg==}
 
   db0@0.1.4:
     resolution: {integrity: sha512-Ft6eCwONYxlwLjBXSJxw0t0RYtA5gW9mq8JfBXn9TtC0nDPlqePAhpv9v4g9aONBi6JI1OXHTKKkUYGd+BOrCA==}
@@ -7529,13 +7512,6 @@ snapshots:
     dependencies:
       tslib: 2.6.2
 
-  '@tabler/icons-vue@3.5.0(vue@3.4.27(typescript@5.4.5))':
-    dependencies:
-      '@tabler/icons': 3.5.0
-      vue: 3.4.27(typescript@5.4.5)
-
-  '@tabler/icons@3.5.0': {}
-
   '@tanstack/virtual-core@3.5.0': {}
 
   '@tanstack/vue-virtual@3.5.0(vue@3.4.27(typescript@5.4.5))':
@@ -9144,8 +9120,6 @@ snapshots:
       d3-zoom: 3.0.0
 
   data-uri-to-buffer@2.0.2: {}
-
-  dayjs@1.11.11: {}
 
   db0@0.1.4: {}
 

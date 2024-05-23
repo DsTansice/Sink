@@ -1,6 +1,6 @@
 # Sink
 
-A Simple/Speed/Secrue Link Shortener with Analytics, 100% run on Cloudflare.
+A Simple / Speed / Secrue Link Shortener with Analytics, 100% run on Cloudflare.
 
 ----
 
@@ -30,18 +30,18 @@ Site Token: SinkCool
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **Deployment**: [Cloudflare](https://www.cloudflare.com/)
 
-### 🚗 Roadmap [WIP]
+## 🚗 Roadmap [WIP]
 
 We welcome your contributions and PRs.
 
-- [] Browser Extension
-- [] Apple Shortcuts
-- [] Enhanced Link Management (with Cloudflare D1)
-- [] Analytics Enhancements (Support for merging filter conditions)
-- [] Dashboard Performance Optimization (Virtual scrolling)
-- [] Support for Other Deployment Platforms
+- [ ] Browser Extension
+- [ ] Apple Shortcuts
+- [ ] Enhanced Link Management (with Cloudflare D1)
+- [ ] Analytics Enhancements (Support for merging filter conditions)
+- [ ] Dashboard Performance Optimization (Virtual scrolling)
+- [ ] Support for Other Deployment Platforms
 
-### 🏗️ Deployment
+## 🏗️ Deployment
 
 1. [Fork](https://github.com/ccbikai/Sink/fork) the repository to your GitHub account.
 2. Create a [Cloudflare Pages](https://developers.cloudflare.com/pages/) project.
@@ -58,8 +58,17 @@ We welcome your contributions and PRs.
    3. Analytics Engine bindings. Bind the variable name `ANALYTICS` to the `sink` dataset, and enable [Cloudflare Analytics Engine beta](https://developers.cloudflare.com/analytics/analytics-engine/get-started/) for your account.
 7. Redeploy.
 
+## ⚒️ Configuration
+
+[Configuration Docs](./docs/configuration.md)
+
 ## 💖 Credits
 
 1. [**Cloudflare**](https://www.cloudflare.com/)
 2. [**NuxtHub**](https://hub.nuxt.com/)
-3. [**AstroWind**](https://astrowind.vercel.app/)
+3. [**Astroship**](https://astroship.web3templates.com/)
+
+## ☕ Sponsor
+
+1. [Follow Me on X(Twitter)](https://x.com/ccbikai).
+2. [Become a sponsor to on GitHub](https://github.com/sponsors/ccbikai).

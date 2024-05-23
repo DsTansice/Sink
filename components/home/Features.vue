@@ -1,42 +1,42 @@
 <script setup>
-import { IconClick } from '@tabler/icons-vue'
+import { Link, AreaChart, ServerOff, Paintbrush, Sparkles, Hourglass } from 'lucide-vue-next'
 
 const features = ref([
   {
-    title: 'Bring Your Own Framework',
+    title: 'URL Shortening',
     description:
-          'Build your site using React, Svelte, Vue, Preact, web components, or just plain ol\' HTML + JavaScript.',
-    icon: 'bx:bxs-briefcase',
+          'Compress your URLs to their minimal length.',
+    icon: Link,
   },
   {
-    title: '100% Static HTML, No JS',
+    title: 'Analytics',
     description:
-          'Astro renders your entire page to static HTML, removing all JavaScript from your final build by default.',
-    icon: 'bx:bxs-window-alt',
+          'Monitor link analytics and gather insightful statistics.',
+    icon: AreaChart,
   },
   {
-    title: 'On-Demand Components',
+    title: 'Serverless',
     description:
-          'Need some JS? Astro can automatically hydrate interactive components when they become visible on the page.  ',
-    icon: 'bx:bxs-data',
+          'Deploy without the need for traditional servers.',
+    icon: ServerOff,
   },
   {
-    title: 'Broad Integration',
+    title: 'Customizable Slug',
     description:
-          'Astro supports TypeScript, Scoped CSS, CSS Modules, Sass, Tailwind, Markdown, MDX, and any other npm packages.',
-    icon: 'bx:bxs-bot',
+          'Support for personalized slugs.',
+    icon: Paintbrush,
   },
   {
-    title: 'SEO Enabled',
+    title: 'AI Slug',
     description:
-          'Automatic sitemaps, RSS feeds, pagination and collections take the pain out of SEO and syndication. It just works!',
-    icon: 'bx:bxs-file-find',
+          'Leverage AI to generate slugs.',
+    icon: Sparkles,
   },
   {
-    title: 'Community',
+    title: 'Link Expiration',
     description:
-          'Astro is an open source project powered by hundreds of contributors making thousands of individual contributions.',
-    icon: 'bx:bxs-user',
+          'Set expiration dates for your links.',
+    icon: Hourglass,
   },
 ])
 </script>
@@ -45,25 +45,23 @@ const features = ref([
   <main class="pt-16 md:py-12">
     <div class="md:pb-12">
       <h2 class="text-4xl font-bold lg:text-5xl lg:tracking-tight">
-        Everything you need to start a website
+        Features
       </h2>
-      <p class="mt-4 text-lg text-slate-600">
-        Astro comes batteries included. It takes the best parts of state-of-the-art
-        tools and adds its own innovations.
+      <p class="my-8 text-lg md:mb-0 text-slate-600">
+        Simple and sufficient functionality
       </p>
     </div>
 
-    <div class="grid gap-16 sm:grid-cols-2 md:grid-cols-3">
+    <div class="grid gap-8 md:gap-16 sm:grid-cols-2 md:grid-cols-3">
       <div
         v-for="item in features"
         :key="item.title"
         class="flex items-start gap-4"
       >
         <div class="w-8 h-8 p-2 mt-1 bg-black rounded-full shrink-0">
-          <IconClick
-            class="text-white"
-            stroke="2"
-            :name="item.icon"
+          <component
+            :is="item.icon"
+            class="w-4 h-4 text-white"
           />
         </div>
         <div>
