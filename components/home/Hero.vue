@@ -2,6 +2,8 @@
 import { AreaChart } from 'lucide-vue-next'
 import { GitHubIcon } from 'vue3-simple-icons'
 import heroImg from '@/assets/images/hero.svg?raw'
+
+const { title, description } = useAppConfig()
 </script>
 
 <template>
@@ -18,10 +20,10 @@ import heroImg from '@/assets/images/hero.svg?raw'
       <h1
         class="text-5xl font-bold lg:text-6xl xl:text-7xl lg:tracking-tight xl:tracking-tighter"
       >
-        Sink
+        {{ title }}
       </h1>
       <p class="max-w-xl mt-4 text-lg text-slate-600">
-        A Simple / Speed / Secrue Link Shortener with Analytics, 100% run on Cloudflare.
+        {{ description }}
       </p>
       <div class="flex flex-col gap-3 mt-6 sm:flex-row">
         <HomeLink
