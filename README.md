@@ -2,12 +2,7 @@
 
 **A Simple / Speed / Secrue Link Shortener with Analytics, 100% run on Cloudflare.**
 
-<details>
-  <summary>Screenshots</summary>
-
-![Dashboard](./public/dashboard.png)
-
-</details>
+![Hero](./public/image.png)
 
 ----
 
