@@ -1,6 +1,6 @@
 # Sink
 
-A Simple/Speed/Secrue Link Shortener with Analytics, 100% run on Cloudflare.
+A Simple / Speed / Secrue Link Shortener with Analytics, 100% run on Cloudflare.
 
 ----
 

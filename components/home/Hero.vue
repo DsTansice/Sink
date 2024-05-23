@@ -1,11 +1,12 @@
 <script setup>
-import { IconBrandGithub } from '@tabler/icons-vue'
+import { AreaChart } from 'lucide-vue-next'
+import { GitHubIcon } from 'vue3-simple-icons'
 import heroImg from '@/assets/images/hero.svg?raw'
 </script>
 
 <template>
   <main
-    class="grid pt-16 pb-8 lg:grid-cols-2 place-items-center md:py-12"
+    class="grid pt-8 pb-8 lg:grid-cols-2 place-items-center md:py-12"
   >
     <div class="hidden py-6 md:order-1 md:block">
       <div
@@ -20,7 +21,7 @@ import heroImg from '@/assets/images/hero.svg?raw'
         Sink
       </h1>
       <p class="max-w-xl mt-4 text-lg text-slate-600">
-        A Simple/Speed/Secrue Link Shortener with Analytics, 100% run on Cloudflare.
+        A Simple / Speed / Secrue Link Shortener with Analytics, 100% run on Cloudflare.
       </p>
       <div class="flex flex-col gap-3 mt-6 sm:flex-row">
         <HomeLink
@@ -29,12 +30,10 @@ import heroImg from '@/assets/images/hero.svg?raw'
           class="flex items-center justify-center gap-1"
           rel="noopener"
         >
-          <IconBrandGithub
-            stroke="2"
+          <AreaChart
             class="w-5 h-5"
           />
-
-          Demo
+          Dashboard
         </HomeLink>
         <HomeLink
           size="lg"
@@ -44,9 +43,8 @@ import heroImg from '@/assets/images/hero.svg?raw'
           class="flex items-center justify-center gap-1"
           target="_blank"
         >
-          <IconBrandGithub
-            stroke="2"
-            class="w-4 h-4"
+          <GitHubIcon
+            class="w-5 h-5"
           />
           GitHub Repo
         </HomeLink>
