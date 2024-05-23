@@ -47,6 +47,9 @@ importers:
       vee-validate:
         specifier: ^4.12.8
         version: 4.12.8(vue@3.4.27(typescript@5.4.5))
+      virtua:
+        specifier: ^0.31.0
+        version: 0.31.0(vue@3.4.27(typescript@5.4.5))
       vue-sonner:
         specifier: ^1.1.2
         version: 1.1.2
@@ -5605,6 +5608,26 @@ packages:
     resolution: {integrity: sha512-A07rm3+y7SRk0CMD/O4nBT0nxtwjyfzGZwjEUDk18SxK0ZMzd4AFCzzdHlIiCE1QgHetxd0I3kVkZdN0GG0Oww==}
     peerDependencies:
       vue: ^3.4.26
+
+  virtua@0.31.0:
+    resolution: {integrity: sha512-E7xGz1OKz4E/YRjIYfCyEHgg1XrASvkYLn5hhpPV6WEbGnMMmG1MF5VyumKRKmpNke3Tu3b7wfUNM8K0HVPlgw==}
+    peerDependencies:
+      react: '>=16.14.0'
+      react-dom: '>=16.14.0'
+      solid-js: '>=1.0'
+      svelte: '>=4.0'
+      vue: '>=3.2'
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+      solid-js:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
 
   vite-hot-client@0.2.3:
     resolution: {integrity: sha512-rOGAV7rUlUHX89fP2p2v0A2WWvV3QMX2UYq0fRqsWSvFvev4atHWqjwGoKaZT1VTKyLGk533ecu3eyd0o59CAg==}
@@ -12416,6 +12439,10 @@ snapshots:
     dependencies:
       '@vue/devtools-api': 6.6.1
       type-fest: 4.18.2
+      vue: 3.4.27(typescript@5.4.5)
+
+  virtua@0.31.0(vue@3.4.27(typescript@5.4.5)):
+    optionalDependencies:
       vue: 3.4.27(typescript@5.4.5)
 
   vite-hot-client@0.2.3(vite@5.2.11(@types/node@20.12.11)(terser@5.31.0)):

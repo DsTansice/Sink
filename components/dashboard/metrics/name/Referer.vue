@@ -9,6 +9,7 @@ defineProps({
     :href="`http://${name}`"
     target="_blank"
     rel="noopener noreferrer"
+    class="block w-full truncate"
   >
     <Avatar
       class="w-5 h-5 p-0.5 float-left"
@@ -24,6 +25,6 @@ defineProps({
         >
       </AvatarFallback>
     </Avatar>
-    <span class="w-32 leading-5 truncate">{{ name }}</span>
+    <span>{{ name }}</span>
   </a>
 </template>

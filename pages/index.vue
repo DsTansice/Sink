@@ -1,8 +1,8 @@
 <template>
   <main>
     <HomeHero />
-    <HomeLogos />
     <HomeFeatures />
+    <HomeLogos />
     <HomeCta />
   </main>
 </template>

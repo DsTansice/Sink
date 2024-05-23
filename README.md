@@ -40,7 +40,7 @@ We welcome your contributions and PRs.
 - [ ] Apple Shortcuts
 - [ ] Enhanced Link Management (with Cloudflare D1)
 - [ ] Analytics Enhancements (Support for merging filter conditions)
-- [ ] Dashboard Performance Optimization (Virtual scrolling)
+- [x] Dashboard Performance Optimization (Virtual scrolling)
 - [ ] Support for Other Deployment Platforms
 
 ## 🏗️ Deployment
