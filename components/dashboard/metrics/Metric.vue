@@ -18,12 +18,12 @@ const endAt = inject('endAt')
 
 const total = ref(0)
 const metrics = ref([])
-const top10 = ref([])
+const top6 = ref([])
 
 async function getLinkMetrics() {
   total.value = 0
   metrics.value = []
-  top10.value = []
+  top6.value = []
   const { data } = await useAPI('/api/stats/metrics', {
     query: {
       type: props.type,
@@ -40,7 +40,7 @@ async function getLinkMetrics() {
       item.percent = Math.floor(item.count / total.value * 100) || (item.count ? 1 : 0)
       return item
     })
-    top10.value = metrics.value.slice(0, 10)
+    top6.value = metrics.value.slice(0, 6)
   }
 }
 
@@ -58,16 +58,16 @@ onBeforeUnmount(() => {
 <template>
   <Card class="flex flex-col">
     <template v-if="metrics.length">
-      <DashboardMetricsTable
+      <DashboardMetricsList
         class="flex-1"
-        :metrics="top10"
+        :metrics="top6"
         :type="type"
       />
-      <CardFooter>
+      <CardFooter class="py-2">
         <Dialog>
           <DialogTrigger
             as-child
-            class="w-full mt-2"
+            class="w-full"
           >
             <Button
               variant="link"
@@ -81,7 +81,7 @@ onBeforeUnmount(() => {
             <DialogHeader>
               <DialogTitle>{{ name }}</DialogTitle>
             </DialogHeader>
-            <DashboardMetricsTable
+            <DashboardMetricsList
               class="overflow-y-auto"
               :metrics="metrics"
               :type="type"

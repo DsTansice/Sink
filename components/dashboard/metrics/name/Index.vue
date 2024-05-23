@@ -35,7 +35,7 @@ function formatName(name, type) {
 <template>
   <TooltipProvider>
     <Tooltip>
-      <TooltipTrigger class="text-left">
+      <TooltipTrigger class="w-full text-left">
         <DashboardMetricsNameReferer
           v-if="name && type === 'referer'"
           :name="name"
@@ -51,7 +51,7 @@ function formatName(name, type) {
         />
         <div
           v-else
-          class="w-40 leading-5 truncate"
+          class="w-full truncate"
         >
           {{ formatName(name, type) || '(None)' }}
         </div>
