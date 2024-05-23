@@ -66,7 +66,6 @@ const form = useForm({
     url: link.value.url,
     optional: {
       comment: link.value.comment,
-      expiration: link.value.expiration,
     },
   },
   validateOnMount: isEdit,
@@ -96,6 +95,12 @@ async function aiSlug() {
   }
   aiSlugPending.value = false
 }
+
+onMounted(() => {
+  if (link.value.expiration) {
+    form.setFieldValue('optional.expiration', unix2date(link.value.expiration))
+  }
+})
 
 async function onSubmit(formData) {
   const link = {
