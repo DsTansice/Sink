@@ -58,10 +58,6 @@ const showMenu = ref(false)
             >
               <a
                 class="w-full px-6 py-2 mr-0 text-gray-700 cursor-pointer md:px-3 md:mr-2 lg:mr-3 md:w-auto"
-                href="https://docs.sink.cool"
-              >Docs</a>
-              <a
-                class="w-full px-6 py-2 mr-0 text-gray-700 cursor-pointer md:px-3 md:mr-2 lg:mr-3 md:w-auto"
                 href="/dashboard"
               >Dashboard</a>
               <a

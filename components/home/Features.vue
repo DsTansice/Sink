@@ -3,39 +3,39 @@ import { IconClick } from '@tabler/icons-vue'
 
 const features = ref([
   {
-    title: 'Bring Your Own Framework',
+    title: 'URL Shortening',
     description:
-          'Build your site using React, Svelte, Vue, Preact, web components, or just plain ol\' HTML + JavaScript.',
+          'Compress your URLs to their minimal length.',
     icon: 'bx:bxs-briefcase',
   },
   {
-    title: '100% Static HTML, No JS',
+    title: 'Analytics',
     description:
-          'Astro renders your entire page to static HTML, removing all JavaScript from your final build by default.',
+          'Monitor link analytics and gather insightful statistics.',
     icon: 'bx:bxs-window-alt',
   },
   {
-    title: 'On-Demand Components',
+    title: 'Serverless',
     description:
-          'Need some JS? Astro can automatically hydrate interactive components when they become visible on the page.  ',
+          'Deploy without the need for traditional servers.',
     icon: 'bx:bxs-data',
   },
   {
-    title: 'Broad Integration',
+    title: 'Customizable Slug',
     description:
-          'Astro supports TypeScript, Scoped CSS, CSS Modules, Sass, Tailwind, Markdown, MDX, and any other npm packages.',
+          'Support for personalized slugs.',
     icon: 'bx:bxs-bot',
   },
   {
-    title: 'SEO Enabled',
+    title: 'AI Slug',
     description:
-          'Automatic sitemaps, RSS feeds, pagination and collections take the pain out of SEO and syndication. It just works!',
+          'Leverage AI to generate slugs.',
     icon: 'bx:bxs-file-find',
   },
   {
-    title: 'Community',
+    title: 'Link Expiration',
     description:
-          'Astro is an open source project powered by hundreds of contributors making thousands of individual contributions.',
+          'Set expiration dates for your links.',
     icon: 'bx:bxs-user',
   },
 ])
@@ -45,11 +45,10 @@ const features = ref([
   <main class="pt-16 md:py-12">
     <div class="md:pb-12">
       <h2 class="text-4xl font-bold lg:text-5xl lg:tracking-tight">
-        Everything you need to start a website
+        Features
       </h2>
       <p class="mt-4 text-lg text-slate-600">
-        Astro comes batteries included. It takes the best parts of state-of-the-art
-        tools and adds its own innovations.
+        Simple and sufficient functionality
       </p>
     </div>
 
