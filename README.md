@@ -58,6 +58,10 @@ We welcome your contributions and PRs.
    3. Analytics Engine bindings. Bind the variable name `ANALYTICS` to the `sink` dataset, and enable [Cloudflare Analytics Engine beta](https://developers.cloudflare.com/analytics/analytics-engine/get-started/) for your account.
 7. Redeploy.
 
+## ⚒️ Configuration
+
+[Configuration Docs](./docs/configuration.md)
+
 ## 💖 Credits
 
 1. [**Cloudflare**](https://www.cloudflare.com/)
