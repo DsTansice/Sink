@@ -1,15 +1,15 @@
 <script setup>
+const { title, description, image } = useAppConfig()
 useSeoMeta({
-  title: 'NuxtHub Starter',
-  description: 'A Nuxt template to build your full-stack application on the edge.',
-  ogTitle: '[og:title]',
-  ogDescription: '[og:description]',
-  ogImage: '[og:image]',
-  ogUrl: '[og:url]',
-  twitterTitle: '[twitter:title]',
-  twitterDescription: '[twitter:description]',
-  twitterImage: '[twitter:image]',
-  twitterCard: 'summary',
+  title,
+  description,
+  ogTitle: title,
+  ogDescription: description,
+  ogImage: image,
+  twitterTitle: title,
+  twitterDescription: description,
+  twitterImage: image,
+  twitterCard: 'summary_large_image',
 })
 
 useHead({
@@ -20,7 +20,7 @@ useHead({
     {
       rel: 'icon',
       type: 'image/png',
-      href: '/favicon.png',
+      href: '/favicon-32x32.png',
     },
   ],
 })
