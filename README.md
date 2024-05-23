@@ -34,12 +34,12 @@ Site Token: SinkCool
 
 We welcome your contributions and PRs.
 
-- [] Browser Extension
-- [] Apple Shortcuts
-- [] Enhanced Link Management (with Cloudflare D1)
-- [] Analytics Enhancements (Support for merging filter conditions)
-- [] Dashboard Performance Optimization (Virtual scrolling)
-- [] Support for Other Deployment Platforms
+- [ ] Browser Extension
+- [ ] Apple Shortcuts
+- [ ] Enhanced Link Management (with Cloudflare D1)
+- [ ] Analytics Enhancements (Support for merging filter conditions)
+- [ ] Dashboard Performance Optimization (Virtual scrolling)
+- [ ] Support for Other Deployment Platforms
 
 ## 🏗️ Deployment
 
@@ -71,4 +71,4 @@ We welcome your contributions and PRs.
 ## ☕ Sponsor
 
 1. [Follow Me on X(Twitter)](https://x.com/ccbikai).
-2. [Become a sponsor to on GitHub.](https://github.com/sponsors/ccbikai).
+2. [Become a sponsor to on GitHub](https://github.com/sponsors/ccbikai).
