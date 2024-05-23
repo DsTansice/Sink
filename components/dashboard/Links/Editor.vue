@@ -117,6 +117,8 @@ async function onSubmit(formData) {
   emit('update:link', newLink, isEdit ? 'edit' : 'create')
   isEdit ? toast('Link updated successfully') : toast('Link created successfully')
 }
+
+const { previewMode } = useRuntimeConfig().public
 </script>
 
 <template>
@@ -136,6 +138,12 @@ async function onSubmit(formData) {
       <DialogHeader>
         <DialogTitle>{{ link.id ? 'Edit Link' : 'Create Link' }}</DialogTitle>
       </DialogHeader>
+      <p
+        v-if="previewMode"
+        class="text-sm text-muted-foreground"
+      >
+        The preview mode link is valid for up to 24 hours.
+      </p>
       <AutoForm
         class="px-2 space-y-2 overflow-y-auto"
         :schema="EditLinkSchema"
