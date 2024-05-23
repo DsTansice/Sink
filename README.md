@@ -62,4 +62,4 @@ We welcome your contributions and PRs.
 
 1. [**Cloudflare**](https://www.cloudflare.com/)
 2. [**NuxtHub**](https://hub.nuxt.com/)
-3. [**AstroWind**](https://astrowind.vercel.app/)
+3. [**Astroship**](https://astroship.web3templates.com/)
