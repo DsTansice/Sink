@@ -52,7 +52,7 @@ defineProps({
           </div>
         </div>
         <div
-          class="flex-1 hidden sm:block"
+          class="flex-1"
         >
           <TooltipProvider>
             <Tooltip>
