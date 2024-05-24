@@ -1,6 +1,6 @@
 # Sink
 
-**A Simple / Speed / Secrue Link Shortener with Analytics, 100% run on Cloudflare.**
+**A Simple / Speedy / Secrue Link Shortener with Analytics, 100% run on Cloudflare.**
 
 ![Hero](./public/image.png)
 
@@ -37,10 +37,11 @@ Site Token: SinkCool
 We welcome your contributions and PRs.
 
 - [ ] Browser Extension
+- [ ] Raycast Extension
 - [ ] Apple Shortcuts
 - [ ] Enhanced Link Management (with Cloudflare D1)
 - [ ] Analytics Enhancements (Support for merging filter conditions)
-- [x] Dashboard Performance Optimization (Virtual scrolling)
+- [ ] Dashboard Performance Optimization (Infinite loading)
 - [ ] Support for Other Deployment Platforms
 
 ## 🏗️ Deployment
