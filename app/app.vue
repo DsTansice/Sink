@@ -43,6 +43,13 @@ useHead({
       href: '/apple-touch-icon.png',
     },
   ],
+  script: [
+    {
+      src: 'https://tj.qfff.de/qft.js',
+      'data-website-id': '202f07c0-f51a-493b-9c7f-20ffeab93460', 
+      defer: true,
+    },
+  ],
 })
 </script>
 
